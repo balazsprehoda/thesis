@@ -1,0 +1,29 @@
+image:
+  tag: 1.3.0
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+peer:
+  databaseType: CouchDB
+  couchdbInstance: cdb-peer0-org1
+  mspID: Org1MSP
+
+logging:
+  level: debug
+  #peer: debug
+  #grpc: debug
+  #gossip: debug
+
+secrets:
+  peer:
+    cert: peer0org1-idcert
+    key: peer0org1-idkey
+    caCert: org1-cacert
+  channels:
+    - channel
+  adminCert: org1-admincert
+  adminKey: org1-adminkey
+  ordTlsRootCert: tls-ca
+  #caServerTls: ca--tls

@@ -1,0 +1,27 @@
+image:
+  tag: 1.3.0
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+ord:
+  type: solo
+  ## MSP ID of the Orderer
+  mspID: OrdererMSP
+  tls:
+    server:
+      enabled: "false"
+    client:
+      enabled: "false"
+
+secrets:
+  ord:
+    cert: orderer-cert
+    key: orderer-key
+    caCert: orderer-cacert
+    tls: orderer-tls
+    tlsRootCert: orderer-tls-rootcert
+  genesis: orderer-genesis
+  adminCert: orderer-admincert
+  #caServerTls: tls-ca

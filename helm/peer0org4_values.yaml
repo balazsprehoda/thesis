@@ -1,0 +1,21 @@
+image:
+  tag: 1.3.0
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+peer:
+  databaseType: CouchDB
+  couchdbInstance: cdb-peer0-org4
+  mspID: Org4MSP
+
+secrets:
+  peer:
+    cert: peer0org4-idcert
+    key: peer0org4-idkey
+    caCert: org4-cacert
+  channel: channel
+  adminCert: org4-admincert
+  adminKey: org4-adminkey
+  #caServerTls: ca--tls

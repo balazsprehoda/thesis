@@ -1,0 +1,43 @@
+OrdererOrgs:
+
+  - Name: Orderer
+    Domain: ordererorg
+    Specs:
+      - Hostname: orderer
+      #- Hostname: orderer-hlf-ord.default.svc.cluster.local
+      #- SANS: 
+      #    - orderer-hlf-ord.default.svc.cluster.local
+
+PeerOrgs:
+
+  - Name: Org1
+    Domain: org1
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: Org2
+    Domain: org2
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: Org3
+    Domain: org3
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: Org4
+    Domain: org4
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
