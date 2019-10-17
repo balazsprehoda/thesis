@@ -1,0 +1,248 @@
+ 
+#
+# Copyright SecureKey Technologies Inc. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+#
+# The network connection profile provides client applications the information about the target
+# blockchain network that are necessary for the applications to interact with it. These are all
+# knowledge that must be acquired from out-of-band sources. This file provides such a source.
+#
+
+name: "test-network"
+
+description: ""
+
+#
+# Schema version of the content. Used by the SDK to apply the corresponding parsing rules.
+#
+version: 1.0.0
+
+#
+# The client section used by GO SDK.
+#
+client:
+
+  # Which organization does this application instance belong to? The value must be the name of an org
+  # defined under "organizations"
+  organization: org1
+
+  logging:
+    level: info
+
+  connection:
+   timeout:
+     peer:
+       endorser: '3000'
+     orderer: '3000'
+
+  # Root of the MSP directories with keys and certs.
+  cryptoconfig:
+    path: /home/prehi/thesis/network/crypto-config
+
+  # BCCSP config for the client. Used by GO SDK.
+  BCCSP:
+    security:
+     enabled: true
+     default:
+      provider: "SW"
+     hashAlgorithm: "SHA2"
+     softVerify: true
+     level: 256
+
+#
+# [Optional]. But most apps would have this section so that channel objects can be constructed
+# based on the content below. If an app is creating channels, then it likely will not need this
+# section.
+#
+channels:
+  # name of the channel
+  mychannel:
+    # Required. list of orderers designated by the application to use for transactions on this
+    # channel. This list can be a result of access control ("org1" can only access "ordererA"), or
+    # operational decisions to share loads from applications among the orderers.  The values must
+    # be "names" of orgs defined under "organizations/peers"
+    orderers:
+      - ord1-hlf-ord.orderers.svc.cluster.local
+
+    # Required. list of peers from participating orgs
+    peers:
+      peer1-hlf-peer.org1.svc.cluster.local:
+      peer2-hlf-peer.org2.svc.cluster.local:
+      peer3-hlf-peer.org3.svc.cluster.local:
+
+#
+# list of participating organizations in this network
+#
+organizations:
+  org1:
+    mspid: Org1MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp
+
+    peers:
+      - peer1-hlf-peer.org1.svc.cluster.local
+
+  org2:
+    mspid: Org2MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp
+
+    peers:
+      - peer2-hlf-peer.org2.svc.cluster.local
+
+  org3:
+    mspid: Org3MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp
+
+    peers:
+      - peer3-hlf-peer.org3.svc.cluster.local
+
+  # Orderer Org name
+  ordererorg:
+      # Membership Service Provider ID for this organization
+      mspID: OrdererMSP
+
+      # Needed to load users crypto keys and certs for this org (absolute path or relative to global crypto path, DEV mode)
+      cryptoPath: ordererOrganizations/orderers.svc.cluster.local/users/Admin@orderers.svc.cluster.local/msp
+
+
+#
+# List of orderers to send transaction and channel create/update requests to. For the time
+# being only one orderer is needed. If more than one is defined, which one get used by the
+# SDK is implementation specific. Consult each SDK's documentation for its handling of orderers.
+#
+orderers:
+  ord1-hlf-ord.orderers.svc.cluster.local:
+    # [Optional] Default: Infer from hostname
+    #url: orderer.example.com:7050
+
+    # these are standard properties defined by the gRPC library
+    # they will be passed in as-is to gRPC client constructor
+    #TODO to be moved to high level, common for all grpc connections
+    grpcOptions:
+      ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
+#     These parameters should be set in coordination with the keepalive policy on the server,
+#     as incompatible settings can result in closing of connection.
+#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
+      allow-insecure: false
+
+    tlsCACerts:
+      # Certificate location absolute path
+      path: /home/prehi/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/tlsca/tlsca.orderers.svc.cluster.local-cert.pem
+
+#
+# List of peers to send various requests to, including endorsement, query
+# and event listener registration.
+#
+peers:
+  peer1-hlf-peer.org1.svc.cluster.local:
+    # this URL is used to send endorsement and query requests
+    # [Optional] Default: Infer from hostname
+    url: grpc://peer1.org1.example.com:7051
+
+    #TODO to be moved to high level, common for all grpc connections
+    grpcOptions:
+      ssl-target-name-override: peer1.org1.example.com
+#     These parameters should be set in coordination with the keepalive policy on the server,
+#     as incompatible settings can result in closing of connection.
+#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
+      allow-insecure: true
+
+    tlsCACerts:
+      # Certificate location absolute path
+      path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/tlsca/tlsca.org1.svc.cluster.local-cert.pem
+
+  peer2-hlf-peer.org2.svc.cluster.local:
+    # this URL is used to send endorsement and query requests
+    # [Optional] Default: Infer from hostname
+    #url: peer0.org1.example.com:7051
+
+    #TODO to be moved to high level, common for all grpc connections
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
+#     These parameters should be set in coordination with the keepalive policy on the server,
+#     as incompatible settings can result in closing of connection.
+#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
+      allow-insecure: false
+
+    tlsCACerts:
+      # Certificate location absolute path
+      path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/tlsca/tlsca.org2.svc.cluster.local-cert.pem
+
+  peer3-hlf-peer.org3.svc.cluster.local:
+    # this URL is used to send endorsement and query requests
+    # [Optional] Default: Infer from hostname
+    #url: peer0.org1.example.com:7051
+
+    #TODO to be moved to high level, common for all grpc connections
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
+#     These parameters should be set in coordination with the keepalive policy on the server,
+#     as incompatible settings can result in closing of connection.
+#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
+      allow-insecure: false
+
+    tlsCACerts:
+      # Certificate location absolute path
+      path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/tlsca/tlsca.org3.svc.cluster.local-cert.pem
+
+#
+# Fabric-CA is a special kind of Certificate Authority provided by Hyperledger Fabric which allows
+# certificate management to be done via REST APIs. Application may choose to use a standard
+# Certificate Authority instead of Fabric-CA, in which case this section would not be specified.
+#
+
+###############################################################################
+#
+#    Operations section
+#    copied from Fabric's core.yaml
+###############################################################################
+operations:
+  # host and port for the operations server
+  listenAddress: 127.0.0.1:8080
+
+  # TLS configuration for the operations endpoint
+  tls:
+    # TLS enabled
+    enabled: false
+
+    # path to PEM encoded server certificate for the operations server
+    cert:
+      file:
+
+    # path to PEM encoded server key for the operations server
+    key:
+      file:
+
+    # require client certificate authentication to access all resources
+    clientAuthRequired: false
+
+    # paths to PEM encoded ca certificates to trust for client authentication
+    clientRootCAs:
+      files: []

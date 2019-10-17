@@ -1,43 +1,32 @@
 OrdererOrgs:
 
   - Name: Orderer
-    Domain: ordererorg
+    Domain: orderers.svc.cluster.local
     Specs:
-      - Hostname: orderer
-      #- Hostname: orderer-hlf-ord.default.svc.cluster.local
-      #- SANS: 
-      #    - orderer-hlf-ord.default.svc.cluster.local
+      - Hostname: ord1-hlf-ord
 
 PeerOrgs:
 
   - Name: Org1
-    Domain: org1
-    EnableNodeOUs: true
+    Domain: org1.svc.cluster.local
     Template:
       Count: 1
+      Hostname: "peer1-hlf-peer"
     Users:
       Count: 1
 
   - Name: Org2
-    Domain: org2
-    EnableNodeOUs: true
+    Domain: org2.svc.cluster.local
     Template:
       Count: 1
+      Hostname: "peer2-hlf-peer"
     Users:
       Count: 1
 
   - Name: Org3
-    Domain: org3
-    EnableNodeOUs: true
+    Domain: org3.svc.cluster.local
     Template:
       Count: 1
-    Users:
-      Count: 1
-
-  - Name: Org4
-    Domain: org4
-    EnableNodeOUs: true
-    Template:
-      Count: 1
+      Hostname: "peer3-hlf-peer"
     Users:
       Count: 1

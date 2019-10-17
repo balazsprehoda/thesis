@@ -1,0 +1,21 @@
+image:
+  tag: 1.4.3
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+peer:
+  databaseType: CouchDB
+  couchdbInstance: cdb-peer2
+  mspID: Org2MSP
+
+secrets:
+  peer:
+    cert: hlf--peer2-idcert
+    key: hlf--peer2-idkey
+    caCert: hlf--peer-cacert
+  channels:
+    - hlf--channel
+  adminCert: hlf--peer-admincert
+  adminKey: hlf--peer-adminkey

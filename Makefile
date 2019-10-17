@@ -1,34 +1,60 @@
 start:
-	make minikube-setup
-	make generate-artifacts
-	sleep 30
-	make deploy
+	cd network && ../cryptogen generate --config=crypto-config.yaml
+	cd network && ./rename-keys.sh
 
-minikube-setup:
-	minikube start --kubernetes-version=v1.15.4 --memory 4096
-	helm init
+	kubectl create ns orderers
+	kubectl create ns org1
+	kubectl create ns org2
+	kubectl create ns org3
 
-generate-artifacts:
-	make delete-artifacts
-	cd network && ./generate-artifacts.sh
-	cd network && ./create-secrets.sh
+	@echo "-------Creating orderer secrets-------"
+	cd network && ./create-orderer-admin-secrets.sh
 
-deploy:
-	cd helm && ./deploy-cdbs.sh
-	cd helm && ./deploy-orderers.sh
-	cd helm && ./deploy-peers.sh
+	@echo "-------Creating peer secrets-------"
+	cd network && ./create-peer-admin-secrets.sh
 
-watch:
-	watch -n 2 'kubectl get pods'
+	@echo "-------Creating genesis and channel secrets-------"
+	cd network && ./create-genesis-channel-secrets.sh
 
-stop:
-	helm delete peer0-org1 peer0-org2 peer0-org3 peer0-org4 orderer cdb-peer0-org1 cdb-peer0-org2 cdb-peer0-org3 cdb-peer0-org4
+	@echo "-------Creating anchor peer configuration secrets-------"
+	cd network && ./create-config-txs.sh
 
-delete-artifacts:
-	cd network && ./destroy-artifacts.sh
-	kubectl delete secrets --all
+	@echo "-------Creating orderer node secrets-------"
+	cd network && ./create-orderer-node-secrets.sh
+
+	@echo "-------Deploying orderers-------"
+	helm install stable/hlf-ord -n ord1 --namespace orderers -f ./helm/ord1_values.yaml
+
+	@echo "-------Deploying CouchDB for peer1-------"
+	helm install stable/hlf-couchdb -n cdb-peer1 --namespace org1 -f ./helm/cdb_values.yaml
+	helm install stable/hlf-couchdb -n cdb-peer2 --namespace org2 -f ./helm/cdb_values.yaml
+	helm install stable/hlf-couchdb -n cdb-peer3 --namespace org3 -f ./helm/cdb_values.yaml
+
+	@echo "-------Creating peer node secrets-------"
+	cd network && ./create-peer-node-secrets.sh
+
+	@echo "-------Deploying peers-------"
+	helm install stable/hlf-peer -n peer1 --namespace org1 -f ./helm/peer1_values.yaml
+	helm install stable/hlf-peer -n peer2 --namespace org2 -f ./helm/peer2_values.yaml
+	helm install stable/hlf-peer -n peer3 --namespace org3 -f ./helm/peer3_values.yaml
+
+	@echo "-------Deploying ingress controller (nginx)-------"
+	helm install stable/nginx-ingress --name my-nginx
+
+	make watch
+
+join:
+	cd network && ./fetch-join-channel.sh
 
 destroy:
-	make stop
-	make delete-artifacts
-	minikube delete
+	rm -rf network/crypto-config/
+	rm -rf network/channel-artifacts/
+	kubectl delete ns orderers org1 org2 org3
+	helm del --purge ord1 cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3 my-nginx
+	kubectl delete secrets --all
+
+watch:
+	watch -n 2 'kubectl get pods --all-namespaces'
+
+channel-create:
+	PEER_POD=$(echo $(kubectl get pods -n peers -l "app=hlf-peer,release=peer1" -o jsonpath="{.items[0].metadata.name}"))

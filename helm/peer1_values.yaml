@@ -1,0 +1,28 @@
+image:
+  tag: 1.4.3
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+peer:
+  databaseType: CouchDB
+  couchdbInstance: cdb-peer1
+  mspID: Org1MSP
+
+secrets:
+  peer:
+    cert: hlf--peer1-idcert
+    key: hlf--peer1-idkey
+    caCert: hlf--peer-cacert
+  channels:
+    - hlf--channel
+  adminCert: hlf--peer-admincert
+  adminKey: hlf--peer-adminkey
+
+#ingress:
+  #enabled: true
+  #annotations:
+    #nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+  #hosts: 
+    #- peer1-hlf-peer.org1.svc.cluster.local
