@@ -26,7 +26,7 @@ client:
 
   # Which organization does this application instance belong to? The value must be the name of an org
   # defined under "organizations"
-  organization: org1
+  organization: Org1
 
   logging:
     level: info
@@ -34,8 +34,8 @@ client:
   connection:
    timeout:
      peer:
-       endorser: '3000'
-     orderer: '3000'
+       endorser: '6000'
+     orderer: '6000'
 
   # Root of the MSP directories with keys and certs.
   cryptoconfig:
@@ -76,7 +76,7 @@ channels:
 # list of participating organizations in this network
 #
 organizations:
-  org1:
+  Org1:
     mspid: Org1MSP
 
     # This org's MSP store (absolute path or relative to client.cryptoconfig)
@@ -85,7 +85,7 @@ organizations:
     peers:
       - peer1-hlf-peer.org1.svc.cluster.local
 
-  org2:
+  Org2:
     mspid: Org2MSP
 
     # This org's MSP store (absolute path or relative to client.cryptoconfig)
@@ -94,7 +94,7 @@ organizations:
     peers:
       - peer2-hlf-peer.org2.svc.cluster.local
 
-  org3:
+  Org3:
     mspid: Org3MSP
 
     # This org's MSP store (absolute path or relative to client.cryptoconfig)
@@ -104,7 +104,7 @@ organizations:
       - peer3-hlf-peer.org3.svc.cluster.local
 
   # Orderer Org name
-  ordererorg:
+  Orderer:
       # Membership Service Provider ID for this organization
       mspID: OrdererMSP
 
@@ -147,13 +147,14 @@ orderers:
 #
 peers:
   peer1-hlf-peer.org1.svc.cluster.local:
+    
     # this URL is used to send endorsement and query requests
     # [Optional] Default: Infer from hostname
-    url: grpc://peer1.org1.example.com:7051
+    url: grpc://peer1.org1.example.com:31422
 
     #TODO to be moved to high level, common for all grpc connections
     grpcOptions:
-      ssl-target-name-override: peer1.org1.example.com
+      ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
 #     These parameters should be set in coordination with the keepalive policy on the server,
 #     as incompatible settings can result in closing of connection.
 #     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
@@ -162,11 +163,11 @@ peers:
       keep-alive-permit: false
       fail-fast: false
       #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
-      allow-insecure: true
+      allow-insecure: false
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/tlsca/tlsca.org1.svc.cluster.local-cert.pem
+      path: "/home/prehi/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem"
 
   peer2-hlf-peer.org2.svc.cluster.local:
     # this URL is used to send endorsement and query requests
@@ -246,3 +247,17 @@ operations:
     # paths to PEM encoded ca certificates to trust for client authentication
     clientRootCAs:
       files: []
+
+# entityMatchers:
+#   peer:
+#     - pattern: (\w*)peer1-hlf-peer.org1.svc.cluster.local(\w*)
+#       urlSubstitutionExp: 192.168.99.100:80
+#       eventUrlSubstitutionExp: localhost:7053
+#       sslTargetOverrideUrlSubstitutionExp: peer1-hlf-peer.org1.svc.cluster.local
+#       mappedHost: peer1.org1.example.com
+
+#   orderer:
+#     - pattern: (\w*)orderer.orderers.svc.cluster.local(\w*)
+#       urlSubstitutionExp: 192.168.99.100:7050
+#       sslTargetOverrideUrlSubstitutionExp: orderer.orderers.svc.cluster.local
+#       mappedHost: orderer.example.com

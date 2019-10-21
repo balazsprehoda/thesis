@@ -5,6 +5,9 @@ persistence:
   accessMode: ReadWriteOnce
   size: 1Gi
 
+logging:
+  level: info
+
 peer:
   databaseType: CouchDB
   couchdbInstance: cdb-peer1

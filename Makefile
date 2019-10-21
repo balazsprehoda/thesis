@@ -38,8 +38,7 @@ start:
 	helm install stable/hlf-peer -n peer2 --namespace org2 -f ./helm/peer2_values.yaml
 	helm install stable/hlf-peer -n peer3 --namespace org3 -f ./helm/peer3_values.yaml
 
-	@echo "-------Deploying ingress controller (nginx)-------"
-	helm install stable/nginx-ingress --name my-nginx
+	kubectl expose deployment -n org1 peer1-hlf-peer --name=peer1-service --type=NodePort
 
 	make watch
 
@@ -50,11 +49,8 @@ destroy:
 	rm -rf network/crypto-config/
 	rm -rf network/channel-artifacts/
 	kubectl delete ns orderers org1 org2 org3
-	helm del --purge ord1 cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3 my-nginx
+	helm del --purge ord1 cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3
 	kubectl delete secrets --all
 
 watch:
 	watch -n 2 'kubectl get pods --all-namespaces'
-
-channel-create:
-	PEER_POD=$(echo $(kubectl get pods -n peers -l "app=hlf-peer,release=peer1" -o jsonpath="{.items[0].metadata.name}"))
