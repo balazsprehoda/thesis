@@ -45,6 +45,12 @@ spec:
         # Channel artifacts
         - mountPath: /fabric/config/channel-artifacts
           name: artifacts
+        # Scripts (create channel, join peer, install & instantiate chaincode)
+        - mountPath: /fabric/config/scripts
+          name: scripts
+        # Chaincode
+        - mountPath: fabric/chaincode
+          name: chaincode
         # Docker socket
         - mountPath: /host/var/run/docker.sock
           name: dockersocket
@@ -92,6 +98,14 @@ spec:
     - name: artifacts
       secret:
         secretName: hlf--artifacts
+    # Scripts
+    - name: scripts
+      secret:
+        secretName: hlf--scripts
+    # Chaincode
+    - name: chaincode
+      secret:
+        secretName: hlf--chaincode
     # Docker socket
     - name: dockersocket
       hostPath:

@@ -25,17 +25,16 @@ Organizations:
         # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
 
-        # Policies:
-        #     Readers:
-        #         Type: ImplicitMeta
-        #         Rule: "ANY Readers"
-        #     Writers:
-        #         Type: ImplicitMeta
-        #         Rule: "ANY Writers"
-        #     Admins:
-        #         Type: ImplicitMeta
-        #         Rule: "MAJORITY Admins"
-        AdminPrincipal: Role.MEMBER
+        Policies:
+            Readers:
+                Type: ImplicitMeta
+                Rule: "ANY Readers"
+            Writers:
+                Type: ImplicitMeta
+                Rule: "ANY Writers"
+            Admins:
+                Type: ImplicitMeta
+                Rule: "MAJORITY Admins"
 
     # Organisation controlling Peers
     - &Org1
@@ -46,17 +45,16 @@ Organizations:
 
         MSPDir: ./crypto-config/peerOrganizations/org1.svc.cluster.local/msp
 
-        # Policies:
-        #     Readers:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
-        #     Writers:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
-        #     Admins:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin')"
-        AdminPrincipal: Role.MEMBER
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('Org1MSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers that can be used
@@ -73,17 +71,16 @@ Organizations:
 
         MSPDir: ./crypto-config/peerOrganizations/org2.svc.cluster.local/msp
 
-        # Policies:
-        #     Readers:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
-        #     Writers:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
-        #     Admins:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin')"
-        AdminPrincipal: Role.MEMBER
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('Org2MSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers that can be used
@@ -100,17 +97,16 @@ Organizations:
 
         MSPDir: ./crypto-config/peerOrganizations/org3.svc.cluster.local/msp
 
-        # Policies:
-        #     Readers:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
-        #     Writers:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
-        #     Admins:
-        #         Type: Signature
-        #         Rule: "OR('Org1MSP.admin')"
-        AdminPrincipal: Role.MEMBER
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('Org3MSP.admin', 'Org3MSP.peer', 'Org3MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('Org3MSP.admin', 'Org3MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('Org3MSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers that can be used
@@ -165,6 +161,21 @@ Orderer: &OrdererDefaults
     # the orderer side of the network
     Organizations:
 
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+
 ################################################################################
 #
 #   SECTION: Capabilities
@@ -178,7 +189,7 @@ Capabilities:
 
     Orderer: &OrdererCapabilities
 
-        V1_3: true
+        V1_1: true
 
     Application: &ApplicationCapabilities
 
@@ -201,21 +212,44 @@ Application: &ApplicationDefaults
     # Organizations is the list of orgs which are defined as participants on
     # the application side of the network
     Organizations:
-    #    - *Org1
 
-    # Policies:
-    #     Readers:
-    #         Type: ImplicitMeta
-    #         Rule: "ANY Readers"
-    #     Writers:
-    #         Type: ImplicitMeta
-    #         Rule: "ANY Writers"
-    #     Admins:
-    #         Type: ImplicitMeta
-    #         Rule: "MAJORITY Admins"
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
 
-    # Capabilities:
-    #     <<: *ApplicationCapabilities
+    Capabilities:
+        <<: *ApplicationCapabilities
+
+################################################################################
+#
+#   SECTION: Channel
+#
+################################################################################
+Channel: &ChannelDefaults
+
+    Policies:
+
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+
+    Capabilities:
+        <<: *ChannelCapabilities
 
 ################################################################################
 #
@@ -228,10 +262,13 @@ Application: &ApplicationDefaults
 Profiles:
 
     OrdererGenesis:
+        <<: *ChannelDefaults
         Orderer:
             <<: *OrdererDefaults
             Organizations:
                 - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
         Consortiums:
             MyConsortium:
                 Organizations:
@@ -240,9 +277,12 @@ Profiles:
                     - *Org3
     ThreeOrgsChannel:
         Consortium: MyConsortium
+        <<: *ChannelDefaults
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *Org1
                 - *Org2
                 - *Org3
+            Capabilities:
+                <<: *ApplicationCapabilities

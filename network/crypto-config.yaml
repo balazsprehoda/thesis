@@ -1,6 +1,6 @@
 OrdererOrgs:
 
-  - Name: Orderer
+  - Name: OrdererOrg
     Domain: orderers.svc.cluster.local
     Specs:
       - Hostname: ord1-hlf-ord

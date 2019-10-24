@@ -18,7 +18,6 @@ start:
 	cd network && ./create-genesis-channel-secrets.sh
 
 	@echo "-------Creating anchor peer configuration secrets-------"
-	cd network && ./create-configtx.sh
 	cd network && ./create-configtx-secrets.sh
 
 	@echo "-------Creating orderer node secrets-------"
@@ -41,14 +40,20 @@ start:
 	helm install stable/hlf-peer -n peer3 --namespace org3 -f ./helm/peer3_values.yaml
 
 	@echo "-------Deploying cli-------"
+	cd network && ./create-cli-secrets.sh
 	kubectl apply -f network/cli.yaml
 
-	kubectl expose deployment -n org1 peer1-hlf-peer --name=peer1-service --type=NodePort
+	kubectl apply -f network/peer1-exposed.yaml
+	kubectl apply -f network/peer2-exposed.yaml
+	kubectl apply -f network/peer3-exposed.yaml
 
 	make watch
 
 join:
-	cd network && ./fetch-join-channel.sh
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && scripts/create-join-channel.sh"
+
+chaincode:
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /opt/gopath/src/github.com/chaincode/go && go get github.com/hyperledger/fabric/core/chaincode && go build && cd /scripts && ./install-instantiate-chaincode.sh"
 
 destroy:
 	rm -rf network/crypto-config/

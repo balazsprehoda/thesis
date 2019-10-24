@@ -51,18 +51,9 @@ client:
      softVerify: true
      level: 256
 
-#
-# [Optional]. But most apps would have this section so that channel objects can be constructed
-# based on the content below. If an app is creating channels, then it likely will not need this
-# section.
-#
 channels:
   # name of the channel
   mychannel:
-    # Required. list of orderers designated by the application to use for transactions on this
-    # channel. This list can be a result of access control ("org1" can only access "ordererA"), or
-    # operational decisions to share loads from applications among the orderers.  The values must
-    # be "names" of orgs defined under "organizations/peers"
     orderers:
       - ord1-hlf-ord.orderers.svc.cluster.local
 
@@ -104,120 +95,42 @@ organizations:
       - peer3-hlf-peer.org3.svc.cluster.local
 
   # Orderer Org name
-  Orderer:
+  OrdererOrg:
       # Membership Service Provider ID for this organization
       mspID: OrdererMSP
 
       # Needed to load users crypto keys and certs for this org (absolute path or relative to global crypto path, DEV mode)
       cryptoPath: ordererOrganizations/orderers.svc.cluster.local/users/Admin@orderers.svc.cluster.local/msp
 
-
-#
-# List of orderers to send transaction and channel create/update requests to. For the time
-# being only one orderer is needed. If more than one is defined, which one get used by the
-# SDK is implementation specific. Consult each SDK's documentation for its handling of orderers.
-#
 orderers:
   ord1-hlf-ord.orderers.svc.cluster.local:
-    # [Optional] Default: Infer from hostname
-    #url: orderer.example.com:7050
-
-    # these are standard properties defined by the gRPC library
-    # they will be passed in as-is to gRPC client constructor
-    #TODO to be moved to high level, common for all grpc connections
+    url: grpcs://minikube:30993
     grpcOptions:
       ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
-#     These parameters should be set in coordination with the keepalive policy on the server,
-#     as incompatible settings can result in closing of connection.
-#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      keep-alive-permit: false
-      fail-fast: false
-      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
-      allow-insecure: false
-
     tlsCACerts:
-      # Certificate location absolute path
       path: /home/prehi/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/tlsca/tlsca.orderers.svc.cluster.local-cert.pem
 
-#
-# List of peers to send various requests to, including endorsement, query
-# and event listener registration.
-#
 peers:
   peer1-hlf-peer.org1.svc.cluster.local:
-    
-    # this URL is used to send endorsement and query requests
-    # [Optional] Default: Infer from hostname
-    url: grpc://peer1.org1.example.com:31422
-
-    #TODO to be moved to high level, common for all grpc connections
+    url: grpc://minikube:30151
     grpcOptions:
       ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
-#     These parameters should be set in coordination with the keepalive policy on the server,
-#     as incompatible settings can result in closing of connection.
-#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      keep-alive-permit: false
-      fail-fast: false
-      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
-      allow-insecure: false
-
     tlsCACerts:
-      # Certificate location absolute path
       path: "/home/prehi/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem"
 
   peer2-hlf-peer.org2.svc.cluster.local:
-    # this URL is used to send endorsement and query requests
-    # [Optional] Default: Infer from hostname
-    #url: peer0.org1.example.com:7051
-
-    #TODO to be moved to high level, common for all grpc connections
+    url: grpc://minikube:30251
     grpcOptions:
       ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
-#     These parameters should be set in coordination with the keepalive policy on the server,
-#     as incompatible settings can result in closing of connection.
-#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      keep-alive-permit: false
-      fail-fast: false
-      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
-      allow-insecure: false
-
     tlsCACerts:
-      # Certificate location absolute path
       path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/tlsca/tlsca.org2.svc.cluster.local-cert.pem
 
   peer3-hlf-peer.org3.svc.cluster.local:
-    # this URL is used to send endorsement and query requests
-    # [Optional] Default: Infer from hostname
-    #url: peer0.org1.example.com:7051
-
-    #TODO to be moved to high level, common for all grpc connections
+    url: grpc://minikube:30351
     grpcOptions:
       ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
-#     These parameters should be set in coordination with the keepalive policy on the server,
-#     as incompatible settings can result in closing of connection.
-#     When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      keep-alive-permit: false
-      fail-fast: false
-      #will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
-      allow-insecure: false
-
     tlsCACerts:
-      # Certificate location absolute path
       path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/tlsca/tlsca.org3.svc.cluster.local-cert.pem
-
-#
-# Fabric-CA is a special kind of Certificate Authority provided by Hyperledger Fabric which allows
-# certificate management to be done via REST APIs. Application may choose to use a standard
-# Certificate Authority instead of Fabric-CA, in which case this section would not be specified.
-#
 
 ###############################################################################
 #
@@ -251,13 +164,25 @@ operations:
 # entityMatchers:
 #   peer:
 #     - pattern: (\w*)peer1-hlf-peer.org1.svc.cluster.local(\w*)
-#       urlSubstitutionExp: 192.168.99.100:80
-#       eventUrlSubstitutionExp: localhost:7053
+#       urlSubstitutionExp: grpc://minikube:30151
+#       eventUrlSubstitutionExp: grpc://minikube:30153
 #       sslTargetOverrideUrlSubstitutionExp: peer1-hlf-peer.org1.svc.cluster.local
-#       mappedHost: peer1.org1.example.com
+#       mappedHost: peer1-hlf-peer.org1.svc.cluster.local
 
-#   orderer:
-#     - pattern: (\w*)orderer.orderers.svc.cluster.local(\w*)
-#       urlSubstitutionExp: 192.168.99.100:7050
-#       sslTargetOverrideUrlSubstitutionExp: orderer.orderers.svc.cluster.local
-#       mappedHost: orderer.example.com
+#     - pattern: (\w*)peer2-hlf-peer.org2.svc.cluster.local(\w*)
+#       urlSubstitutionExp: grpc://minikube:30251
+#       eventUrlSubstitutionExp: grpc://minikube:30253
+#       sslTargetOverrideUrlSubstitutionExp: peer2-hlf-peer.org2.svc.cluster.local
+#       mappedHost: peer2-hlf-peer.org2.svc.cluster.local
+
+#     - pattern: (\w*)peer3-hlf-peer.org3.svc.cluster.local(\w*)
+#       urlSubstitutionExp: grpc://minikube:30351
+#       eventUrlSubstitutionExp: grpc://minikube:30353
+#       sslTargetOverrideUrlSubstitutionExp: peer3-hlf-peer.org3.svc.cluster.local
+#       mappedHost: peer3-hlf-peer.org3.svc.cluster.local
+
+  # orderer:
+  #   - pattern: (\w*)ord1-hlf-ord.orderers.svc.cluster.local(\w*)
+  #     urlSubstitutionExp: grpcs://minikube:30993
+  #     sslTargetOverrideUrlSubstitutionExp: ord1-hlf-ord.orderers.svc.cluster.local
+  #     mappedHost: ord1-hlf-ord.orderers.svc.cluster.local
