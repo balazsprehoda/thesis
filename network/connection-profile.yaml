@@ -104,31 +104,32 @@ organizations:
 
 orderers:
   ord1-hlf-ord.orderers.svc.cluster.local:
-    url: grpcs://minikube:30993
-    grpcOptions:
-      ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
+    #url: grpcs://minikube:30993
+    # grpcOptions:
+    #   ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
     tlsCACerts:
       path: /home/prehi/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/tlsca/tlsca.orderers.svc.cluster.local-cert.pem
 
 peers:
   peer1-hlf-peer.org1.svc.cluster.local:
     url: grpc://minikube:30151
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
+    #url: grpc://minikube:31286
+    # grpcOptions:
+    #   ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
     tlsCACerts:
       path: "/home/prehi/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem"
 
   peer2-hlf-peer.org2.svc.cluster.local:
     url: grpc://minikube:30251
-    grpcOptions:
-      ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
+    # grpcOptions:
+    #   ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
     tlsCACerts:
       path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/tlsca/tlsca.org2.svc.cluster.local-cert.pem
 
   peer3-hlf-peer.org3.svc.cluster.local:
     url: grpc://minikube:30351
-    grpcOptions:
-      ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
+    # grpcOptions:
+    #   ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
     tlsCACerts:
       path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/tlsca/tlsca.org3.svc.cluster.local-cert.pem
 

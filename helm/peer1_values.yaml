@@ -1,20 +1,21 @@
 image:
-  tag: 1.3.0
+  tag: 1.4.3
 
 persistence:
   accessMode: ReadWriteOnce
   size: 1Gi
 
 logging:
-  level: debug
+  level: info
 
 peer:
   databaseType: CouchDB
   couchdbInstance: cdb-peer1
   mspID: Org1MSP
   gossip:
-    externalEndpoint: peer1-hlf-peer.org1.svc.cluster.local:7051
-    bootstrap: peer1-hlf-peer.org1.svc.cluster.local:7051
+    externalEndpoint: minikube:30151
+    endpoint: peer1-hlf-peer:7051
+    bootstrap: peer1-hlf-peer:7051
 
 secrets:
   peer:
@@ -25,10 +26,3 @@ secrets:
     - hlf--channel
   adminCert: hlf--peer-admincert
   adminKey: hlf--peer-adminkey
-
-#ingress:
-  #enabled: true
-  #annotations:
-    #nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-  #hosts: 
-    #- peer1-hlf-peer.org1.svc.cluster.local

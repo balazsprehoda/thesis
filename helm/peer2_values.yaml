@@ -1,20 +1,21 @@
 image:
-  tag: 1.3.0
+  tag: 1.4.3
 
 persistence:
   accessMode: ReadWriteOnce
   size: 1Gi
 
 logging:
-  level: debug
+  level: info
 
 peer:
   databaseType: CouchDB
   couchdbInstance: cdb-peer2
   mspID: Org2MSP
   gossip:
-    externalEndpoint: peer2-hlf-peer.org2.svc.cluster.local:7051
-    bootstrap: peer2-hlf-peer.org2.svc.cluster.local:7051
+    externalEndpoint: minikube:30251
+    bootstrap: peer2-hlf-peer:7051
+    endpoint: peer2-hlf-peer:7051
 
 secrets:
   peer:
