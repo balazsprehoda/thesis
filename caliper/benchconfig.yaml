@@ -1,0 +1,22 @@
+test:
+  name: fabcar
+  description: A simple fabcar workload simulation
+  clients:
+    type: local
+    number: 3
+  rounds:
+  - label: generate
+    txDuration: [60] # The test length in seconds
+    rateControl:
+    - type: linear-rate
+      opts:
+        startingTps: 10
+        finishingTps: 100
+    # the user callback module relative to the workspace
+    arguments:
+      sensor_batch_size: 1
+      clients: 3
+    callback: caliper/generate.js
+monitor:
+  type: ['none']
+  interval: 1

@@ -1,0 +1,132 @@
+ 
+name: "test-network"
+
+#
+# Schema version of the content. Used by the SDK to apply the corresponding parsing rules.
+#
+version: "1.0"
+
+caliper:
+  blockchain: fabric
+  command:
+    start: sleep 60s
+
+info:
+  Version: 1.4.3
+  Size: 3 Orgs with 1 Peer
+  Orderer: Solo
+  Distribution: Kubernetes
+  StateDB: CouchDB
+
+clients:
+  client0.org1.example.com:
+    client:
+      organization: Org1
+      credentialStore:
+        path: /tmp/hfc-kvs/org1
+        cryptoStore:
+          path: /tmp/hfc-cvs/org1
+      clientPrivateKey:
+        path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1@org1.svc.cluster.local/msp/keystore/key.pem
+      clientSignedCert:
+        path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1@org1.svc.cluster.local/msp/signcerts/User1@org1.svc.cluster.local-cert.pem
+
+  client0.org2.example.com:
+    client:
+      organization: Org2
+      credentialStore:
+        path: /tmp/hfc-kvs/org2
+        cryptoStore:
+          path: /tmp/hfc-cvs/org2
+      clientPrivateKey:
+        path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org2.svc.cluster.local/users/User1@org2.svc.cluster.local/msp/keystore/key.pem
+      clientSignedCert:
+        path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org2.svc.cluster.local/users/User1@org2.svc.cluster.local/msp/signcerts/User1@org2.svc.cluster.local-cert.pem
+
+channels:
+  # name of the channel
+  mychannel:
+    created: true
+    orderers:
+      - ord1-hlf-ord.orderers.svc.cluster.local
+
+    # Required. list of peers from participating orgs
+    peers:
+      peer1-hlf-peer.org1.svc.cluster.local:
+      peer2-hlf-peer.org2.svc.cluster.local:
+      peer3-hlf-peer.org3.svc.cluster.local:
+
+    chaincodes:
+        - id: go
+          version: v0
+          language: golang
+          path: ../network/chaincode/go
+
+#
+# list of participating organizations in this network
+#
+organizations:
+  Org1:
+    mspid: Org1MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp
+
+    peers:
+      - peer1-hlf-peer.org1.svc.cluster.local
+
+  Org2:
+    mspid: Org2MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp
+
+    peers:
+      - peer2-hlf-peer.org2.svc.cluster.local
+
+  Org3:
+    mspid: Org3MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp
+
+    peers:
+      - peer3-hlf-peer.org3.svc.cluster.local
+
+  # Orderer Org name
+  OrdererOrg:
+      # Membership Service Provider ID for this organization
+      mspID: OrdererMSP
+
+      # Needed to load users crypto keys and certs for this org (absolute path or relative to global crypto path, DEV mode)
+      cryptoPath: ordererOrganizations/orderers.svc.cluster.local/users/Admin@orderers.svc.cluster.local/msp
+
+orderers:
+  ord1-hlf-ord.orderers.svc.cluster.local:
+    url: grpcs://ord1-hlf-ord.orderers.svc.cluster.local:7050
+    # grpcOptions:
+    #   ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
+    tlsCACerts:
+      path: ${PROJECT_PATH}/crypto-config/ordererOrganizations/orderers.svc.cluster.local/tlsca/tlsca.orderers.svc.cluster.local-cert.pem
+
+peers:
+  peer1-hlf-peer.org1.svc.cluster.local:
+    url: grpc://peer1-hlf-peer.org1.svc.cluster.local:7051
+    # grpcOptions:
+    #   ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+
+  peer2-hlf-peer.org2.svc.cluster.local:
+    url: grpc://peer2-hlf-peer.org2.svc.cluster.local:7051
+    # grpcOptions:
+    #   ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org2.svc.cluster.local/tlsca/tlsca.org2.svc.cluster.local-cert.pem
+
+  peer3-hlf-peer.org3.svc.cluster.local:
+    url: grpc://peer3-hlf-peer.org3.svc.cluster.local:7051
+    # grpcOptions:
+    #   ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: ${PROJECT_PATH}/crypto-config/peerOrganizations/org3.svc.cluster.local/tlsca/tlsca.org3.svc.cluster.local-cert.pem

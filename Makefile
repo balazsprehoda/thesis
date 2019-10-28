@@ -7,6 +7,7 @@ start:
 	kubectl create ns org2
 	kubectl create ns org3
 	kubectl create ns fabric-tools
+	kubectl create ns caliper
 
 	@echo "-------Creating orderer secrets-------"
 	cd network && ./create-orderer-admin-secrets.sh
@@ -49,18 +50,35 @@ start:
 
 	make watch
 
+minikube:
+	minikube start --kubernetes-version=1.15.4 --memory=4096 --mount-string="/home/prehi/thesis/caliper:/hlnetwork" --mount
+
 join:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && scripts/create-join-channel.sh"
 
 chaincode:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /opt/gopath/src/github.com/chaincode/go && go get github.com/hyperledger/fabric/core/chaincode && go build && cd /scripts && ./install-instantiate-chaincode.sh"
 
+init:
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "cd /scripts && ORG_NUM=${ORG_NUM} ./init-ledger.sh"
+
+change-owner:
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "cd /scripts && ORG_NUM=${ORG_NUM} ./change-owner.sh ${KEY} ${OWNER}"
+
+caliper:
+	mkdir caliper/crypto-config
+	mkdir caliper/channel-artifacts
+	cp network/crypto-config/ caliper/crypto-config
+	cp network/channel-artifacts/ caliper/channel-artifacts
+	kubectl apply -f caliper/caliper.yaml
+
 destroy:
 	rm -rf network/crypto-config/
 	rm -rf network/channel-artifacts/
 	helm del --purge ord1 cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3
-	kubectl delete pod -n fabric-tools fabric-tools 
-	kubectl delete ns orderers org1 org2 org3 fabric-tools
+	kubectl delete pod -n fabric-tools fabric-tools
+	kubectl delete pod -n caliper caliper
+	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper
 	kubectl delete secrets --all
 
 watch:

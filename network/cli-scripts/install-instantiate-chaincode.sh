@@ -15,5 +15,3 @@ do
 done
 
 peer chaincode instantiate -o ${ORDERER_URL} -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -P "AND('Org1MSP.member','Org2MSP.member','Org3MSP.member')" -c '{"Args":["init"]}'
-
-peer chaincode invoke -o ${ORDERER_URL} -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -c "{\"Args\":[\"initLedger\"]}"
