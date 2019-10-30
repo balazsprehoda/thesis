@@ -77,7 +77,7 @@ destroy:
 	rm -rf network/channel-artifacts/
 	helm del --purge ord1 cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3
 	kubectl delete pod -n fabric-tools fabric-tools
-	kubectl delete pod -n caliper caliper
+	#kubectl delete pod -n caliper caliper
 	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper
 	kubectl delete secrets --all
 

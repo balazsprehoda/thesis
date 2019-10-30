@@ -27,4 +27,4 @@ spec:
   volumes:
     - name: workspace
       hostPath: #Minikube!!
-        path: /hosthome/prehi/thesis/
+        path: /hosthome/prehi/thesis/ #Linux!!

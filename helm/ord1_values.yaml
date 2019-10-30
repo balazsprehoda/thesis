@@ -8,11 +8,17 @@ persistence:
 ord:
   type: solo
   mspID: OrdererMSP
+  tls:
+    server:
+      enabled: true
 
 secrets:
   ord:
     cert: hlf--ord1-idcert
     key: hlf--ord1-idkey
     caCert: hlf--ord-cacert
+    tls: hlf--ord1-tls
+    tlsRootCert: hlf--ord1-tls-rootcert
+    tlsClientRootCert: hlf--ord1-tls-rootcert
   genesis: hlf--genesis
   adminCert: hlf--ord-admincert

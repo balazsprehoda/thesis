@@ -14,34 +14,34 @@ spec:
         value: "Etc/UTC"
       - name: FABRIC_CFG_PATH
         value: "/fabric"
+      - name: CORE_PEER_TLS_ENABLED
+        value: "true"
+      - name: CORE_PEER_TLS_CLIENTAUTHREQUIRED
+        value: "true"
+      - name:  CORE_PEER_TLS_CLIENTROOTCAS_FILES
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/ca.crt /fabric/config/crypto/peerOrganizations/org2.svc.cluster.local/peers/peer2-hlf-peer.org2.svc.cluster.local/tls/ca.crt /fabric/config/crypto/peerOrganizations/org3.svc.cluster.local/peers/peer3-hlf-peer.org3.svc.cluster.local/tls/ca.crt"
+      - name: CORE_PEER_TLS_CLIENTCERT_FILE
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/tls.crt"
+      - name: CORE_PEER_TLS_CLIENTKEY_FILE
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/tls.key"
+      - name: CORE_PEER_TLS_CERT_FILE
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/tls.crt"
+      - name: CORE_PEER_TLS_KEY_FILE
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/tls.key"
+      - name: CORE_PEER_TLS_ROOTCERT_FILE
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/ca.crt"
+      - name: CORE_PEER_MSPCONFIGPATH
+        value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp"
+      - name: CORE_PEER_ID
+        value: "cli"
+      - name: CORE_PEER_ADDRESS
+        value: "peer1-hlf-peer.org1.svc.cluster.local:7051"
+      - name: CORE_PEER_LOCALMSPID
+        value: "Org1MSP"
       volumeMounts:
-        # Org1 MSP
-        - mountPath: /fabric/config/crypto/org1/msp/admincerts
-          name: peer1-admincert
-        - mountPath: /fabric/config/crypto/org1/msp/signcerts
-          name: peer1-admin-signcert
-        - mountPath: /fabric/config/crypto/org1/msp/keystore
-          name: peer1-adminkey
-        - mountPath: /fabric/config/crypto/org1/msp/cacerts
-          name: peer1-cacert
-        # Org2 MSP
-        - mountPath: /fabric/config/crypto/org2/msp/admincerts
-          name: peer2-admincert
-        - mountPath: /fabric/config/crypto/org2/msp/signcerts
-          name: peer2-admin-signcert
-        - mountPath: /fabric/config/crypto/org2/msp/keystore
-          name: peer2-adminkey
-        - mountPath: /fabric/config/crypto/org2/msp/cacerts
-          name: peer2-cacert
-        # Org3 MSP
-        - mountPath: /fabric/config/crypto/org3/msp/admincerts
-          name: peer3-admincert
-        - mountPath: /fabric/config/crypto/org3/msp/signcerts
-          name: peer3-admin-signcert
-        - mountPath: /fabric/config/crypto/org3/msp/keystore
-          name: peer3-adminkey
-        - mountPath: /fabric/config/crypto/org3/msp/cacerts
-          name: peer3-cacert
+        # MSP + TLS
+        - mountPath: /fabric/config/crypto/
+          name: crypto-config
         # Channel artifacts
         - mountPath: /fabric/config/channel-artifacts
           name: artifacts
@@ -55,45 +55,9 @@ spec:
         - mountPath: /host/var/run/docker.sock
           name: dockersocket
   volumes:
-    # Peer1 admin credentials
-    - name: peer1-admincert
-      secret:
-        secretName: hlf--peer1-admincert
-    - name: peer1-admin-signcert
-      secret:
-        secretName: hlf--peer1-admincert
-    - name: peer1-adminkey
-      secret:
-        secretName: hlf--peer1-adminkey
-    - name: peer1-cacert
-      secret:
-        secretName: hlf--peer1-cacert
-    # Peer2 admin credentials
-    - name: peer2-admincert
-      secret:
-        secretName: hlf--peer2-admincert
-    - name: peer2-admin-signcert
-      secret:
-        secretName: hlf--peer2-admincert
-    - name: peer2-adminkey
-      secret:
-        secretName: hlf--peer2-adminkey
-    - name: peer2-cacert
-      secret:
-        secretName: hlf--peer2-cacert
-    # Peer3 admin credentials
-    - name: peer3-admincert
-      secret:
-        secretName: hlf--peer3-admincert
-    - name: peer3-admin-signcert
-      secret:
-        secretName: hlf--peer3-admincert
-    - name: peer3-adminkey
-      secret:
-        secretName: hlf--peer3-adminkey
-    - name: peer3-cacert
-      secret:
-        secretName: hlf--peer3-cacert
+    - name: crypto-config
+      hostPath:
+        path: /hosthome/prehi/thesis/network/crypto-config/
     # Channel artifacts (genesis block, channel tx, anchor update txs)
     - name: artifacts
       secret:

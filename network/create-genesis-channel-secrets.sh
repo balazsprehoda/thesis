@@ -4,7 +4,7 @@ CHANNEL_NAME=mychannel
 
 mkdir channel-artifacts
 
-../configtxgen -profile OrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+../configtxgen -profile OrdererGenesis -outputBlock ./channel-artifacts/genesis.block -channelID syschannel
 
 ../configtxgen -profile ThreeOrgsChannel -channelID ${CHANNEL_NAME} -outputCreateChannelTx ./channel-artifacts/${CHANNEL_NAME}.tx
 

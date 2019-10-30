@@ -12,6 +12,11 @@ peer:
   databaseType: CouchDB
   couchdbInstance: cdb-peer2
   mspID: Org2MSP
+  tls:
+    server:
+      enabled: true
+    client:
+      enabled: true
   gossip:
     externalEndpoint: minikube:30251
     bootstrap: peer2-hlf-peer:7051
@@ -22,7 +27,12 @@ secrets:
     cert: hlf--peer2-idcert
     key: hlf--peer2-idkey
     caCert: hlf--peer-cacert
+    tls: hlf--peer2-tls
+    tlsRootCert: hlf--peer2-tls-rootcert
+    tlsClient: hlf--peer2-tls
+    tlsClientRootCert: hlf--peer2-tls-clientrootcerts
   channels:
     - hlf--channel
   adminCert: hlf--peer-admincert
   adminKey: hlf--peer-adminkey
+  ordTlsRootCert: hlf--ord1-tls-rootcert
