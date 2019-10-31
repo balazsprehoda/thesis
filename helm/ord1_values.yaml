@@ -10,7 +10,7 @@ ord:
   mspID: OrdererMSP
   tls:
     server:
-      enabled: true
+      enabled: false
 
 secrets:
   ord:

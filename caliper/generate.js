@@ -6,7 +6,7 @@ let blockchain, context;
 let clientIndex = 0;
 let dataId = 0;
 
-let sensorBatchSize = 1;
+let changeBatchSize = 1;
 let totalClients = 0;
 
 module.exports.info  = 'Caliper callback module for the fabcar benchmark';
@@ -15,35 +15,31 @@ module.exports.init = async (bc, contx, args) => {
     clientIndex = process.pid;
     dataId = clientIndex;
     totalClients = parseInt(args.clients.toString());
-    sensorBatchSize = parseInt(args.sensor_batch_size.toString());
 
     blockchain = bc;
     context = contx;
 };
 
-function createSensorBatch() {
-    let changes = [];
-    for (let i = 0; i < sensorBatchSize; i++, dataId += totalClients) {
-        changes.push({
-            id: dataId,
-            make: "Toyota",
-            model: "Prius",
-            color: "Silver",
-            owner: "Bence"
-        });
-    }
+function createChangeBatch() {
+    let changes = [
+        dataId.toString(),
+        "Toyota",
+        "Prius",
+        "Silver",
+        "Bence"
+    ];
 
-    return sensors.map(s => JSON.stringify(s));
+    return changes;
 }
 
 module.exports.run = async () => {
-    let sensorData = createSensorBatch();
+    let changeData = createChangeBatch();
     let txArgs = {
         chaincodeFunction: 'createCar',
-        chaincodeArguments: [''].concat(sensorData) // the first arg is the private collection name, empty means => don't use one
+        chaincodeArguments: changeData
     };
 
-    let results = await blockchain.invokeSmartContract(context, 'go', '', txArgs, 3);
+    let results = await blockchain.invokeSmartContract(context, 'go', '', txArgs, 10);
     for (let result of results) {
         let txinfo = {
             tx_id: result.GetID(),

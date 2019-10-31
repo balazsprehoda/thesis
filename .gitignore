@@ -3,4 +3,6 @@
 crypto-config/
 channel-artifacts/
 
+# Caliper-generated
 *.log
+*.html

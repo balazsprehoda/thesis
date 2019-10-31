@@ -1,14 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: peer1-hlf-peer
+  name: peer1
   namespace: org1
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: peer1-hlf-peer
+        name: peer1
     spec:
       containers:
         - name: peer
@@ -31,15 +31,15 @@ spec:
           - name: CORE_PEER_GOSSIP_ORGLEADER
             value: "false"
           - name: CORE_PEER_GOSSIP_BOOTSTRAP
-            value: "localhost:7051"
+            value: "peer1-hlf-peer:30151"
           - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
             value: "minikube:30151"
           - name: CORE_PEER_ADDRESSAUTODETECT
             value: "true"
           - name: CORE_PEER_LISTENADDRESS
-            value: "0.0.0.0:7051"
+            value: "0.0.0.0:30151"
           - name: CORE_PEER_EVENTS_ADDRESS
-            value: "0.0.0.0:7053"
+            value: "0.0.0.0:30153"
           - name: CORE_PEER_PROFILE_ENABLED
             value: "true"
           - name: CORE_PEER_ID

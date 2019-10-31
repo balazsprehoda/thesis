@@ -24,10 +24,6 @@
 
 package main
 
-/* Imports
- * 4 utility libraries for formatting, handling bytes, reading and writing JSON, and string manipulation
- * 2 specific Hyperledger Fabric specific libraries for Smart Contracts
- */
 import (
 	"bytes"
 	"encoding/json"
@@ -123,8 +119,15 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 
 func (s *SmartContract) createCar(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
+	argumentList := ""
+	i := 0
+	for i < len(args) {
+		argumentList = fmt.Sprintf("%s %d %s,", argumentList, i, args[i])
+		i = i + 1
+	}
+
 	if len(args) != 5 {
-		return shim.Error("Incorrect number of arguments. Expecting 5")
+		return shim.Error(fmt.Sprintf("Incorrect number of arguments. Expecting 5, got %d: %s", len(args), argumentList))
 	}
 
 	var car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4]}

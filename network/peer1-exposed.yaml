@@ -10,7 +10,6 @@ metadata:
   name: peer1-expose
   namespace: org1
 spec:
-  type: NodePort
   ports:
   - name: port-1
     port: 7051

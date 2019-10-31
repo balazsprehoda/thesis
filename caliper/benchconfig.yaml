@@ -14,7 +14,7 @@ test:
         finishingTps: 100
     # the user callback module relative to the workspace
     arguments:
-      sensor_batch_size: 1
+      change_batch_size: 1
       clients: 3
     callback: caliper/generate.js
 monitor:

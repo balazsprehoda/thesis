@@ -15,9 +15,9 @@ spec:
       - name: FABRIC_CFG_PATH
         value: "/fabric"
       - name: CORE_PEER_TLS_ENABLED
-        value: "true"
+        value: "false"
       - name: CORE_PEER_TLS_CLIENTAUTHREQUIRED
-        value: "true"
+        value: "false"
       - name:  CORE_PEER_TLS_CLIENTROOTCAS_FILES
         value: "/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/ca.crt /fabric/config/crypto/peerOrganizations/org2.svc.cluster.local/peers/peer2-hlf-peer.org2.svc.cluster.local/tls/ca.crt /fabric/config/crypto/peerOrganizations/org3.svc.cluster.local/peers/peer3-hlf-peer.org3.svc.cluster.local/tls/ca.crt"
       - name: CORE_PEER_TLS_CLIENTCERT_FILE

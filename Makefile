@@ -66,10 +66,6 @@ change-owner:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "cd /scripts && ORG_NUM=${ORG_NUM} ./change-owner.sh ${KEY} ${OWNER}"
 
 caliper:
-	mkdir caliper/crypto-config
-	mkdir caliper/channel-artifacts
-	cp network/crypto-config/ caliper/crypto-config
-	cp network/channel-artifacts/ caliper/channel-artifacts
 	kubectl apply -f caliper/caliper.yaml
 
 destroy:
