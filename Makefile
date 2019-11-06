@@ -25,7 +25,12 @@ start:
 	cd network && ./create-orderer-node-secrets.sh
 
 	@echo "-------Deploying orderers-------"
-	helm install stable/hlf-ord -n ord1 --namespace orderers -f ./helm/ord1_values.yaml
+	kubectl apply -f network/orderer1.yaml
+	kubectl apply -f network/orderer2.yaml
+	kubectl apply -f network/orderer3.yaml
+	kubectl apply -f network/orderer1_svc.yaml
+	kubectl apply -f network/orderer2_svc.yaml
+	kubectl apply -f network/orderer3_svc.yaml
 
 	@echo "-------Deploying CouchDBs-------"
 	helm install stable/hlf-couchdb -n cdb-peer1 --namespace org1 -f ./helm/cdb_values.yaml
@@ -71,10 +76,8 @@ caliper:
 destroy:
 	rm -rf network/crypto-config/
 	rm -rf network/channel-artifacts/
-	helm del --purge ord1 cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3
-	kubectl delete pod -n fabric-tools fabric-tools
-	#kubectl delete pod -n caliper caliper
 	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper
+	helm del --purge cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3
 	kubectl delete secrets --all
 
 watch:

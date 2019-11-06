@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: hlf-peer
-    chart: hlf-peer-1.2.10
+    chart: hlf-peer-1.3.0
     heritage: Tiller
     release: peer1
   name: peer1-expose

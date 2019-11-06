@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ord1-hlf-ord
+  namespace: orderers
+  labels:
+    run: ord1-hlf-ord
+spec:
+  type: ClusterIP
+  selector:
+    name: ord1-hlf-ord
+  ports:
+  - protocol: TCP
+    port: 7050
+    name: grpcs

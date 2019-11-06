@@ -112,22 +112,21 @@ orderers:
 
 peers:
   peer1-hlf-peer.org1.svc.cluster.local:
-    url: grpc://minikube:30151
-    #url: grpc://minikube:31286
+    url: grpcs://peer1-hlf-peer.org1.svc.cluster.local:30151
     grpcOptions:
       ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
     tlsCACerts:
       path: "/home/prehi/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem"
 
   peer2-hlf-peer.org2.svc.cluster.local:
-    url: grpc://minikube:30251
+    url: grpcs://peer2-hlf-peer.org2.svc.cluster.local:30251
     grpcOptions:
       ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
     tlsCACerts:
       path: /home/prehi/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/tlsca/tlsca.org2.svc.cluster.local-cert.pem
 
   peer3-hlf-peer.org3.svc.cluster.local:
-    url: grpc://minikube:30351
+    url: grpcs://peer3-hlf-peer.org3.svc.cluster.local:30351
     grpcOptions:
       ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
     tlsCACerts:
@@ -161,29 +160,3 @@ operations:
     # paths to PEM encoded ca certificates to trust for client authentication
     clientRootCAs:
       files: []
-
-# entityMatchers:
-#   peer:
-#     - pattern: (\w*)peer1-hlf-peer.org1.svc.cluster.local(\w*)
-#       urlSubstitutionExp: grpc://minikube:30151
-#       eventUrlSubstitutionExp: grpc://minikube:30153
-#       sslTargetOverrideUrlSubstitutionExp: peer1-hlf-peer.org1.svc.cluster.local
-#       mappedHost: peer1-hlf-peer.org1.svc.cluster.local
-
-#     - pattern: (\w*)peer2-hlf-peer.org2.svc.cluster.local(\w*)
-#       urlSubstitutionExp: grpc://minikube:30251
-#       eventUrlSubstitutionExp: grpc://minikube:30253
-#       sslTargetOverrideUrlSubstitutionExp: peer2-hlf-peer.org2.svc.cluster.local
-#       mappedHost: peer2-hlf-peer.org2.svc.cluster.local
-
-#     - pattern: (\w*)peer3-hlf-peer.org3.svc.cluster.local(\w*)
-#       urlSubstitutionExp: grpc://minikube:30351
-#       eventUrlSubstitutionExp: grpc://minikube:30353
-#       sslTargetOverrideUrlSubstitutionExp: peer3-hlf-peer.org3.svc.cluster.local
-#       mappedHost: peer3-hlf-peer.org3.svc.cluster.local
-
-  # orderer:
-  #   - pattern: (\w*)ord1-hlf-ord.orderers.svc.cluster.local(\w*)
-  #     urlSubstitutionExp: grpcs://minikube:30993
-  #     sslTargetOverrideUrlSubstitutionExp: ord1-hlf-ord.orderers.svc.cluster.local
-  #     mappedHost: ord1-hlf-ord.orderers.svc.cluster.local

@@ -74,7 +74,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer1-hlf-peer.org1.svc.cluster.local
-              Port: 7051
+              Port: 30151
 
     - &Org2
         Name: Org2MSP
@@ -113,7 +113,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer2-hlf-peer.org2.svc.cluster.local
-              Port: 7051
+              Port: 30251
 
     - &Org3
         Name: Org3MSP
@@ -152,7 +152,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer3-hlf-peer.org3.svc.cluster.local
-              Port: 7051
+              Port: 30351
 
 ################################################################################
 #
@@ -164,12 +164,12 @@ Organizations:
 ################################################################################
 Orderer: &OrdererDefaults
 
-    # Orderer Type: The orderer implementation to start
-    # Available types are "solo" and "kafka"
-    OrdererType: solo
+    OrdererType: etcdraft
 
     Addresses:
         - ord1-hlf-ord.orderers.svc.cluster.local:7050
+        - ord2-hlf-ord.orderers.svc.cluster.local:7050
+        - ord3-hlf-ord.orderers.svc.cluster.local:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -189,12 +189,20 @@ Orderer: &OrdererDefaults
         # max bytes will result in a batch larger than preferred max bytes.
         PreferredMaxBytes: 512 KB
 
-    Kafka:
-        # Brokers: A list of Kafka brokers to which the orderer connects
-        # If using K8S, we specify the service exposing the brokers
-        # NOTE: Use Address/IP:port notation
-        Brokers:
-            - kafka-hlf.orderers.svc.cluster.local:9092
+    EtcdRaft:
+        Consenters:
+        - Host: ord1-hlf-ord.orderers.svc.cluster.local
+          Port: 7050
+          ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+          ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+        - Host: ord2-hlf-ord.orderers.svc.cluster.local
+          Port: 7050
+          ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+          ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+        - Host: ord3-hlf-ord.orderers.svc.cluster.local
+          Port: 7050
+          ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+          ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network

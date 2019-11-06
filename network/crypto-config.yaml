@@ -4,6 +4,8 @@ OrdererOrgs:
     Domain: orderers.svc.cluster.local
     Specs:
       - Hostname: ord1-hlf-ord
+      - Hostname: ord2-hlf-ord
+      - Hostname: ord3-hlf-ord
 
 PeerOrgs:
 

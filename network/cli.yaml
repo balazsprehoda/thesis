@@ -14,8 +14,10 @@ spec:
         value: "Etc/UTC"
       - name: FABRIC_CFG_PATH
         value: "/fabric"
+      - name: FABRIC_LOGGING_SPEC
+        value: "debug"
       - name: CORE_PEER_TLS_ENABLED
-        value: "false"
+        value: "true"
       - name: CORE_PEER_TLS_CLIENTAUTHREQUIRED
         value: "false"
       - name:  CORE_PEER_TLS_CLIENTROOTCAS_FILES
@@ -35,7 +37,7 @@ spec:
       - name: CORE_PEER_ID
         value: "cli"
       - name: CORE_PEER_ADDRESS
-        value: "peer1-hlf-peer.org1.svc.cluster.local:7051"
+        value: "peer1-hlf-peer.org1.svc.cluster.local:30151"
       - name: CORE_PEER_LOCALMSPID
         value: "Org1MSP"
       volumeMounts:

@@ -6,11 +6,11 @@ persistence:
   size: 1Gi
 
 ord:
-  type: solo
+  type: etcdraft
   mspID: OrdererMSP
   tls:
     server:
-      enabled: false
+      enabled: true
 
 secrets:
   ord:

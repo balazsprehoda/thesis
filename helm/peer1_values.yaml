@@ -13,45 +13,30 @@ peer:
   couchdbInstance: cdb-peer1
   mspID: Org1MSP
   gossip:
-    externalEndpoint: minikube:30151
-    endpoint: peer1-hlf-peer:7051
-    bootstrap: peer1-hlf-peer:7051
+    externalEndpoint: peer1-hlf-peer.org1.svc.cluster.local:30151
+    bootstrap: peer1-hlf-peer:30151
+    endpoint: peer1-hlf-peer:30151
+  tls:
+    server:
+      enabled: true
+    client:
+      enabled: false
 
 secrets:
   peer:
     cert: hlf--peer1-idcert
     key: hlf--peer1-idkey
     caCert: hlf--peer-cacert
+    tls: hlf--peer1-tls
+    tlsRootCert: hlf--peer1-tls-rootcert
+    tlsClient: hlf--peer1-tls
+    tlsClientRootCert: hlf--peer1-tls-clientrootcerts
   channels:
     - hlf--channel
   adminCert: hlf--peer-admincert
   adminKey: hlf--peer-adminkey
+  ordTlsRootCert: hlf--ord1-tls-rootcert
 
-# peer:
-#   databaseType: CouchDB
-#   couchdbInstance: cdb-peer1
-#   mspID: Org1MSP
-#   tls:
-#     server:
-#       enabled: false
-#     client:
-#       enabled: false
-#   gossip:
-#     externalEndpoint: minikube:30151
-#     bootstrap: peer1-hlf-peer:7051
-#     endpoint: peer1-hlf-peer:7051
-
-# secrets:
-#   peer:
-#     cert: hlf--peer1-idcert
-#     key: hlf--peer1-idkey
-#     caCert: hlf--peer-cacert
-#     tls: hlf--peer1-tls
-#     tlsRootCert: hlf--peer1-tls-rootcert
-#     tlsClient: hlf--peer1-tls
-#     tlsClientRootCert: hlf--peer1-tls-clientrootcerts
-#   channels:
-#     - hlf--channel
-#   adminCert: hlf--peer-admincert
-#   adminKey: hlf--peer-adminkey
-#   ordTlsRootCert: hlf--ord1-tls-rootcert
+service:
+  portRequest: 30151
+  portEvent: 30153
