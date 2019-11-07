@@ -3,31 +3,78 @@
 const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('txinfo');
 
 let blockchain, context;
-let clientIndex = 0;
-let dataId = 0;
+let carId = 0;
+let owners = [  
+    "Bence", "Balazs", "Barni", "Blanka",
+    "Marci", "Zoli", "Marcell", "Dani",
+    "Gellert", "Agoston", "Julcsi", "Borka",
+    "Levente", "Huba", "Hanga", "Soma"
+];
+let makesAndModels = [
+    {make: "Toyota", model: "Prius"},
+    {make: "Toyota", model: "Hiace"},
+    {make: "Toyota", model: "Vitz"},
+    {make: "Toyota", model: "Hilux"},
+    {make: "Toyota", model: "Corolla"},
+    {make: "Skoda", model: "Fabia"},
+    {make: "Skoda", model: "Octavia"},
+    {make: "Skoda", model: "Scala"},
+    {make: "Skoda", model: "Kamiq"},
+    {make: "Skoda", model: "Karoq"},
+    {make: "Fiat", model: "Punto"},
+    {make: "Fiat", model: "Panda"},
+    {make: "Fiat", model: "Viaggio"},
+    {make: "Fiat", model: "Ducato"},
+    {make: "Fiat", model: "Cronos"},
+    {make: "Ford", model: "Fiesta"},
+    {make: "Ford", model: "Focus"},
+    {make: "Ford", model: "Mustang"},
+    {make: "Ford", model: "Explorer"},
+    {make: "Ford", model: "Transit"},
+    {make: "Tesla", model: "X"},
+    {make: "Tesla", model: "3"},
+    {make: "Tesla", model: "S"},
+    {make: "Tesla", model: "Y"},
+    {make: "Tesla", model: "Roadster"},
+    {make: "Volkswagen", model: "Arteon"},
+    {make: "Volkswagen", model: "Jetta"},
+    {make: "Volkswagen", model: "Passat"},
+    {make: "Volkswagen", model: "Golf"},
+    {make: "Volkswagen", model: "Atlas"},
+];
 
-let changeBatchSize = 1;
-let totalClients = 0;
+let colors = [
+    "white", "black", "red", "yellow",
+    "purple", "blue", "silver", "gold",
+    "gray", "green", "brown", "orange"
+];
 
 module.exports.info  = 'Caliper callback module for the fabcar benchmark';
 
 module.exports.init = async (bc, contx, args) => {
-    clientIndex = process.pid;
-    dataId = clientIndex;
-    totalClients = parseInt(args.clients.toString());
-
     blockchain = bc;
     context = contx;
 };
 
+function randomInt(max) {
+    return Math.floor(Math.random() * (max + 1));
+}
+
 function createChangeBatch() {
+    let makeAndModel = makesAndModels[randomInt(makesAndModels.length - 1)];
+    let id = "CAR" + carId.toString();
+    let make = makeAndModel.make;
+    let model = makeAndModel.model;
+    let color = colors[randomInt(colors.length - 1)];
+    let owner = owners[randomInt(owners.length - 1)];
     let changes = [
-        dataId.toString(),
-        "Toyota",
-        "Prius",
-        "Silver",
-        "Bence"
+        id,
+        make,
+        model,
+        color,
+        owner
     ];
+    carId += 1;
 
     return changes;
 }

@@ -4,6 +4,7 @@ metadata:
   name: caliper
   namespace: caliper
 spec:
+  restartPolicy: Never
   containers:
     - name: caliper
       image: hyperledger/caliper:0.2.0
