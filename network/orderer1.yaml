@@ -52,6 +52,10 @@ spec:
             # Channel artifacts
             - mountPath: /etc/hyperledger/config/
               name: artifacts
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
 
       volumes:
         - name: crypto-config-1

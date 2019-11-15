@@ -1,12 +1,12 @@
 #!/bin/bash
 
 export CHANNEL_NAME=mychannel
-export ORDERER_URL=ord2-hlf-ord.orderers.svc.cluster.local:7050
+export ORDERER_URL=ord1-hlf-ord.orderers.svc.cluster.local:7050
 export CORE_PEER_LOCALMSPID=Org1MSP
 export CORE_PEER_MSPCONFIGPATH=/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp
 export CORE_PEER_ADDRESS=peer1-hlf-peer.org1.svc.cluster.local:30151
 export FABRIC_CFG_PATH=/etc/hyperledger/fabric
-export ORDERER_CAFILE=/fabric/config/crypto/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/ca.crt
+export ORDERER_CAFILE=/fabric/config/crypto/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/ca.crt
 export CORE_PEER_TLS_ROOTCERT_FILE=/fabric/config/crypto/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/tls/ca.crt
 
 # Create channel
