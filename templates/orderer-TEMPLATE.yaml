@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: ord3-hlf-ord
+  name: ordORD_NUMBER-hlf-ord
   namespace: orderers
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: ord3-hlf-ord
+        name: ordORD_NUMBER-hlf-ord
     spec:
       containers:
-
-        - name: ord3-hlf-ord
+        
+        - name: ordORD_NUMBER-hlf-ord
           image: hyperledger/fabric-orderer:1.4.3
           imagePullPolicy: IfNotPresent
           command: ["sh", "-c", "orderer"]
@@ -20,7 +20,7 @@ spec:
           - name: TZ
             value: "Etc/UTC"
           - name: FABRIC_LOGGING_SPEC
-            value: "info"
+            value: "debug"
           - name: GODEBUG
             value: "netdns=go"
           - name: ORDERER_GENERAL_LISTENADDRESS
@@ -32,15 +32,15 @@ spec:
           - name: ORDERER_GENERAL_TLS_ENABLED
             value: "true"
           - name: ORDERER_GENERAL_TLS_CERTIFICATE
-            value: "/etc/hyperledger/msp/orderer/tls/server.crt"
+            value: "/etc/hyperledger/msp/orderer/tls/tls.crt"
           - name: ORDERER_GENERAL_TLS_PRIVATEKEY
-            value: "/etc/hyperledger/msp/orderer/tls/server.key"
+            value: "/etc/hyperledger/msp/orderer/tls/tls.key"
           - name: ORDERER_GENERAL_TLS_ROOTCAS
             value: "/etc/hyperledger/msp/orderer/tls/ca.crt"
           - name: ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE
-            value: "/etc/hyperledger/msp/orderer/tls/server.crt"
+            value: "/etc/hyperledger/msp/orderer/tls/tls.crt"
           - name: ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY
-            value: "/etc/hyperledger/msp/orderer/tls/server.key"
+            value: "/etc/hyperledger/msp/orderer/tls/tls.key"
           - name: ORDERER_GENERAL_LOCALMSPDIR
             value: "/etc/hyperledger/msp/orderer/msp"
           - name: ORDERER_GENERAL_LOCALMSPID
@@ -48,15 +48,19 @@ spec:
           volumeMounts:
             # MSP + TLS
             - mountPath: /etc/hyperledger/msp/orderer/
-              name: crypto-config-3
+              name: crypto-config
             # Channel artifacts
             - mountPath: /etc/hyperledger/config/
               name: artifacts
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
 
       volumes:
-        - name: crypto-config-3
+        - name: crypto-config
           hostPath:
-            path: /hosthome/prehi/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/
+            path: ABSPATH/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ordORD_NUMBER-hlf-ord.orderers.svc.cluster.local/
         # Channel artifacts (genesis block, channel tx, anchor update txs)
         - name: artifacts
           secret:

@@ -3,6 +3,9 @@
 crypto-config/
 channel-artifacts/
 
+connection-profile.yaml
+network-config.yaml
+
 # Caliper-generated
 *.log
 *.html

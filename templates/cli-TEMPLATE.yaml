@@ -59,7 +59,7 @@ spec:
   volumes:
     - name: crypto-config
       hostPath:
-        path: /hosthome/prehi/thesis/network/crypto-config/
+        path: ABSPATH/network/crypto-config/
     # Channel artifacts (genesis block, channel tx, anchor update txs)
     - name: artifacts
       secret:

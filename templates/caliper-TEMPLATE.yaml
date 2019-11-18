@@ -20,12 +20,10 @@ spec:
         value: "caliper/network-config.yaml"
       - name: CALIPER_TXUPDATETIME
         value: "10000"
-      - name: PROJECT_PATH
-        value: "/hosthome/prehi/thesis/network"
       volumeMounts:
         - mountPath: /hyperledger/caliper/workspace
           name: workspace
   volumes:
     - name: workspace
       hostPath: #Minikube!!
-        path: /hosthome/prehi/thesis/ #Linux!!
+        path: ABSPATH/ #Linux!!
