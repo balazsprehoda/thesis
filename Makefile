@@ -1,8 +1,6 @@
 NUMBER_OF_ORGS?=3
 
 start:
-	cd network && ../cryptogen generate --config=crypto-config.yaml
-	cd network && ./rename-keys.sh
 
 	kubectl create ns orderers
 
@@ -67,6 +65,10 @@ start:
 minikube:
 	minikube start --kubernetes-version=1.15.4 --memory=4096
 
+crypto-gen:
+	cd network && ../cryptogen generate --config=crypto-config.yaml
+	cd network && ./rename-keys.sh
+
 join:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && scripts/create-join-channel.sh"
 
@@ -97,11 +99,13 @@ net-delay:
 	kubectl create -f network/pumba_network.yaml
 
 destroy:
-	rm -rf network/crypto-config/
 	rm -rf network/channel-artifacts/
 	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper pumba
 	helm del --purge cdb-peer1 cdb-peer2 cdb-peer3 peer1 peer2 peer3
 	kubectl delete secrets --all
+
+crypto-del:
+	rm -rf network/crypto-config/
 
 watch:
 	watch -n 2 'kubectl get pods --all-namespaces'
