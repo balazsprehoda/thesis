@@ -5,6 +5,8 @@ channel-artifacts/
 
 connection-profile.yaml
 network-config.yaml
+orderers/*.yaml
+cli.yaml
 
 # Caliper-generated
 *.log
