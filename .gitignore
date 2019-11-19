@@ -5,7 +5,9 @@ channel-artifacts/
 
 connection-profile.yaml
 network-config.yaml
-orderers/*.yaml
+network/orderers/*.yaml
+network/peers/*.yaml
+caliper/caliper.yaml
 cli.yaml
 
 # Caliper-generated

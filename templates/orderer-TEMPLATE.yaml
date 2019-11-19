@@ -32,15 +32,15 @@ spec:
           - name: ORDERER_GENERAL_TLS_ENABLED
             value: "true"
           - name: ORDERER_GENERAL_TLS_CERTIFICATE
-            value: "/etc/hyperledger/msp/orderer/tls/tls.crt"
+            value: "/etc/hyperledger/msp/orderer/tls/server.crt"
           - name: ORDERER_GENERAL_TLS_PRIVATEKEY
-            value: "/etc/hyperledger/msp/orderer/tls/tls.key"
+            value: "/etc/hyperledger/msp/orderer/tls/server.key"
           - name: ORDERER_GENERAL_TLS_ROOTCAS
             value: "/etc/hyperledger/msp/orderer/tls/ca.crt"
           - name: ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE
-            value: "/etc/hyperledger/msp/orderer/tls/tls.crt"
+            value: "/etc/hyperledger/msp/orderer/tls/server.crt"
           - name: ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY
-            value: "/etc/hyperledger/msp/orderer/tls/tls.key"
+            value: "/etc/hyperledger/msp/orderer/tls/server.key"
           - name: ORDERER_GENERAL_LOCALMSPDIR
             value: "/etc/hyperledger/msp/orderer/msp"
           - name: ORDERER_GENERAL_LOCALMSPID
@@ -61,7 +61,9 @@ spec:
         - name: crypto-config
           hostPath:
             path: ABSPATH/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ordORD_NUMBER-hlf-ord.orderers.svc.cluster.local/
+            type: Directory
         # Channel artifacts (genesis block, channel tx, anchor update txs)
         - name: artifacts
-          secret:
-            secretName: hlf--artifacts
+          hostPath:
+            path: ABSPATH/network/channel-artifacts
+            type: Directory

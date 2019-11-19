@@ -62,16 +62,19 @@ spec:
         path: ABSPATH/network/crypto-config/
     # Channel artifacts (genesis block, channel tx, anchor update txs)
     - name: artifacts
-      secret:
-        secretName: hlf--artifacts
+      hostPath:
+        path: ABSPATH/network/channel-artifacts
+        type: Directory
     # Scripts
     - name: scripts
-      secret:
-        secretName: hlf--scripts
+      hostPath:
+        path: ABSPATH/network/cli-scripts
+        type: Directory
     # Chaincode
     - name: chaincode
-      secret:
-        secretName: hlf--chaincode
+      hostPath:
+        path: ABSPATH/src/chaincode/go
+        type: Directory
     # Docker socket
     - name: dockersocket
       hostPath:
