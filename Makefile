@@ -9,8 +9,6 @@ VM_ABSPATH?=/hosthome/prehi/thesis
 .PHONY: start
 start:
 
-	cd network && CHANNEL_NAME=mychannel ./generate-artifacts.sh
-
 	kubectl create ns orderers
 
 	@for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
@@ -58,6 +56,7 @@ minikube:
 crypto-gen:
 	cd network && ../cryptogen generate --config=crypto-config.yaml
 	cd network && ./rename-keys.sh
+	cd network && CHANNEL_NAME=mychannel ./generate-artifacts.sh
 
 .PHONY: generate
 generate:
@@ -153,12 +152,12 @@ net-delay:
 
 .PHONY: destroy
 destroy:
-	rm -rf network/channel-artifacts/
 	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper pumba
 
 .PHONY: crypto-del
 crypto-del:
 	rm -rf network/crypto-config/
+	rm -rf network/channel-artifacts/
 
 .PHONY: watch
 watch:

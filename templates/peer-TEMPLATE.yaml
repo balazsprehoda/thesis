@@ -33,7 +33,7 @@ spec:
           - name: CORE_PEER_GOSSIP_BOOTSTRAP
             value: "PEER_NAME-hlf-peer:PEER_REQ_PORT"
           - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
-            value: "minikube:PEER_REQ_PORT"
+            value: "PEER_NAME-hlf-peer:PEER_REQ_PORT"
           - name: CORE_PEER_ADDRESSAUTODETECT
             value: "true"
           - name: CORE_PEER_LISTENADDRESS
