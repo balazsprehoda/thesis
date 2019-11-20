@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export CHANNEL_NAME=mychannel
+
 mkdir channel-artifacts
 
 ../configtxgen -profile OrdererGenesis -outputBlock ./channel-artifacts/genesis.block -channelID syschannel

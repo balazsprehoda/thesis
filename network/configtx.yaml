@@ -74,7 +74,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer1-hlf-peer.org1.svc.cluster.local
-              Port: 30151
+              Port: 7051
 
     - &Org2
         Name: Org2MSP
@@ -113,7 +113,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer2-hlf-peer.org2.svc.cluster.local
-              Port: 30251
+              Port: 7051
 
     - &Org3
         Name: Org3MSP
@@ -152,7 +152,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer3-hlf-peer.org3.svc.cluster.local
-              Port: 30351
+              Port: 7051
 
 ################################################################################
 #

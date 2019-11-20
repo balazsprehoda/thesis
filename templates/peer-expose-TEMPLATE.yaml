@@ -3,25 +3,23 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: PEER_NAME-hlf-peer
     release: PEER_NAME
   name: PEER_NAME-expose
   namespace: ORG_NAME
 spec:
   ports:
   - name: port-1
-    port: PEER_REQ_PORT
+    port: 7051
     protocol: TCP
-    targetPort: PEER_REQ_PORT
+    targetPort: 7051
     nodePort: PEER_REQ_PORT
   - name: port-2
-    port: PEER_EVENT_PORT
+    port: 7053
     protocol: TCP
-    targetPort: PEER_EVENT_PORT
+    targetPort: 7053
     nodePort: PEER_EVENT_PORT
   selector:
-    app: hlf-peer
-    release: PEER_NAME
+    name: PEER_NAME-hlf-peer
   type: NodePort
 status:
   loadBalancer: {}

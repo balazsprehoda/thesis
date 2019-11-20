@@ -11,15 +11,28 @@ for ORG_NUM in 1 2 3
 do
     export CORE_PEER_LOCALMSPID=Org${ORG_NUM}MSP
     export CORE_PEER_MSPCONFIGPATH=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/users/Admin@org${ORG_NUM}.svc.cluster.local/msp
-    export CORE_PEER_ADDRESS=peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local:30${ORG_NUM}51
+    # export CORE_PEER_ADDRESS=peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local:30${ORG_NUM}51
+    export CORE_PEER_ADDRESS=peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local:7051
     export CORE_PEER_TLS_ROOTCERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/ca.crt
-    # export CORE_PEER_TLS_CLIENTROOTCAS_FILES="/fabric/config/crypto/tlsrootcerts/ca1.crt /fabric/config/crypto/tlsrootcerts/ca2.crt /fabric/config/crypto/tlsrootcerts/ca3.crt"
-    # export CORE_PEER_TLS_CERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/tls.crt
-    # export CORE_PEER_TLS_CLIENTCERT_FILE=$CORE_PEER_TLS_CERT_FILE
-    # export CORE_PEER_TLS_KEY_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/tls.key
-    # export CORE_PEER_TLS_CLIENTKEY_FILE=$CORE_PEER_TLS_KEY_FILE
 
-    peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p github.com/chaincode/go # --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE
+    export CORE_PEER_TLS_CERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/server.crt
+    export CORE_PEER_TLS_CLIENTCERT_FILE=$CORE_PEER_TLS_CERT_FILE
+    export CORE_PEER_TLS_KEY_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/server.key
+    export CORE_PEER_TLS_CLIENTKEY_FILE=$CORE_PEER_TLS_KEY_FILE
+
+    peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p github.com/chaincode/go
 done
+
+export ORG_NUM=2
+export CORE_PEER_LOCALMSPID=Org${ORG_NUM}MSP
+export CORE_PEER_MSPCONFIGPATH=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/users/Admin@org${ORG_NUM}.svc.cluster.local/msp
+# export CORE_PEER_ADDRESS=peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local:30${ORG_NUM}51
+export CORE_PEER_ADDRESS=peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local:7051
+export CORE_PEER_TLS_ROOTCERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/ca.crt
+
+export CORE_PEER_TLS_CERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/server.crt
+export CORE_PEER_TLS_CLIENTCERT_FILE=$CORE_PEER_TLS_CERT_FILE
+export CORE_PEER_TLS_KEY_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/server.key
+export CORE_PEER_TLS_CLIENTKEY_FILE=$CORE_PEER_TLS_KEY_FILE
 
 peer chaincode instantiate -o ${ORDERER_URL} -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -P "AND('Org1MSP.member','Org2MSP.member','Org3MSP.member')" -c '{"Args":["init"]}' --tls --cafile $ORDERER_CAFILE

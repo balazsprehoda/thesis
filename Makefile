@@ -54,9 +54,10 @@ minikube:
 
 .PHONY: crypto-gen
 crypto-gen:
+	make crypto-del
 	cd network && ../cryptogen generate --config=crypto-config.yaml
 	cd network && ./rename-keys.sh
-	cd network && CHANNEL_NAME=mychannel ./generate-artifacts.sh
+	cd network && ./generate-artifacts.sh
 
 .PHONY: generate
 generate:
@@ -121,9 +122,12 @@ clean:
 join:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && scripts/create-join-channel.sh"
 
+##############################################
+# No need for building it! Fabric will do it.
+##############################################
 .PHONY: chaincode
 chaincode:
-	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /opt/gopath/src/github.com/chaincode/go && go get github.com/hyperledger/fabric/core/chaincode && go build && cd /scripts && ./install-instantiate-chaincode.sh"
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /scripts && ./install-instantiate-chaincode.sh"
 
 .PHONY: init
 init:

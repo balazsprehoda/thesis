@@ -20,7 +20,7 @@ spec:
           - name: TZ
             value: "Etc/UTC"
           - name: FABRIC_LOGGING_SPEC
-            value: "debug"
+            value: "info"
           - name: GODEBUG
             value: "netdns=go"
           - name: ORDERER_GENERAL_LISTENADDRESS

@@ -11,10 +11,10 @@ spec:
     name: PEER_NAME
   ports:
   - protocol: TCP
-    port: PEER_REQ_PORT
+    port: 7051
     name: grpcs
   - protocol: TCP
-    port: PEER_EVENT_PORT
+    port: 7053
     name: events
   - protocol: TCP
     port: 5984

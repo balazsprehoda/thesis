@@ -20,26 +20,26 @@ spec:
             value: "Etc/UTC"
           - name: CORE_VM_ENDPOINT
             value: "unix:///host/var/run/docker.sock"
-          - name: CORE_PEER_NETWORKID
-            value: "nid1"
           - name: FABRIC_CFG_PATH
             value: "/etc/hyperledger/fabric/"
           - name: FABRIC_LOGGING_SPEC
-            value: "INFO"
+            value: "info"
+          - name: GODEBUG
+            value: "netdns=go"
           - name: CORE_PEER_GOSSIP_USELEADERELECTION
             value: "true"
           - name: CORE_PEER_GOSSIP_ORGLEADER
             value: "false"
           - name: CORE_PEER_GOSSIP_BOOTSTRAP
-            value: "PEER_NAME-hlf-peer:PEER_REQ_PORT"
+            value: "PEER_NAME-hlf-peer.ORG_NAME.svc.cluster.local:7051"
           - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
-            value: "PEER_NAME-hlf-peer:PEER_REQ_PORT"
+            value: "PEER_NAME-hlf-peer.ORG_NAME.svc.cluster.local:7051"
           - name: CORE_PEER_ADDRESSAUTODETECT
             value: "true"
           - name: CORE_PEER_LISTENADDRESS
-            value: "0.0.0.0:PEER_REQ_PORT"
+            value: "0.0.0.0:7051"
           - name: CORE_PEER_EVENTS_ADDRESS
-            value: "0.0.0.0:PEER_EVENT_PORT"
+            value: "0.0.0.0:7053"
           - name: CORE_PEER_PROFILE_ENABLED
             value: "true"
           - name: CORE_PEER_ID
@@ -52,6 +52,14 @@ spec:
             value: "/fabric/config/crypto/peer/tls/server.key"
           - name: CORE_PEER_TLS_ROOTCERT_FILE
             value: "/fabric/config/crypto/peer/tls/ca.crt"
+          - name: CORE_PEER_TLS_CLIENTAUTHREQUIRED
+            value: "false"
+          - name: CORE_PEER_TLS_CLIENTROOTCAS_FILES
+            value: "/fabric/config/crypto/peer/tls/ca.crt"
+          - name: CORE_PEER_TLS_CLIENTCERT_FILE
+            value: "/fabric/config/crypto/peer/tls/server.crt"
+          - name: CORE_PEER_TLS_CLIENTKEY_FILE
+            value: "/fabric/config/crypto/peer/tls/server.key"
           - name: CORE_PEER_MSPCONFIGPATH
             value: "/fabric/config/crypto/peer/msp"
           - name: CORE_PEER_LOCALMSPID
@@ -71,6 +79,13 @@ spec:
             # Docker socket
             - mountPath: /host/var/run/docker.sock
               name: dockersocket
+          ports:
+            - name: request
+              containerPort: 7051
+              protocol: TCP
+            - name: event
+              containerPort: 7053
+              protocol: TCP
         - name: couchdb
           image: hyperledger/fabric-couchdb:amd64-0.4.14
           env:
@@ -80,11 +95,28 @@ spec:
             value: "hyperledgeruser"
           - name: COUCHDB_PASSWORD
             value: "hyperledgerpass"
+          ports:
+            - name: couchdb
+              containerPort: 5984
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 5984
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            tcpSocket:
+              port: 5984
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+            periodSeconds: 5
       volumes:
         # Peer MSP + TLS
         - name: crypto-config
           hostPath:
             path: ABSPATH/network/crypto-config/peerOrganizations/ORG_NAME.svc.cluster.local/peers/PEER_NAME-hlf-peer.ORG_NAME.svc.cluster.local
+            type: Directory
         # Docker socket
         - name: dockersocket
           hostPath:
