@@ -75,7 +75,7 @@ channels:
 
     chaincodes:
         - id: go
-          version: v4
+          version: '1.0'
           language: golang
           path: chaincode/go
 

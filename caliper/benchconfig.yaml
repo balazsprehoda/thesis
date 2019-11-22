@@ -15,7 +15,12 @@ test:
     # the user callback module relative to the workspace
     arguments:
       clients: 3
+      # Here comes PUMBA STUFF
+      # kubectl commands in manager, use the awk magic!
     callback: caliper/generate.js
+observer:
+  type: 'local'
+  interval: 1
 monitor:
   type: ['none']
   interval: 1

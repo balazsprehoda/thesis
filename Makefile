@@ -122,9 +122,6 @@ clean:
 join:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && scripts/create-join-channel.sh"
 
-##############################################
-# No need for building it! Fabric will do it.
-##############################################
 .PHONY: chaincode
 chaincode:
 	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /scripts && ./install-instantiate-chaincode.sh"
@@ -141,7 +138,7 @@ change-owner:
 caliper: caliper/caliper.yaml
 	@echo "-------Deploying Caliper-------"
 	kubectl apply -f caliper/caliper.yaml
-	sleep 5
+	sleep 10
 	kubectl logs -f -n caliper caliper
 
 .PHONY: ord1-kill
