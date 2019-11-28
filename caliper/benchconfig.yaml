@@ -11,12 +11,15 @@ test:
     - type: linear-rate
       opts:
         startingTps: 10
-        finishingTps: 100
+        finishingTps: 200
     # the user callback module relative to the workspace
     arguments:
       clients: 3
-      # Here comes PUMBA STUFF
-      # kubectl commands in manager, use the awk magic!
+      targetPattern: ord1-hlf
+      # Deploy Pumba after milliseconds:
+      deployAfter: 10000
+      pumbaConfigPath: /home/meres/thesis/network/pumba
+      projectPath: /home/meres/thesis
     callback: caliper/generate.js
 observer:
   type: 'local'

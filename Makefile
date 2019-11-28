@@ -6,6 +6,8 @@ CHANNEL_NAME?=mychannel
 ABSPATH?=/home/prehi/thesis
 # Absolute path to project dir on VM. Minikube mounts /home dir to /hosthome by default.
 VM_ABSPATH?=/hosthome/prehi/thesis
+# Fault injection target regex pattern and namespace
+TARGET_PATTERN?=ord1-hlf
 .PHONY: start
 start:
 
@@ -39,7 +41,6 @@ start:
 	done
 
 	@echo "-------Deploying cli-------"
-	cd network && ./create-cli-secrets.sh
 	kubectl apply -f network/cli.yaml
 
 	@for PEER_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
@@ -108,6 +109,15 @@ generate:
 		done \
 	done
 
+.PHONY: pumba-generate
+pumba-generate: export POD_NS=$(shell echo `kubectl get --no-headers=true pods --all-namespaces -o wide | grep $(shell echo `kubectl get pods -n ${TARGET_NS} --template='{{range.items}}{{.metadata.name}}{{printf "\n"}}{{end}}' | grep ${TARGET_PATTERN}`) | awk -F " " '{out=$$1; print out}'`)
+pumba-generate: export POD_NODE=$(shell echo `kubectl get --no-headers=true pods -n ${POD_NS} -o wide | grep $(shell echo `kubectl get pods -n ${TARGET_NS} --template='{{range.items}}{{.metadata.name}}{{printf "\n"}}{{end}}' | grep ${TARGET_PATTERN}`) | awk -F " " '{out=$$7; print out}'`)
+pumba-generate:
+	export TARGET_FILE=network/pumba/pumba-kill-${TARGET_PATTERN}.yaml; \
+	cp templates/pumba-kill-TEMPLATE.yaml $${TARGET_FILE} && \
+	sed -i -e "s/TARGET_NS/${POD_NS}/g" $${TARGET_FILE} && \
+	sed -i -e "s/TARGET_NODE/${POD_NODE}/g" $${TARGET_FILE} && \
+	sed -i -e "s/TARGET_PATTERN/${TARGET_PATTERN}/g" $${TARGET_FILE}
 
 .PHONY: clean
 clean:
@@ -138,7 +148,7 @@ change-owner:
 caliper: caliper/caliper.yaml
 	@echo "-------Deploying Caliper-------"
 	kubectl apply -f caliper/caliper.yaml
-	sleep 10
+	sleep 15
 	kubectl logs -f -n caliper caliper
 
 .PHONY: ord1-kill

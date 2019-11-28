@@ -87,7 +87,7 @@ spec:
               containerPort: 7053
               protocol: TCP
         - name: couchdb
-          image: hyperledger/fabric-couchdb:amd64-0.4.14
+          image: hyperledger/fabric-couchdb:amd64-0.4.16
           env:
           - name: TZ
             value: "Etc/UTC"

@@ -1,8 +1,10 @@
 'use strict';
 
 const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('txinfo');
+const sys = require('sys')
+const exec = require('child_process').exec;
 
-let blockchain, context;
+let blockchain, context, targetPattern;
 let carId = 0;
 let owners = [  
     "Bence", "Balazs", "Barni", "Blanka",
@@ -54,7 +56,48 @@ module.exports.info  = 'Caliper callback module for the fabcar benchmark';
 module.exports.init = async (bc, contx, args) => {
     blockchain = bc;
     context = contx;
+    targetPattern = args.targetPattern.toString();
+    var deployAfter = parseInt(args.deployAfter.toString());
+    var pumbaConfigPath = args.pumbaConfigPath.toString();
+    var projectPath = args.projectPath.toString();
+    // Dangerzone!! TODO: Sanitize.
+    if(targetPattern && deployAfter && projectPath) {
+        exec("rm ./pumba-*.yaml", {cwd: projectPath}, (err, stdout, stderr) => {
+            if (err) {
+              logger.warn("Could not clear directory: " + err);
+              return;
+            }
+            logger.info(`stdout: ${stdout}`);
+            logger.warn(`stderr: ${stderr}`);
+        });
+        exec("make pumba-generate TARGET_PATTERN=" + targetPattern, {cwd: pumbaConfigPath}, (err, stdout, stderr) => {
+            if (err) {
+              logger.warn("Could not execute Pumba configuration generation: " + err);
+              return;
+            }
+          
+            logger.info(`stdout: ${stdout}`);
+            logger.warn(`stderr: ${stderr}`);
+        });
+
+        logger.info("Deploying pumba in " + deployAfter + " milliseconds");
+        setTimeout(deployPumba, deployAfter, pumbaConfigPath);
+    }
+    
 };
+
+function deployPumba(pumbaConfigPath) {
+    // Dangerzone!! TODO: Sanitize.
+    exec("kubectl create -f " + pumbaConfigPath, (err, stdout, stderr) => {
+        if (err) {
+          logger.warn("Could not execute Pumba deployment: " + err)
+          return;
+        }
+      
+        logger.info(`stdout: ${stdout}`);
+        logger.warn(`stderr: ${stderr}`);
+    });
+}
 
 function randomInt(max) {
     return Math.floor(Math.random() * (max + 1));
@@ -86,28 +129,7 @@ module.exports.run = async () => {
         chaincodeArguments: changeData
     };
 
-    let results = await blockchain.invokeSmartContract(context, 'go', '', txArgs, 10);
-    for (let result of results) {
-        let txinfo = {
-            tx_id: result.GetID(),
-            time_create: result.GetTimeCreate(),
-            time_end: result.GetTimeFinal(),
-            status: result.GetStatus(),
-            result: result.GetResult() ? result.GetResult().toString() : '',
-        };
-
-        let custom = result.GetCustomData();
-        for (let entry of custom.entries()) {
-            // convert CC return values to strings
-            if (entry[0].includes('result')) {
-                txinfo[entry[0]] = entry[1].toString();
-            } else {
-                txinfo[entry[0]] = entry[1];
-            }
-        }
-
-        logger.info(JSON.stringify(txinfo));
-    }
+    let results = await blockchain.invokeSmartContract(context, 'go', '', txArgs, 20);
     return results;
 };
 
