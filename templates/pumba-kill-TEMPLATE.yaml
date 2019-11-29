@@ -14,6 +14,7 @@ metadata:
   namespace: TARGET_NS
 spec:
   nodeName: TARGET_NODE
+  restartPolicy: Never
   containers:
   - image: gaiaadm/pumba:master
     imagePullPolicy: IfNotPresent

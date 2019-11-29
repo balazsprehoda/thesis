@@ -25,5 +25,5 @@ spec:
           name: workspace
   volumes:
     - name: workspace
-      hostPath: #Minikube!!
-        path: ABSPATH/ #Linux!!
+      hostPath:
+        path: ABSPATH/

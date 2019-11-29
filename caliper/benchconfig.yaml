@@ -15,11 +15,10 @@ test:
     # the user callback module relative to the workspace
     arguments:
       clients: 3
+      # Pattern is going to be evaluated as .*targetPattern.*
       targetPattern: ord1-hlf
       # Deploy Pumba after milliseconds:
       deployAfter: 10000
-      pumbaConfigPath: /home/meres/thesis/network/pumba
-      projectPath: /home/meres/thesis
     callback: caliper/generate.js
 observer:
   type: 'local'

@@ -2,7 +2,8 @@
 
 const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('txinfo');
 const sys = require('sys')
-const regex = RegExp('/[a-z0-9-.]*/');
+//Allow valid Kubernetes names only.
+const regex = RegExp('[a-z0-9-.]*');
 const exec = require('child_process').exec;
 
 let blockchain, context, targetPattern;
@@ -59,18 +60,16 @@ module.exports.init = async (bc, contx, args) => {
     context = contx;
     targetPattern = args.targetPattern.toString();
     var deployAfter = parseInt(args.deployAfter.toString());
-    var pumbaConfigPath = args.pumbaConfigPath.toString();
-    var projectPath = args.projectPath.toString();
-    if(targetPattern && regex.test(targetPattern) && deployAfter && projectPath) {
-        exec("rm ./pumba-*.yaml", {cwd: projectPath}, (err, stdout, stderr) => {
-            if (err) {
-              logger.warn("Could not clear directory: " + err);
-              return;
-            }
-            logger.info(`stdout: ${stdout}`);
-            logger.warn(`stderr: ${stderr}`);
-        });
-        exec("make pumba-generate TARGET_PATTERN=" + targetPattern, {cwd: pumbaConfigPath}, (err, stdout, stderr) => {
+    if(targetPattern && regex.test(targetPattern) && deployAfter) {
+        // exec("rm ./pumba-*.yaml", {cwd: "/hyperledger/caliper/workspace/network/pumba"}, (err, stdout, stderr) => {
+        //     if (err) {
+        //       logger.warn("Could not clear directory: " + err);
+        //       return;
+        //     }
+        //     logger.info(`stdout: ${stdout}`);
+        //     logger.warn(`stderr: ${stderr}`);
+        // });
+        exec("make pumba-generate TARGET_PATTERN=" + targetPattern, {cwd: "/hyperledger/caliper/workspace"}, (err, stdout, stderr) => {
             if (err) {
               logger.warn("Could not execute Pumba configuration generation: " + err);
               return;
@@ -81,13 +80,13 @@ module.exports.init = async (bc, contx, args) => {
         });
 
         logger.info("Deploying pumba in " + deployAfter + " milliseconds");
-        setTimeout(deployPumba, deployAfter, pumbaConfigPath);
+        setTimeout(deployPumba, deployAfter);
     }
     
 };
 
-function deployPumba(pumbaConfigPath) {
-    exec("kubectl create -f ./*.yaml", {cwd: pumbaConfigPath}, (err, stdout, stderr) => {
+function deployPumba() {
+    exec("./kubectl create -f /hyperledger/caliper/workspace/network/pumba/*.yaml", {cwd: "/hyperledger/caliper/workspace/kubectl"}, (err, stdout, stderr) => {
         if (err) {
           logger.warn("Could not execute Pumba deployment: " + err)
           return;

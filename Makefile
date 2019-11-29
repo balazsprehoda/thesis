@@ -110,8 +110,8 @@ generate:
 	done
 
 .PHONY: pumba-generate
-pumba-generate: export POD_NS=$(shell echo `kubectl get --no-headers=true pods --all-namespaces -o wide | grep $(shell echo `kubectl get pods -n ${TARGET_NS} --template='{{range.items}}{{.metadata.name}}{{printf "\n"}}{{end}}' | grep ${TARGET_PATTERN}`) | awk -F " " '{out=$$1; print out}'`)
-pumba-generate: export POD_NODE=$(shell echo `kubectl get --no-headers=true pods -n ${POD_NS} -o wide | grep $(shell echo `kubectl get pods -n ${TARGET_NS} --template='{{range.items}}{{.metadata.name}}{{printf "\n"}}{{end}}' | grep ${TARGET_PATTERN}`) | awk -F " " '{out=$$7; print out}'`)
+pumba-generate: export POD_NS=$(shell echo `./kubectl/kubectl get --no-headers=true pods --all-namespaces -o wide | grep ${TARGET_PATTERN} | awk -F " " '{out=$$1; print out}'`)
+pumba-generate: export POD_NODE=$(shell echo `./kubectl/kubectl get --no-headers=true pods --all-namespaces -o wide | grep ${TARGET_PATTERN} | awk -F " " '{out=$$8; print out}'`)
 pumba-generate:
 	export TARGET_FILE=network/pumba/pumba-kill-${TARGET_PATTERN}.yaml; \
 	cp templates/pumba-kill-TEMPLATE.yaml $${TARGET_FILE} && \
@@ -126,6 +126,7 @@ clean:
 	rm network/cli.yaml
 	rm network/connection-profile.yaml
 	rm caliper/caliper.yaml
+	rm network/pumba/*.yaml
 
 
 .PHONY: join
@@ -148,6 +149,8 @@ change-owner:
 caliper: caliper/caliper.yaml
 	@echo "-------Deploying Caliper-------"
 	kubectl apply -f caliper/caliper.yaml
+	kubectl apply -f caliper/readpods.yaml
+	kubectl apply -f caliper/rolebinding.yaml
 	sleep 15
 	kubectl logs -f -n caliper caliper
 
