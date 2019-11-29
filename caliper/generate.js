@@ -2,6 +2,7 @@
 
 const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('txinfo');
 const sys = require('sys')
+const regex = RegExp('/[a-z0-9-.]*/');
 const exec = require('child_process').exec;
 
 let blockchain, context, targetPattern;
@@ -60,8 +61,7 @@ module.exports.init = async (bc, contx, args) => {
     var deployAfter = parseInt(args.deployAfter.toString());
     var pumbaConfigPath = args.pumbaConfigPath.toString();
     var projectPath = args.projectPath.toString();
-    // Dangerzone!! TODO: Sanitize.
-    if(targetPattern && deployAfter && projectPath) {
+    if(targetPattern && regex.test(targetPattern) && deployAfter && projectPath) {
         exec("rm ./pumba-*.yaml", {cwd: projectPath}, (err, stdout, stderr) => {
             if (err) {
               logger.warn("Could not clear directory: " + err);
@@ -87,8 +87,7 @@ module.exports.init = async (bc, contx, args) => {
 };
 
 function deployPumba(pumbaConfigPath) {
-    // Dangerzone!! TODO: Sanitize.
-    exec("kubectl create -f " + pumbaConfigPath, (err, stdout, stderr) => {
+    exec("kubectl create -f ./*.yaml", {cwd: pumbaConfigPath}, (err, stdout, stderr) => {
         if (err) {
           logger.warn("Could not execute Pumba deployment: " + err)
           return;
