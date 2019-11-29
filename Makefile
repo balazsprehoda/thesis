@@ -22,6 +22,9 @@ start:
 	kubectl create ns caliper
 	kubectl create ns pumba
 
+	kubectl apply -f caliper/readpods.yaml
+	kubectl apply -f caliper/rolebinding.yaml
+
 	@echo "-------Deploying orderers-------"
 	@for ORD_NUM in $(shell seq 1 ${NUMBER_OF_ORDERERS}); \
 	do \
@@ -149,8 +152,6 @@ change-owner:
 caliper: caliper/caliper.yaml
 	@echo "-------Deploying Caliper-------"
 	kubectl apply -f caliper/caliper.yaml
-	kubectl apply -f caliper/readpods.yaml
-	kubectl apply -f caliper/rolebinding.yaml
 	sleep 15
 	kubectl logs -f -n caliper caliper
 
