@@ -8,6 +8,7 @@ ABSPATH?=/home/prehi/thesis
 VM_ABSPATH?=/hosthome/prehi/thesis
 # Fault injection target regex pattern and namespace
 TARGET_PATTERN?=ord1-hlf
+ACTION?=pause
 .PHONY: start
 start:
 
@@ -116,8 +117,8 @@ generate:
 pumba-generate: export POD_NS=$(shell echo `./kubectl/kubectl get --no-headers=true pods --all-namespaces -o wide | grep ${TARGET_PATTERN} | awk -F " " '{out=$$1; print out}'`)
 pumba-generate: export POD_NODE=$(shell echo `./kubectl/kubectl get --no-headers=true pods --all-namespaces -o wide | grep ${TARGET_PATTERN} | awk -F " " '{out=$$8; print out}'`)
 pumba-generate:
-	export TARGET_FILE=network/pumba/pumba-kill-${TARGET_PATTERN}.yaml; \
-	cp templates/pumba-kill-TEMPLATE.yaml $${TARGET_FILE} && \
+	export TARGET_FILE=network/pumba/pumba-${ACTION}-${TARGET_PATTERN}.yaml; \
+	cp templates/pumba-${ACTION}-TEMPLATE.yaml $${TARGET_FILE} && \
 	sed -i -e "s/TARGET_NS/${POD_NS}/g" $${TARGET_FILE} && \
 	sed -i -e "s/TARGET_NODE/${POD_NODE}/g" $${TARGET_FILE} && \
 	sed -i -e "s/TARGET_PATTERN/${TARGET_PATTERN}/g" $${TARGET_FILE}

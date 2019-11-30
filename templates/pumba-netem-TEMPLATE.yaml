@@ -11,19 +11,25 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: pumba
-  namespace: orderers
+  namespace: TARGET_NS
 spec:
-  nodeName: minikube
+  nodeName: TARGET_NODE
+  restartPolicy: Never
   containers:
   - image: gaiaadm/pumba:master
     imagePullPolicy: IfNotPresent
     name: pumba
     args:
       - --random
-      - kill
-      - --signal
-      - "SIGKILL"
-      - "re2:.*ord1-hlf.*"
+      - netem
+      - --tc-image
+      - gaiadocker/iproute2
+      - --duration
+      - "1m"
+      - delay
+      - --time
+      - "100"
+      - "re2:.*TARGET_PATTERN.*"
     resources:
       requests:
         cpu: 10m

@@ -10,15 +10,17 @@ test:
     rateControl:
     - type: linear-rate
       opts:
-        startingTps: 10
-        finishingTps: 200
+        startingTps: 50
+        finishingTps: 500
     # the user callback module relative to the workspace
     arguments:
       clients: 3
       # Pattern is going to be evaluated as .*targetPattern.*
       targetPattern: ord1-hlf
+      # Action is going to be passed to make generate. Can be one of kill, pause, netem
+      pumbaAction: netem
       # Deploy Pumba after milliseconds:
-      deployAfter: 10000
+      deployAfter: 1500
     callback: caliper/generate.js
 observer:
   type: 'local'

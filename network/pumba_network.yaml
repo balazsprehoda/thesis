@@ -34,9 +34,9 @@ spec:
           - gaiadocker/iproute2
           - delay
           - --time
+          - "2000"
           - --distribution
           - "normal"
-          - "2000"
           - "re2:.*ord1-hlf-ord.*"
         resources:
           requests:

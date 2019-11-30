@@ -3,10 +3,11 @@
 const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('txinfo');
 const sys = require('sys')
 //Allow valid Kubernetes names only.
-const regex = RegExp('[a-z0-9-.]*');
+const patternRegex = RegExp('[a-z0-9-.]*');
+const actionRegex = RegExp('[a-z]*');
 const exec = require('child_process').exec;
 
-let blockchain, context, targetPattern;
+let blockchain, context, deployAfter, pumbaAction, targetPattern;
 let carId = 0;
 let owners = [  
     "Bence", "Balazs", "Barni", "Blanka",
@@ -59,17 +60,12 @@ module.exports.init = async (bc, contx, args) => {
     blockchain = bc;
     context = contx;
     targetPattern = args.targetPattern.toString();
-    var deployAfter = parseInt(args.deployAfter.toString());
-    if(targetPattern && regex.test(targetPattern) && deployAfter) {
-        // exec("rm ./pumba-*.yaml", {cwd: "/hyperledger/caliper/workspace/network/pumba"}, (err, stdout, stderr) => {
-        //     if (err) {
-        //       logger.warn("Could not clear directory: " + err);
-        //       return;
-        //     }
-        //     logger.info(`stdout: ${stdout}`);
-        //     logger.warn(`stderr: ${stderr}`);
-        // });
-        exec("make pumba-generate TARGET_PATTERN=" + targetPattern, {cwd: "/hyperledger/caliper/workspace"}, (err, stdout, stderr) => {
+    deployAfter = parseInt(args.deployAfter.toString());
+    pumbaAction = args.pumbaAction.toString();
+    if(targetPattern && patternRegex.test(targetPattern)
+        && pumbaAction && actionRegex.test(pumbaAction)
+        && deployAfter) {
+        exec("make pumba-generate TARGET_PATTERN=" + targetPattern + " ACTION=" + pumbaAction, {cwd: "/hyperledger/caliper/workspace"}, (err, stdout, stderr) => {
             if (err) {
               logger.warn("Could not execute Pumba configuration generation: " + err);
               return;
@@ -82,19 +78,28 @@ module.exports.init = async (bc, contx, args) => {
         logger.info("Deploying pumba in " + deployAfter + " milliseconds");
         setTimeout(deployPumba, deployAfter);
     }
-    
+    else {
+        logger.warn("Will not execute command, it contains illegal characters!");
+    }
 };
 
 function deployPumba() {
-    exec("./kubectl create -f /hyperledger/caliper/workspace/network/pumba/*.yaml", {cwd: "/hyperledger/caliper/workspace/kubectl"}, (err, stdout, stderr) => {
-        if (err) {
-          logger.warn("Could not execute Pumba deployment: " + err)
-          return;
-        }
-      
-        logger.info(`stdout: ${stdout}`);
-        logger.warn(`stderr: ${stderr}`);
-    });
+    if(pumbaAction && actionRegex.test(pumbaAction
+            && targetPattern && patternRegex.test(targetPattern))){
+        exec("./kubectl create -f /hyperledger/caliper/workspace/network/pumba/pumba-" + pumbaAction + "-" + targetPattern + ".yaml", {cwd: "/hyperledger/caliper/workspace/kubectl"}, (err, stdout, stderr) => {
+            if (err) {
+                logger.warn("Could not execute Pumba deployment: " + err)
+                return;
+            }
+            
+            logger.info(`stdout: ${stdout}`);
+            logger.warn(`stderr: ${stderr}`);
+        });
+    }
+    else {
+        logger.warn("Will not execute command, it contains illegal characters!");
+    }
+    
 }
 
 function randomInt(max) {
