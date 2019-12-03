@@ -1,70 +1,19 @@
- 
-name: "test-network"
-
-#
-# Schema version of the content. Used by the SDK to apply the corresponding parsing rules.
-#
-version: "1.0"
-
 caliper:
   blockchain: fabric
   command:
     start: sleep 60s
-
-info:
-  Version: 1.4.3
-  Size: 3 Orgs with 1 Peer each
-  Orderer: Raft with 3 Orderers
-  Distribution: Kubernetes
-  StateDB: CouchDB
-
-clients:
-  client0.org1.example.com:
-    client:
-      organization: Org1
-      credentialStore:
-        path: /tmp/hfc-kvs/org1
-        cryptoStore:
-          path: /tmp/hfc-cvs/org1
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1@org1.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1@org1.svc.cluster.local/msp/signcerts/User1@org1.svc.cluster.local-cert.pem
-
-  client0.org2.example.com:
-    client:
-      organization: Org2
-      credentialStore:
-        path: /tmp/hfc-kvs/org2
-        cryptoStore:
-          path: /tmp/hfc-cvs/org2
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/User1@org2.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/User1@org2.svc.cluster.local/msp/signcerts/User1@org2.svc.cluster.local-cert.pem
-
-  client0.org3.example.com:
-    client:
-      organization: Org3
-      credentialStore:
-        path: /tmp/hfc-kvs/org3
-        cryptoStore:
-          path: /tmp/hfc-cvs/org3
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/User1@org3.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/User1@org3.svc.cluster.local/msp/signcerts/User1@org3.svc.cluster.local-cert.pem
-
 channels:
-  # name of the channel
   mychannel:
+    chaincodes:
+    - id: go
+      language: golang
+      path: chaincode/go
+      version: '1.0'
     created: true
     orderers:
-      - ord1-hlf-ord.orderers.svc.cluster.local
-      - ord2-hlf-ord.orderers.svc.cluster.local
-      - ord3-hlf-ord.orderers.svc.cluster.local
-
-    # Required. list of peers from participating orgs
+    - ord1-hlf-ord.orderers.svc.cluster.local
+    - ord2-hlf-ord.orderers.svc.cluster.local
+    - ord3-hlf-ord.orderers.svc.cluster.local
     peers:
       peer1-hlf-peer.org1.svc.cluster.local:
         eventSource: true
@@ -72,91 +21,108 @@ channels:
         eventSource: true
       peer3-hlf-peer.org3.svc.cluster.local:
         eventSource: true
-
-    chaincodes:
-        - id: go
-          version: '1.0'
-          language: golang
-          path: chaincode/go
-
-#
-# list of participating organizations in this network
-#
-organizations:
-  Org1:
-    mspid: Org1MSP
-
-    peers:
-      - peer1-hlf-peer.org1.svc.cluster.local
-
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/keystore/adminKey
-    
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/signcerts/Admin@org1.svc.cluster.local-cert.pem
-
-  Org2:
-    mspid: Org2MSP
-
-    peers:
-      - peer2-hlf-peer.org2.svc.cluster.local
-
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/keystore/adminKey
-    
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/signcerts/Admin@org2.svc.cluster.local-cert.pem
-
-  Org3:
-    mspid: Org3MSP
-
-    peers:
-      - peer3-hlf-peer.org3.svc.cluster.local
-
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/keystore/adminKey
-    
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/signcerts/Admin@org3.svc.cluster.local-cert.pem
-
+clients:
+  client0.org1.example.com:
+    client:
+      clientPrivateKey:
+        path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1@org1.svc.cluster.local/msp/keystore/key.pem
+      clientSignedCert:
+        path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1@org1.svc.cluster.local/msp/signcerts/User1@org1.svc.cluster.local-cert.pem
+      credentialStore:
+        cryptoStore:
+          path: /tmp/hfc-cvs/org1
+        path: /tmp/hfc-kvs/org1
+      organization: Org1
+  client0.org2.example.com:
+    client:
+      clientPrivateKey:
+        path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/User1@org2.svc.cluster.local/msp/keystore/key.pem
+      clientSignedCert:
+        path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/User1@org2.svc.cluster.local/msp/signcerts/User1@org2.svc.cluster.local-cert.pem
+      credentialStore:
+        cryptoStore:
+          path: /tmp/hfc-cvs/org2
+        path: /tmp/hfc-kvs/org2
+      organization: Org2
+  client0.org3.example.com:
+    client:
+      clientPrivateKey:
+        path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/User1@org3.svc.cluster.local/msp/keystore/key.pem
+      clientSignedCert:
+        path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/User1@org3.svc.cluster.local/msp/signcerts/User1@org3.svc.cluster.local-cert.pem
+      credentialStore:
+        cryptoStore:
+          path: /tmp/hfc-cvs/org3
+        path: /tmp/hfc-kvs/org3
+      organization: Org3
+info:
+  Distribution: Kubernetes
+  Orderer: Raft with 3 orderers
+  Size: 32 orgs with 1 peer each
+  StateDB: CouchDB
+  Version: 1.4.3
+name: test-network
 orderers:
   ord1-hlf-ord.orderers.svc.cluster.local:
-    url: grpcs://ord1-hlf-ord.orderers.svc.cluster.local:7050
     grpcOptions:
       ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/msp/tlscacerts/tlsca.orderers.svc.cluster.local-cert.pem
+    url: grpcs://ord1-hlf-ord.orderers.svc.cluster.local:7050
   ord2-hlf-ord.orderers.svc.cluster.local:
-    url: grpcs://ord2-hlf-ord.orderers.svc.cluster.local:7050
     grpcOptions:
       ssl-target-name-override: ord2-hlf-ord.orderers.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/msp/tlscacerts/tlsca.orderers.svc.cluster.local-cert.pem
+    url: grpcs://ord2-hlf-ord.orderers.svc.cluster.local:7050
   ord3-hlf-ord.orderers.svc.cluster.local:
-    url: grpcs://ord3-hlf-ord.orderers.svc.cluster.local:7050
     grpcOptions:
       ssl-target-name-override: ord3-hlf-ord.orderers.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/msp/tlscacerts/tlsca.orderers.svc.cluster.local-cert.pem
-
+    url: grpcs://ord3-hlf-ord.orderers.svc.cluster.local:7050
+organizations:
+  Org1:
+    adminPrivateKey:
+      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org1MSP
+    peers:
+    - peer1-hlf-peer.org1.svc.cluster.local
+    signedCert:
+      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/signcerts/Admin@org1.svc.cluster.local-cert.pem
+  Org2:
+    adminPrivateKey:
+      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org2MSP
+    peers:
+    - peer2-hlf-peer.org2.svc.cluster.local
+    signedCert:
+      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/signcerts/Admin@org2.svc.cluster.local-cert.pem
+  Org3:
+    adminPrivateKey:
+      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org3MSP
+    peers:
+    - peer3-hlf-peer.org3.svc.cluster.local
+    signedCert:
+      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/signcerts/Admin@org3.svc.cluster.local-cert.pem
 peers:
   peer1-hlf-peer.org1.svc.cluster.local:
-    url: grpcs://peer1-hlf-peer.org1.svc.cluster.local:7051
     grpcOptions:
       ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
-
+    url: grpcs://peer1-hlf-peer.org1.svc.cluster.local:7051
   peer2-hlf-peer.org2.svc.cluster.local:
-    url: grpcs://peer2-hlf-peer.org2.svc.cluster.local:7051
     grpcOptions:
       ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer2-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
-
+    url: grpcs://peer2-hlf-peer.org2.svc.cluster.local:7051
   peer3-hlf-peer.org3.svc.cluster.local:
-    url: grpcs://peer3-hlf-peer.org3.svc.cluster.local:7051
     grpcOptions:
       ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer3-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org3.svc.cluster.local:7051
+version: '1.0'

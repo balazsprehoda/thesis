@@ -19,7 +19,7 @@ spec:
     targetPort: 7053
     nodePort: PEER_EVENT_PORT
   selector:
-    name: PEER_NAME-hlf-peer
+    name: PEER_NAME
   type: NodePort
 status:
   loadBalancer: {}

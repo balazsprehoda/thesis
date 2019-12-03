@@ -13,3 +13,6 @@ cli.yaml
 # Caliper-generated
 *.log
 *.html
+
+# Python
+*.pyc

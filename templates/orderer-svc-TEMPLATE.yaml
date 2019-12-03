@@ -4,7 +4,7 @@ metadata:
   name: ordORD_NUMBER-hlf-ord
   namespace: orderers
   labels:
-    run: ordORD_NUMBER-hlf-ord
+    app: ordORD_NUMBER-hlf-ord
 spec:
   type: ClusterIP
   selector:
@@ -28,7 +28,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: ordORD_NUMBER-hlf-ord # target gitlab service
+      app: ordORD_NUMBER-hlf-ord
   endpoints:
   - port: operations
     interval: 10s

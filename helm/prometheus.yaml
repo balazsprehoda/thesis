@@ -4,5 +4,7 @@ prometheus:
     ruleSelector: {}
     podMonitorNamespaceSelector: {}
     podMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+    serviceMonitorSelector: {}
   service:
     type: NodePort

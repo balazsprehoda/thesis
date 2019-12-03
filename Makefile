@@ -1,6 +1,7 @@
 NUMBER_OF_ORGS?=3
 NUMBER_OF_ORDERERS?=3
 NUMBER_OF_PEERS_PER_ORG?=1
+NETWORK?=basic
 CHANNEL_NAME?=mychannel
 # Absolute path to project dir on host.
 ABSPATH?=/home/prehi/thesis
@@ -27,30 +28,13 @@ start:
 	kubectl apply -f caliper/rolebinding.yaml
 
 	@echo "-------Deploying orderers-------"
-	@for ORD_NUM in $(shell seq 1 ${NUMBER_OF_ORDERERS}); \
-	do \
-		kubectl apply -f network/orderers/orderer$${ORD_NUM}.yaml; \
-		kubectl apply -f network/orderers/orderer$${ORD_NUM}_svc.yaml; \
-	done
+	kubectl create -f network/orderers/*.yaml
 
 	@echo "-------Deploying peers and CouchDBs-------"
-	@for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
-	do \
-		for PEER_NUM in $(shell seq 1 ${NUMBER_OF_PEERS_PER_ORG}); \
-		do \
-			kubectl apply -f network/peers/peer$${ORG_NUM}.yaml; \
-			kubectl apply -f network/peers/peer$${ORG_NUM}_svc.yaml; \
-			kubectl apply -f network/peers/peer$${ORG_NUM}_expose.yaml; \
-		done \
-	done
+	kubectl create -f network/peers/*.yaml
 
 	@echo "-------Deploying cli-------"
 	kubectl apply -f network/cli.yaml
-
-	@for PEER_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
-	do \
-		kubectl apply -f network/peer$${PEER_NUM}-exposed.yaml; \
-	done
 	
 
 .PHONY: minikube
@@ -61,8 +45,8 @@ minikube:
 crypto-gen:
 	make crypto-del
 	cd network && ../cryptogen generate --config=crypto-config.yaml
-	cd network && ./rename-keys.sh
-	cd network && ./generate-artifacts.sh
+	cd network && ./rename-keys.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS}
+	cd network && ./generate-artifacts.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS} NETWORK=${NETWORK}
 
 .PHONY: generate
 generate:
@@ -176,7 +160,11 @@ net-delay:
 
 .PHONY: destroy
 destroy:
-	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper pumba monitoring
+	kubectl delete ns orderers fabric-tools caliper pumba monitoring
+	for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
+	do \
+		kubectl delete ns org$${ORG_NUM}; \
+	done
 	kubectl delete customresourcedefinitions.apiextensions.k8s.io --all
 
 .PHONY: crypto-del
