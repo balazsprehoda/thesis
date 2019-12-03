@@ -64,6 +64,10 @@ spec:
             value: "/fabric/config/crypto/peer/msp"
           - name: CORE_PEER_LOCALMSPID
             value: "MSP_NAME"
+          - name: CORE_METRICS_PROVIDER
+            value: "prometheus"
+          - name: CORE_OPERATIONS_LISTENADDRESS
+            value: "0.0.0.0:9443"
           - name: CORE_LEDGER_STATE_STATEDATABASE
             value: "CouchDB"
           - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
@@ -85,6 +89,9 @@ spec:
               protocol: TCP
             - name: event
               containerPort: 7053
+              protocol: TCP
+            - name: operations
+              containerPort: 9443
               protocol: TCP
         - name: couchdb
           image: hyperledger/fabric-couchdb:amd64-0.4.16

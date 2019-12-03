@@ -1,0 +1,8 @@
+prometheus:
+  prometheusSpec:
+    ruleNamespaceSelector: {}
+    ruleSelector: {}
+    podMonitorNamespaceSelector: {}
+    podMonitorSelector: {}
+  service:
+    type: NodePort

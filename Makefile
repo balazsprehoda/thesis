@@ -123,6 +123,14 @@ pumba-generate:
 	sed -i -e "s/TARGET_NODE/${POD_NODE}/g" $${TARGET_FILE} && \
 	sed -i -e "s/TARGET_PATTERN/${TARGET_PATTERN}/g" $${TARGET_FILE}
 
+.PHONY: monitor
+monitor:
+	kubectl create ns monitoring
+	kubectl create serviceaccount --namespace kube-system tiller
+	kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+	kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+	helm install --name=main --namespace=monitoring stable/prometheus-operator -f helm/prometheus.yaml
+
 .PHONY: clean
 clean:
 	rm -rf network/orderers/*.yaml
@@ -168,7 +176,8 @@ net-delay:
 
 .PHONY: destroy
 destroy:
-	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper pumba
+	kubectl delete ns orderers org1 org2 org3 fabric-tools caliper pumba monitoring
+	kubectl delete customresourcedefinitions.apiextensions.k8s.io --all
 
 .PHONY: crypto-del
 crypto-del:

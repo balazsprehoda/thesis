@@ -16,12 +16,12 @@ test:
     arguments:
       clients: 3
       # Pattern is going to be evaluated as .*targetPattern.*
-      targetPattern: ord1-hlf
+      # targetPattern: ord1-hlf
       # Action is going to be passed to make generate. Can be one of kill, pause, netem
-      pumbaAction: netem
+      # pumbaAction: netem
       # Deploy Pumba after milliseconds:
-      deployAfter: 1500
-    callback: caliper/generate.js
+      # deployAfter: 1500
+    callback: caliper/generate-randomid.js
 observer:
   type: 'local'
   interval: 1

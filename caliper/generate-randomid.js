@@ -8,7 +8,6 @@ const actionRegex = RegExp('[a-z]*');
 const exec = require('child_process').exec;
 
 let blockchain, context, deployAfter, pumbaAction, targetPattern;
-let carId = 0;
 let owners = [  
     "Bence", "Balazs", "Barni", "Blanka",
     "Marci", "Zoli", "Marcell", "Dani",
@@ -111,7 +110,7 @@ function randomInt(max) {
 
 function createChangeBatch() {
     let makeAndModel = makesAndModels[randomInt(makesAndModels.length - 1)];
-    let id = "CAR" + carId.toString();
+    let id = "CAR" + randomInt(Number.MAX_SAFE_INTEGER - 1); //randomInt(max) calculates with max+1, so we need to pass MAX_VALUE-1... 
     let make = makeAndModel.make;
     let model = makeAndModel.model;
     let color = colors[randomInt(colors.length - 1)];
@@ -123,7 +122,6 @@ function createChangeBatch() {
         color,
         owner
     ];
-    carId += 1;
 
     return changes;
 }
