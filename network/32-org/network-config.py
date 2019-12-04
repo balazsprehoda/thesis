@@ -15,7 +15,7 @@ for org_num in range(1, number_of_orgs + 1):
     config.add_client(org_num)
     config.add_organization(org_num)
     for peer_num in range(1, number_of_peers_per_org + 1):
-        config.add_peer(org_num, org_num)
+        config.add_peer(peer_num, org_num)
 
 for ord_num in range(1, number_of_orderers + 1):
     config.add_orderer(ord_num)

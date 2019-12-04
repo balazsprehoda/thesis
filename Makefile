@@ -34,7 +34,7 @@ start:
 	kubectl create -f network/peers/*.yaml
 
 	@echo "-------Deploying cli-------"
-	kubectl apply -f network/cli.yaml
+	kubectl apply -f network/cli/cli.yaml
 	
 
 .PHONY: minikube
@@ -44,9 +44,9 @@ minikube:
 .PHONY: crypto-gen
 crypto-gen:
 	make crypto-del
-	cd network && ../cryptogen generate --config=crypto-config.yaml
-	cd network && ./rename-keys.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS}
-	cd network && ./generate-artifacts.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS} NETWORK=${NETWORK}
+	cd network && ../cryptogen generate --config=${NETWORK}/crypto-config.yaml
+	cd network/scripts && ./rename-keys.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS}
+	cd network/scripts && ./generate-artifacts.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS} NETWORK=${NETWORK}
 
 .PHONY: generate
 generate:

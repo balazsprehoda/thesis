@@ -68,7 +68,7 @@ spec:
     # Scripts
     - name: scripts
       hostPath:
-        path: ABSPATH/network/cli-scripts
+        path: ABSPATH/network/cli/cli-scripts
         type: Directory
     # Chaincode
     - name: chaincode
