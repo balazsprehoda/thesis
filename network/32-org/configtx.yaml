@@ -1,790 +1,718 @@
-Organizations:
-
-    - &OrdererOrg
-        Name: OrdererOrg
-        ID: OrdererMSP
-        MSPDir: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-    - &Org1
-        Name: Org1MSP
-        ID: Org1MSP
-        MSPDir: ./crypto-config/peerOrganizations/org1.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer1-hlf-peer.org1.svc.cluster.local
-              Port: 7051
-    - &Org2
-        Name: Org2MSP
-        ID: Org2MSP
-        MSPDir: ./crypto-config/peerOrganizations/org2.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer2-hlf-peer.org2.svc.cluster.local
-            Port: 7051
-    - &Org3
-        Name: Org3MSP
-        ID: Org3MSP
-        MSPDir: ./crypto-config/peerOrganizations/org3.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer3-hlf-peer.org3.svc.cluster.local
-                Port: 7051
-    - &Org4
-        Name: Org4MSP
-        ID: Org4MSP
-        MSPDir: ./crypto-config/peerOrganizations/org4.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer4-hlf-peer.org4.svc.cluster.local
-              Port: 7051
-    - &Org5
-        Name: Org5MSP
-        ID: Org5MSP
-        MSPDir: ./crypto-config/peerOrganizations/org5.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer5-hlf-peer.org5.svc.cluster.local
-              Port: 7051
-    - &Org6
-        Name: Org6MSP
-        ID: Org6MSP
-        MSPDir: ./crypto-config/peerOrganizations/org6.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer6-hlf-peer.org6.svc.cluster.local
-            Port: 7051
-    - &Org7
-        Name: Org7MSP
-        ID: Org7MSP
-        MSPDir: ./crypto-config/peerOrganizations/org7.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer7-hlf-peer.org8.svc.cluster.local
-                Port: 7051
-    - &Org8
-        Name: Org8MSP
-        ID: Org8MSP
-        MSPDir: ./crypto-config/peerOrganizations/org8.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer8-hlf-peer.org8.svc.cluster.local
-                Port: 7051
-    - &Org9
-        Name: Org9MSP
-        ID: Org9MSP
-        MSPDir: ./crypto-config/peerOrganizations/org9.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer9-hlf-peer.org9.svc.cluster.local
-                Port: 7051
-    - &Org10
-        Name: Org10MSP
-        ID: Org10MSP
-        MSPDir: ./crypto-config/peerOrganizations/org10.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer10-hlf-peer.org10.svc.cluster.local
-                Port: 7051
-    - &Org11
-        Name: Org11MSP
-        ID: Org11MSP
-        MSPDir: ./crypto-config/peerOrganizations/org11.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer11-hlf-peer.org11.svc.cluster.local
-                Port: 7051
-    - &Org12
-        Name: Org12MSP
-        ID: Org12MSP
-        MSPDir: ./crypto-config/peerOrganizations/org12.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer12-hlf-peer.org12.svc.cluster.local
-            Port: 7051
-    - &Org13
-        Name: Org13MSP
-        ID: Org13MSP
-        MSPDir: ./crypto-config/peerOrganizations/org13.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer13-hlf-peer.org13.svc.cluster.local
-                Port: 7051
-    - &Org14
-        Name: Org14MSP
-        ID: Org14MSP
-        MSPDir: ./crypto-config/peerOrganizations/org14.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer14-hlf-peer.org14.svc.cluster.local
-                Port: 7051
-    - &Org15
-        Name: Org15MSP
-        ID: Org15MSP
-        MSPDir: ./crypto-config/peerOrganizations/org15.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer15-hlf-peer.org15.svc.cluster.local
-                Port: 7051
-    - &Org16
-        Name: Org16MSP
-        ID: Org16MSP
-        MSPDir: ./crypto-config/peerOrganizations/org16.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer16-hlf-peer.org16.svc.cluster.local
-            Port: 7051
-    - &Org17
-        Name: Org17MSP
-        ID: Org17MSP
-        MSPDir: ./crypto-config/peerOrganizations/org17.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer17-hlf-peer.org17.svc.cluster.local
-                Port: 7051
-    - &Org18
-        Name: Org18MSP
-        ID: Org18MSP
-        MSPDir: ./crypto-config/peerOrganizations/org18.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer18-hlf-peer.org18.svc.cluster.local
-                Port: 7051
-    - &Org19
-        Name: Org19MSP
-        ID: Org19MSP
-        MSPDir: ./crypto-config/peerOrganizations/org19.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer19-hlf-peer.org19.svc.cluster.local
-                Port: 7051
-    - &Org20
-        Name: Org20MSP
-        ID: Org20MSP
-        MSPDir: ./crypto-config/peerOrganizations/org20.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer20-hlf-peer.org20.svc.cluster.local
-                Port: 7051
-    - &Org21
-        Name: Org21MSP
-        ID: Org21MSP
-        MSPDir: ./crypto-config/peerOrganizations/org21.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer21-hlf-peer.org21.svc.cluster.local
-                Port: 7051
-    - &Org22
-        Name: Org22MSP
-        ID: Org22MSP
-        MSPDir: ./crypto-config/peerOrganizations/org22.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer22-hlf-peer.org22.svc.cluster.local
-            Port: 7051
-    - &Org23
-        Name: Org23MSP
-        ID: Org23MSP
-        MSPDir: ./crypto-config/peerOrganizations/org23.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer23-hlf-peer.org23.svc.cluster.local
-                Port: 7051
-    - &Org24
-        Name: Org24MSP
-        ID: Org24MSP
-        MSPDir: ./crypto-config/peerOrganizations/org24.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer24-hlf-peer.org24.svc.cluster.local
-                Port: 7051
-    - &Org25
-        Name: Org25MSP
-        ID: Org25MSP
-        MSPDir: ./crypto-config/peerOrganizations/org25.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer25-hlf-peer.org25.svc.cluster.local
-                Port: 7051
-    - &Org26
-        Name: Org26MSP
-        ID: Org26MSP
-        MSPDir: ./crypto-config/peerOrganizations/org26.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer26-hlf-peer.org26.svc.cluster.local
-            Port: 7051
-    - &Org27
-        Name: Org27MSP
-        ID: Org27MSP
-        MSPDir: ./crypto-config/peerOrganizations/org27.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer27-hlf-peer.org27.svc.cluster.local
-                Port: 7051
-    - &Org28
-        Name: Org28MSP
-        ID: Org28MSP
-        MSPDir: ./crypto-config/peerOrganizations/org28.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer28-hlf-peer.org28.svc.cluster.local
-                Port: 7051
-    - &Org29
-        Name: Org29MSP
-        ID: Org29MSP
-        MSPDir: ./crypto-config/peerOrganizations/org29.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer29-hlf-peer.org29.svc.cluster.local
-                Port: 7051
-    - &Org30
-        Name: Org30MSP
-        ID: Org30MSP
-        MSPDir: ./crypto-config/peerOrganizations/org30.svc.cluster.local/msp
-        Policies:
-            Readers:
-                Type: ImplicitMeta
-                Rule: "ANY Readers"
-            Writers:
-                Type: ImplicitMeta
-                Rule: "ANY Writers"
-            Admins:
-                Type: ImplicitMeta
-                Rule: "MAJORITY Admins"
-        AnchorPeers:
-            - Host: peer30-hlf-peer.org30.svc.cluster.local
-                Port: 7051
-        - &Org31
-            Name: Org31MSP
-            ID: Org31MSP
-            MSPDir: ./crypto-config/peerOrganizations/org31.svc.cluster.local/msp
-            Policies:
-                Readers:
-                    Type: ImplicitMeta
-                    Rule: "ANY Readers"
-                Writers:
-                    Type: ImplicitMeta
-                    Rule: "ANY Writers"
-                Admins:
-                    Type: ImplicitMeta
-                    Rule: "MAJORITY Admins"
-            AnchorPeers:
-                - Host: peer31-hlf-peer.org31.svc.cluster.local
-                    Port: 7051
-        - &Org32
-            Name: Org32MSP
-            ID: Org32MSP
-            MSPDir: ./crypto-config/peerOrganizations/org32.svc.cluster.local/msp
-            Policies:
-                Readers:
-                    Type: ImplicitMeta
-                    Rule: "ANY Readers"
-                Writers:
-                    Type: ImplicitMeta
-                    Rule: "ANY Writers"
-                Admins:
-                    Type: ImplicitMeta
-                    Rule: "MAJORITY Admins"
-            AnchorPeers:
-                - Host: peer32-hlf-peer.org32.svc.cluster.local
-                    Port: 7051
-
-Orderer: &OrdererDefaults
-
-    OrdererType: etcdraft
-
-    Addresses:
-        - ord1-hlf-ord.orderers.svc.cluster.local:7050
-        - ord2-hlf-ord.orderers.svc.cluster.local:7050
-        - ord3-hlf-ord.orderers.svc.cluster.local:7050
-
-    # Batch Timeout: The amount of time to wait before creating a batch
-    BatchTimeout: 2s
-
-    # Batch Size: Controls the number of messages batched into a block
-    BatchSize:
-
-        # Max Message Count: The maximum number of messages to permit in a batch
-        MaxMessageCount: 100
-
-        # Absolute Max Bytes: The absolute maximum number of bytes allowed for
-        # the serialized messages in a batch.
-        AbsoluteMaxBytes: 98 MB
-
-        # Preferred Max Bytes: The preferred maximum number of bytes allowed for
-        # the serialized messages in a batch. A message larger than the preferred
-        # max bytes will result in a batch larger than preferred max bytes.
-        PreferredMaxBytes: 512 KB
-
-    EtcdRaft:
-        Consenters:
-        - Host: ord1-hlf-ord.orderers.svc.cluster.local
-          Port: 7050
-          ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-          ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-        - Host: ord2-hlf-ord.orderers.svc.cluster.local
-          Port: 7050
-          ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-          ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-        - Host: ord3-hlf-ord.orderers.svc.cluster.local
-          Port: 7050
-          ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-          ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-
-    # Organizations is the list of orgs which are defined as participants on
-    # the orderer side of the network
-    Organizations:
-
-    Policies:
-        Readers:
-            Type: ImplicitMeta
-            Rule: "ANY Readers"
-        Writers:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
-        Admins:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Admins"
-
-        BlockValidation:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
-
-################################################################################
-#
-#   SECTION: Capabilities
-#
-################################################################################
+Application:
+  Capabilities: &id001
+    v1_1: false
+    v1_2: false
+    v1_3: true
+  Policies: &id042
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
 Capabilities:
-
-    Channel: &ChannelCapabilities
-
-        V1_3: true
-
-    Orderer: &OrdererCapabilities
-
-        V1_1: true
-
-    Application: &ApplicationCapabilities
-
-        V1_3: true
-
-        V1_2: false
-
-        V1_1: false
-
-################################################################################
-#
-#   SECTION: Application
-#
-#   - This section defines the values to encode into a config transaction or
-#   genesis block for application related parameters
-#
-################################################################################
-Application: &ApplicationDefaults
-
-    # Organizations is the list of orgs which are defined as participants on
-    # the application side of the network
-    Organizations:
-
-    Policies:
-        Readers:
-            Type: ImplicitMeta
-            Rule: "ANY Readers"
-        Writers:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
-        Admins:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Admins"
-
-    Capabilities:
-        <<: *ApplicationCapabilities
-
-################################################################################
-#
-#   SECTION: Channel
-#
-################################################################################
-Channel: &ChannelDefaults
-
-    Policies:
-
-        Readers:
-            Type: ImplicitMeta
-            Rule: "ANY Readers"
-
-        Writers:
-            Type: ImplicitMeta
-            Rule: "ANY Writers"
-
-        Admins:
-            Type: ImplicitMeta
-            Rule: "MAJORITY Admins"
-
-    Capabilities:
-        <<: *ChannelCapabilities
-
-################################################################################
-#
-#   Profile
-#
-#   - Different configuration profiles may be encoded here to be specified
-#   as parameters to the configtxgen tool
-#
-################################################################################
+  Application: *id001
+  Channel: &id002
+    v1_3: true
+  Orderer: &id037
+    v1_1: true
+Channel:
+  Capabilities: *id002
+  Policies: &id041
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+Orderer:
+  Addresses: &id035
+  - ord1-hlf-ord.orderers.svc.cluster.local:7050
+  - ord2-hlf-ord.orderers.svc.cluster.local:7050
+  - ord3-hlf-ord.orderers.svc.cluster.local:7050
+  BatchSize: &id036
+    AbsoluteMaxBytes: 98MB
+    MaxMessageCount: 100
+    PreferredMaxBytes: 512KB
+  BatchTimeout: 2s
+  EtcdRaft: &id038
+    Consenters:
+    - ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+      Host: ord1-hlf-ord.orderers.svc.cluster.local
+      Port: 7050
+      ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+    - ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+      Host: ord2-hlf-ord.orderers.svc.cluster.local
+      Port: 7050
+      ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+    - ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+      Host: ord3-hlf-ord.orderers.svc.cluster.local
+      Port: 7050
+      ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+  OrdererType: etcdraft
+  Organizations: &id039 {}
+  Policies: &id040
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    BlockValidation:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+Organizations:
+- ID: OrdererMSP
+  MSPDir: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
+  Name: OrdererOrg
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id003
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org1.svc.cluster.local
+    Port: 7051
+  ID: Org1MSP
+  MSPDir: ./crypto-config/peerOrganizations/org1.svc.cluster.local/msp
+  Name: Org1MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id004
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org2.svc.cluster.local
+    Port: 7051
+  ID: Org2MSP
+  MSPDir: ./crypto-config/peerOrganizations/org2.svc.cluster.local/msp
+  Name: Org2MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id005
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org3.svc.cluster.local
+    Port: 7051
+  ID: Org3MSP
+  MSPDir: ./crypto-config/peerOrganizations/org3.svc.cluster.local/msp
+  Name: Org3MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id006
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org4.svc.cluster.local
+    Port: 7051
+  ID: Org4MSP
+  MSPDir: ./crypto-config/peerOrganizations/org4.svc.cluster.local/msp
+  Name: Org4MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id007
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org5.svc.cluster.local
+    Port: 7051
+  ID: Org5MSP
+  MSPDir: ./crypto-config/peerOrganizations/org5.svc.cluster.local/msp
+  Name: Org5MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id008
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org6.svc.cluster.local
+    Port: 7051
+  ID: Org6MSP
+  MSPDir: ./crypto-config/peerOrganizations/org6.svc.cluster.local/msp
+  Name: Org6MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id009
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org7.svc.cluster.local
+    Port: 7051
+  ID: Org7MSP
+  MSPDir: ./crypto-config/peerOrganizations/org7.svc.cluster.local/msp
+  Name: Org7MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id010
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org8.svc.cluster.local
+    Port: 7051
+  ID: Org8MSP
+  MSPDir: ./crypto-config/peerOrganizations/org8.svc.cluster.local/msp
+  Name: Org8MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id011
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org9.svc.cluster.local
+    Port: 7051
+  ID: Org9MSP
+  MSPDir: ./crypto-config/peerOrganizations/org9.svc.cluster.local/msp
+  Name: Org9MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id012
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org10.svc.cluster.local
+    Port: 7051
+  ID: Org10MSP
+  MSPDir: ./crypto-config/peerOrganizations/org10.svc.cluster.local/msp
+  Name: Org10MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id013
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org11.svc.cluster.local
+    Port: 7051
+  ID: Org11MSP
+  MSPDir: ./crypto-config/peerOrganizations/org11.svc.cluster.local/msp
+  Name: Org11MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id014
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org12.svc.cluster.local
+    Port: 7051
+  ID: Org12MSP
+  MSPDir: ./crypto-config/peerOrganizations/org12.svc.cluster.local/msp
+  Name: Org12MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id015
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org13.svc.cluster.local
+    Port: 7051
+  ID: Org13MSP
+  MSPDir: ./crypto-config/peerOrganizations/org13.svc.cluster.local/msp
+  Name: Org13MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id016
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org14.svc.cluster.local
+    Port: 7051
+  ID: Org14MSP
+  MSPDir: ./crypto-config/peerOrganizations/org14.svc.cluster.local/msp
+  Name: Org14MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id017
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org15.svc.cluster.local
+    Port: 7051
+  ID: Org15MSP
+  MSPDir: ./crypto-config/peerOrganizations/org15.svc.cluster.local/msp
+  Name: Org15MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id018
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org16.svc.cluster.local
+    Port: 7051
+  ID: Org16MSP
+  MSPDir: ./crypto-config/peerOrganizations/org16.svc.cluster.local/msp
+  Name: Org16MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id019
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org17.svc.cluster.local
+    Port: 7051
+  ID: Org17MSP
+  MSPDir: ./crypto-config/peerOrganizations/org17.svc.cluster.local/msp
+  Name: Org17MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id020
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org18.svc.cluster.local
+    Port: 7051
+  ID: Org18MSP
+  MSPDir: ./crypto-config/peerOrganizations/org18.svc.cluster.local/msp
+  Name: Org18MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id021
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org19.svc.cluster.local
+    Port: 7051
+  ID: Org19MSP
+  MSPDir: ./crypto-config/peerOrganizations/org19.svc.cluster.local/msp
+  Name: Org19MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id022
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org20.svc.cluster.local
+    Port: 7051
+  ID: Org20MSP
+  MSPDir: ./crypto-config/peerOrganizations/org20.svc.cluster.local/msp
+  Name: Org20MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id023
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org21.svc.cluster.local
+    Port: 7051
+  ID: Org21MSP
+  MSPDir: ./crypto-config/peerOrganizations/org21.svc.cluster.local/msp
+  Name: Org21MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id024
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org22.svc.cluster.local
+    Port: 7051
+  ID: Org22MSP
+  MSPDir: ./crypto-config/peerOrganizations/org22.svc.cluster.local/msp
+  Name: Org22MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id025
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org23.svc.cluster.local
+    Port: 7051
+  ID: Org23MSP
+  MSPDir: ./crypto-config/peerOrganizations/org23.svc.cluster.local/msp
+  Name: Org23MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id026
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org24.svc.cluster.local
+    Port: 7051
+  ID: Org24MSP
+  MSPDir: ./crypto-config/peerOrganizations/org24.svc.cluster.local/msp
+  Name: Org24MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id027
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org25.svc.cluster.local
+    Port: 7051
+  ID: Org25MSP
+  MSPDir: ./crypto-config/peerOrganizations/org25.svc.cluster.local/msp
+  Name: Org25MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id028
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org26.svc.cluster.local
+    Port: 7051
+  ID: Org26MSP
+  MSPDir: ./crypto-config/peerOrganizations/org26.svc.cluster.local/msp
+  Name: Org26MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id029
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org27.svc.cluster.local
+    Port: 7051
+  ID: Org27MSP
+  MSPDir: ./crypto-config/peerOrganizations/org27.svc.cluster.local/msp
+  Name: Org27MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id030
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org28.svc.cluster.local
+    Port: 7051
+  ID: Org28MSP
+  MSPDir: ./crypto-config/peerOrganizations/org28.svc.cluster.local/msp
+  Name: Org28MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id031
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org29.svc.cluster.local
+    Port: 7051
+  ID: Org29MSP
+  MSPDir: ./crypto-config/peerOrganizations/org29.svc.cluster.local/msp
+  Name: Org29MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id032
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org30.svc.cluster.local
+    Port: 7051
+  ID: Org30MSP
+  MSPDir: ./crypto-config/peerOrganizations/org30.svc.cluster.local/msp
+  Name: Org30MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id033
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org31.svc.cluster.local
+    Port: 7051
+  ID: Org31MSP
+  MSPDir: ./crypto-config/peerOrganizations/org31.svc.cluster.local/msp
+  Name: Org31MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+- &id034
+  AnchorPeers:
+  - Host: peer1-hlf-peer.org32.svc.cluster.local
+    Port: 7051
+  ID: Org32MSP
+  MSPDir: ./crypto-config/peerOrganizations/org32.svc.cluster.local/msp
+  Name: Org32MSP
+  Policies:
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
 Profiles:
-
-    OrdererGenesis:
-        <<: *ChannelDefaults
-        Orderer:
-            <<: *OrdererDefaults
-            Organizations:
-                - *OrdererOrg
-            Capabilities:
-                <<: *OrdererCapabilities
-        Consortiums:
-            MyConsortium:
-                Organizations:
-                    - *Org1
-                    - *Org2
-                    - *Org3
-                    - *Org4
-                    - *Org5
-                    - *Org6
-                    - *Org7
-                    - *Org8
-                    - *Org9
-                    - *Org10
-                    - *Org11
-                    - *Org12
-                    - *Org13
-                    - *Org14
-                    - *Org15
-                    - *Org16
-                    - *Org17
-                    - *Org18
-                    - *Org19
-                    - *Org20
-                    - *Org21
-                    - *Org22
-                    - *Org23
-                    - *Org24
-                    - *Org25
-                    - *Org26
-                    - *Org27
-                    - *Org28
-                    - *Org29
-                    - *Org30
-                    - *Org31
-                    - *Org32
-    TestChannel:
-        Consortium: MyConsortium
-        <<: *ChannelDefaults
-        Application:
-            <<: *ApplicationDefaults
-            Organizations:
-                - *Org1
-                - *Org2
-                - *Org3
-                - *Org4
-                - *Org5
-                - *Org6
-                - *Org7
-                - *Org8
-                - *Org9
-                - *Org10
-                - *Org11
-                - *Org12
-                - *Org13
-                - *Org14
-                - *Org15
-                - *Org16
-                - *Org17
-                - *Org18
-                - *Org19
-                - *Org20
-                - *Org21
-                - *Org22
-                - *Org23
-                - *Org24
-                - *Org25
-                - *Org26
-                - *Org27
-                - *Org28
-                - *Org29
-                - *Org30
-                - *Org31
-                - *Org32
-            Capabilities:
-                <<: *ApplicationCapabilities
+  OrdererGenesis:
+    Capabilities: *id002
+    Consortiums:
+      MyConsortium:
+        Organizations:
+        - *id003
+        - *id004
+        - *id005
+        - *id006
+        - *id007
+        - *id008
+        - *id009
+        - *id010
+        - *id011
+        - *id012
+        - *id013
+        - *id014
+        - *id015
+        - *id016
+        - *id017
+        - *id018
+        - *id019
+        - *id020
+        - *id021
+        - *id022
+        - *id023
+        - *id024
+        - *id025
+        - *id026
+        - *id027
+        - *id028
+        - *id029
+        - *id030
+        - *id031
+        - *id032
+        - *id033
+        - *id034
+    Orderer:
+      Addresses: *id035
+      BatchSize: *id036
+      BatchTimeout: 2s
+      Capabilities: *id037
+      EtcdRaft: *id038
+      OrdererType: etcdraft
+      Organizations: *id039
+      Policies: *id040
+    Policies: *id041
+  TestChannel:
+    Application:
+      Capabilities: *id001
+      Organizations:
+      - *id003
+      - *id004
+      - *id005
+      - *id006
+      - *id007
+      - *id008
+      - *id009
+      - *id010
+      - *id011
+      - *id012
+      - *id013
+      - *id014
+      - *id015
+      - *id016
+      - *id017
+      - *id018
+      - *id019
+      - *id020
+      - *id021
+      - *id022
+      - *id023
+      - *id024
+      - *id025
+      - *id026
+      - *id027
+      - *id028
+      - *id029
+      - *id030
+      - *id031
+      - *id032
+      - *id033
+      - *id034
+      Policies: *id042
+    Capabilities: *id002
+    Consortium: MyConsortium
+    Policies: *id041

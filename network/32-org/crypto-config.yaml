@@ -24,3 +24,177 @@ PeerOrgs:
   - Hostname: peer1-hlf-peer
   Users:
     Count: 1
+- Domain: org4.svc.cluster.local
+  Name: Org4
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org5.svc.cluster.local
+  Name: Org5
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org6.svc.cluster.local
+  Name: Org6
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org7.svc.cluster.local
+  Name: Org7
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org8.svc.cluster.local
+  Name: Org8
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org9.svc.cluster.local
+  Name: Org9
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org10.svc.cluster.local
+  Name: Org10
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org11.svc.cluster.local
+  Name: Org11
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org12.svc.cluster.local
+  Name: Org12
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org13.svc.cluster.local
+  Name: Org13
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org14.svc.cluster.local
+  Name: Org14
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org15.svc.cluster.local
+  Name: Org15
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org16.svc.cluster.local
+  Name: Org16
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org17.svc.cluster.local
+  Name: Org17
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org18.svc.cluster.local
+  Name: Org18
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org19.svc.cluster.local
+  Name: Org19
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org20.svc.cluster.local
+  Name: Org20
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org21.svc.cluster.local
+  Name: Org21
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org22.svc.cluster.local
+  Name: Org22
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org23.svc.cluster.local
+  Name: Org23
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org24.svc.cluster.local
+  Name: Org24
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org25.svc.cluster.local
+  Name: Org25
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org26.svc.cluster.local
+  Name: Org26
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org27.svc.cluster.local
+  Name: Org27
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org28.svc.cluster.local
+  Name: Org28
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org29.svc.cluster.local
+  Name: Org29
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org30.svc.cluster.local
+  Name: Org30
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org31.svc.cluster.local
+  Name: Org31
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org32.svc.cluster.local
+  Name: Org32
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
