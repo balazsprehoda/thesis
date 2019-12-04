@@ -4,7 +4,7 @@ class Txconfig(object):
         self.Organizations = [{
                 'Name': 'OrdererOrg',
                 'ID': 'OrdererMSP',
-                'MSPDir': './crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp',
+                'MSPDir': '../crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp',
                 'Policies': {
                     'Readers': {
                         'Type': 'ImplicitMeta',
@@ -54,15 +54,15 @@ class Txconfig(object):
         }
         self.Capabilities = {
             'Channel': {
-                'v1_3': True,
+                'V1_3': True,
             },
             'Orderer': {
-                'v1_1': True,
+                'V1_1': True,
             },
             'Application': {
-                'v1_3': True,
-                'v1_2': False,
-                'v1_1': False,
+                'V1_3': True,
+                'V1_2': False,
+                'V1_1': False,
             },
         }
         self.Application = {
@@ -127,7 +127,7 @@ class Txconfig(object):
     def add_peer_org(self, anchor_peer_number, org_number):
         org_name = 'Org' + str(org_number) + 'MSP'
         msp_id = org_name
-        msp_dir = './crypto-config/peerOrganizations/org' + str(org_number) + '.svc.cluster.local/msp'
+        msp_dir = '../crypto-config/peerOrganizations/org' + str(org_number) + '.svc.cluster.local/msp'
         anchor_peer = 'peer' + str(anchor_peer_number) + '-hlf-peer.org' + str(org_number) + '.svc.cluster.local'
         new_org = {
             'Name': org_name,
@@ -159,7 +159,7 @@ class Txconfig(object):
     
     def add_orderer(self, ord_number):
         ord_name = 'ord' + str(ord_number) + '-hlf-ord.orderers.svc.cluster.local'
-        client_tls_cert = './crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/' + ord_name + '/tls/server.crt'
+        client_tls_cert = '../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/' + ord_name + '/tls/server.crt'
         server_tls_cert = client_tls_cert
         ord_address = ord_name + ':7050'
         self.Orderer['Addresses'].append(ord_address)

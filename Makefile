@@ -28,10 +28,10 @@ start:
 	kubectl apply -f caliper/rolebinding.yaml
 
 	@echo "-------Deploying orderers-------"
-	kubectl create -f network/orderers/*.yaml
+	kubectl create -f network/orderers/
 
 	@echo "-------Deploying peers and CouchDBs-------"
-	kubectl create -f network/peers/*.yaml
+	kubectl create -f network/peers/
 
 	@echo "-------Deploying cli-------"
 	kubectl apply -f network/cli/cli.yaml
@@ -45,8 +45,8 @@ minikube:
 crypto-gen:
 	make crypto-del
 	cd network && ../cryptogen generate --config=${NETWORK}/crypto-config.yaml
-	cd network/scripts && ./rename-keys.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS}
-	cd network/scripts && ./generate-artifacts.sh NUMBER_OF_ORGS=${NUMBER_OF_ORGS} NETWORK=${NETWORK}
+	cd scripts && NUMBER_OF_ORGS=${NUMBER_OF_ORGS} ./rename-keys.sh
+	cd scripts && NUMBER_OF_ORGS=${NUMBER_OF_ORGS} NETWORK=${NETWORK} ./generate-artifacts.sh
 
 .PHONY: generate
 generate:
@@ -77,23 +77,32 @@ generate:
 	do \
 		for PEER_NUM in $(shell seq 1 ${NUMBER_OF_PEERS_PER_ORG}); \
 		do \
-			cp templates/peer-TEMPLATE.yaml network/peers/peer$${ORG_NUM}.yaml; \
-			sed -i -e "s/PEER_NAME/peer$${ORG_NUM}/g" network/peers/peer$${ORG_NUM}.yaml; \
-			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${ORG_NUM}.yaml; \
-			sed -i -e "s/MSP_NAME/Org$${ORG_NUM}MSP/g" network/peers/peer$${ORG_NUM}.yaml; \
-			sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/peers/peer$${ORG_NUM}.yaml; \
-			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${ORG_NUM}.yaml; \
-			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${ORG_NUM}.yaml; \
-			cp templates/peer-svc-TEMPLATE.yaml network/peers/peer$${ORG_NUM}_svc.yaml; \
-			sed -i -e "s/PEER_NAME/peer$${ORG_NUM}/g" network/peers/peer$${ORG_NUM}_svc.yaml; \
-			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${ORG_NUM}_svc.yaml; \
-			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${ORG_NUM}_svc.yaml; \
-			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${ORG_NUM}_svc.yaml; \
-			cp templates/peer-expose-TEMPLATE.yaml network/peers/peer$${ORG_NUM}_expose.yaml; \
-			sed -i -e "s/PEER_NAME/peer$${ORG_NUM}/g" network/peers/peer$${ORG_NUM}_expose.yaml; \
-			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${ORG_NUM}_expose.yaml; \
-			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${ORG_NUM}_expose.yaml; \
-			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${ORG_NUM}_expose.yaml; \
+			cp templates/peer-TEMPLATE.yaml network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s/PEER_NAME/peer$${PEER_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s/MSP_NAME/Org$${ORG_NUM}MSP/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			cp templates/peer-svc-TEMPLATE.yaml network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
+			sed -i -e "s/PEER_NAME/peer$${PEER_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
+			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
+			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
+			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
+		done \
+	done
+
+.PHONY: expose
+expose:
+	for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
+	do \
+		for PEER_NUM in $(shell seq 1 ${NUMBER_OF_PEERS_PER_ORG}); \
+		do \
+			cp templates/peer-expose-TEMPLATE.yaml network/peers/peer$${PEER_NUM}org$${ORG_NUM}_expose.yaml; \
+			sed -i -e "s/PEER_NAME/peer$${PEER_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_expose.yaml; \
+			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_expose.yaml; \
+			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_expose.yaml; \
+			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_expose.yaml; \
 		done \
 	done
 
@@ -119,10 +128,10 @@ monitor:
 clean:
 	rm -rf network/orderers/*.yaml
 	rm -rf network/peers/*.yaml
-	rm network/cli.yaml
-	rm network/connection-profile.yaml
-	rm caliper/caliper.yaml
-	rm network/pumba/*.yaml
+	rm -rf network/cli.yaml
+	rm -rf network/connection-profile.yaml
+	rm -rf caliper/caliper.yaml
+	rm -rf network/pumba/*.yaml
 
 
 .PHONY: join

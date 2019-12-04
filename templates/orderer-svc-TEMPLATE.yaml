@@ -16,19 +16,19 @@ spec:
   - protocol: TCP
     port: 8443
     name: operations
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: ordORD_NUMBER-service-monitor
-  namespace: monitoring
-  labels:
-    app: ordORD_NUMBER-hlf-ord
-    release: prometheus
-spec:
-  selector:
-    matchLabels:
-      app: ordORD_NUMBER-hlf-ord
-  endpoints:
-  - port: operations
-    interval: 10s
+# ---
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: ordORD_NUMBER-service-monitor
+#   namespace: monitoring
+#   labels:
+#     app: ordORD_NUMBER-hlf-ord
+#     release: prometheus
+# spec:
+#   selector:
+#     matchLabels:
+#       app: ordORD_NUMBER-hlf-ord
+#   endpoints:
+#   - port: operations
+#     interval: 10s

@@ -1,34 +1,26 @@
 OrdererOrgs:
-
-  - Name: OrdererOrg
-    Domain: orderers.svc.cluster.local
-    Specs:
-      - Hostname: ord1-hlf-ord
-      - Hostname: ord2-hlf-ord
-      - Hostname: ord3-hlf-ord
-
+- Domain: orderers.svc.cluster.local
+  Name: OrdererOrg
+  Specs:
+  - Hostname: ord1-hlf-ord
+  - Hostname: ord2-hlf-ord
+  - Hostname: ord3-hlf-ord
 PeerOrgs:
-
-  - Name: Org1
-    Domain: org1.svc.cluster.local
-    Template:
-      Count: 1
-      Hostname: "peer1-hlf-peer"
-    Users:
-      Count: 1
-
-  - Name: Org2
-    Domain: org2.svc.cluster.local
-    Template:
-      Count: 1
-      Hostname: "peer2-hlf-peer"
-    Users:
-      Count: 1
-
-  - Name: Org3
-    Domain: org3.svc.cluster.local
-    Template:
-      Count: 1
-      Hostname: "peer3-hlf-peer"
-    Users:
-      Count: 1
+- Domain: org1.svc.cluster.local
+  Name: Org1
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org2.svc.cluster.local
+  Name: Org2
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1
+- Domain: org3.svc.cluster.local
+  Name: Org3
+  Specs:
+  - Hostname: peer1-hlf-peer
+  Users:
+    Count: 1

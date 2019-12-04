@@ -22,19 +22,19 @@ spec:
   - protocol: TCP
     port: 9443
     name: operations
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: PEER_NAME-service-monitor
-  namespace: monitoring
-  labels:
-    app: PEER_NAME-hlf-peer
-    release: prometheus
-spec:
-  selector:
-    matchLabels:
-      app: PEER_NAME-hlf-peer # target gitlab service
-  endpoints:
-  - port: operations
-    interval: 10s
+# ---
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: PEER_NAME-service-monitor
+#   namespace: monitoring
+#   labels:
+#     app: PEER_NAME-hlf-peer
+#     release: prometheus
+# spec:
+#   selector:
+#     matchLabels:
+#       app: PEER_NAME-hlf-peer # target gitlab service
+#   endpoints:
+#   - port: operations
+#     interval: 10s

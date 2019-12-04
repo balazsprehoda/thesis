@@ -1,8 +1,8 @@
 Application:
   Capabilities: &id001
-    v1_1: false
-    v1_2: false
-    v1_3: true
+    V1_1: false
+    V1_2: false
+    V1_3: true
   Policies: &id042
     Admins:
       Rule: MAJORITY Admins
@@ -16,9 +16,9 @@ Application:
 Capabilities:
   Application: *id001
   Channel: &id002
-    v1_3: true
+    V1_3: true
   Orderer: &id037
-    v1_1: true
+    V1_1: true
 Channel:
   Capabilities: *id002
   Policies: &id041
@@ -43,18 +43,18 @@ Orderer:
   BatchTimeout: 2s
   EtcdRaft: &id038
     Consenters:
-    - ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+    - ClientTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
       Host: ord1-hlf-ord.orderers.svc.cluster.local
       Port: 7050
-      ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-    - ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+      ServerTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+    - ClientTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
       Host: ord2-hlf-ord.orderers.svc.cluster.local
       Port: 7050
-      ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
-    - ClientTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+      ServerTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+    - ClientTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
       Host: ord3-hlf-ord.orderers.svc.cluster.local
       Port: 7050
-      ServerTLSCert: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
+      ServerTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
   OrdererType: etcdraft
   Organizations: &id039 {}
   Policies: &id040
@@ -72,7 +72,7 @@ Orderer:
       Type: ImplicitMeta
 Organizations:
 - ID: OrdererMSP
-  MSPDir: ./crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
+  MSPDir: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
   Name: OrdererOrg
   Policies:
     Admins:
@@ -89,7 +89,7 @@ Organizations:
   - Host: peer1-hlf-peer.org1.svc.cluster.local
     Port: 7051
   ID: Org1MSP
-  MSPDir: ./crypto-config/peerOrganizations/org1.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org1.svc.cluster.local/msp
   Name: Org1MSP
   Policies:
     Admins:
@@ -106,7 +106,7 @@ Organizations:
   - Host: peer1-hlf-peer.org2.svc.cluster.local
     Port: 7051
   ID: Org2MSP
-  MSPDir: ./crypto-config/peerOrganizations/org2.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org2.svc.cluster.local/msp
   Name: Org2MSP
   Policies:
     Admins:
@@ -123,7 +123,7 @@ Organizations:
   - Host: peer1-hlf-peer.org3.svc.cluster.local
     Port: 7051
   ID: Org3MSP
-  MSPDir: ./crypto-config/peerOrganizations/org3.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org3.svc.cluster.local/msp
   Name: Org3MSP
   Policies:
     Admins:
@@ -140,7 +140,7 @@ Organizations:
   - Host: peer1-hlf-peer.org4.svc.cluster.local
     Port: 7051
   ID: Org4MSP
-  MSPDir: ./crypto-config/peerOrganizations/org4.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org4.svc.cluster.local/msp
   Name: Org4MSP
   Policies:
     Admins:
@@ -157,7 +157,7 @@ Organizations:
   - Host: peer1-hlf-peer.org5.svc.cluster.local
     Port: 7051
   ID: Org5MSP
-  MSPDir: ./crypto-config/peerOrganizations/org5.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org5.svc.cluster.local/msp
   Name: Org5MSP
   Policies:
     Admins:
@@ -174,7 +174,7 @@ Organizations:
   - Host: peer1-hlf-peer.org6.svc.cluster.local
     Port: 7051
   ID: Org6MSP
-  MSPDir: ./crypto-config/peerOrganizations/org6.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org6.svc.cluster.local/msp
   Name: Org6MSP
   Policies:
     Admins:
@@ -191,7 +191,7 @@ Organizations:
   - Host: peer1-hlf-peer.org7.svc.cluster.local
     Port: 7051
   ID: Org7MSP
-  MSPDir: ./crypto-config/peerOrganizations/org7.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org7.svc.cluster.local/msp
   Name: Org7MSP
   Policies:
     Admins:
@@ -208,7 +208,7 @@ Organizations:
   - Host: peer1-hlf-peer.org8.svc.cluster.local
     Port: 7051
   ID: Org8MSP
-  MSPDir: ./crypto-config/peerOrganizations/org8.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org8.svc.cluster.local/msp
   Name: Org8MSP
   Policies:
     Admins:
@@ -225,7 +225,7 @@ Organizations:
   - Host: peer1-hlf-peer.org9.svc.cluster.local
     Port: 7051
   ID: Org9MSP
-  MSPDir: ./crypto-config/peerOrganizations/org9.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org9.svc.cluster.local/msp
   Name: Org9MSP
   Policies:
     Admins:
@@ -242,7 +242,7 @@ Organizations:
   - Host: peer1-hlf-peer.org10.svc.cluster.local
     Port: 7051
   ID: Org10MSP
-  MSPDir: ./crypto-config/peerOrganizations/org10.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org10.svc.cluster.local/msp
   Name: Org10MSP
   Policies:
     Admins:
@@ -259,7 +259,7 @@ Organizations:
   - Host: peer1-hlf-peer.org11.svc.cluster.local
     Port: 7051
   ID: Org11MSP
-  MSPDir: ./crypto-config/peerOrganizations/org11.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org11.svc.cluster.local/msp
   Name: Org11MSP
   Policies:
     Admins:
@@ -276,7 +276,7 @@ Organizations:
   - Host: peer1-hlf-peer.org12.svc.cluster.local
     Port: 7051
   ID: Org12MSP
-  MSPDir: ./crypto-config/peerOrganizations/org12.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org12.svc.cluster.local/msp
   Name: Org12MSP
   Policies:
     Admins:
@@ -293,7 +293,7 @@ Organizations:
   - Host: peer1-hlf-peer.org13.svc.cluster.local
     Port: 7051
   ID: Org13MSP
-  MSPDir: ./crypto-config/peerOrganizations/org13.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org13.svc.cluster.local/msp
   Name: Org13MSP
   Policies:
     Admins:
@@ -310,7 +310,7 @@ Organizations:
   - Host: peer1-hlf-peer.org14.svc.cluster.local
     Port: 7051
   ID: Org14MSP
-  MSPDir: ./crypto-config/peerOrganizations/org14.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org14.svc.cluster.local/msp
   Name: Org14MSP
   Policies:
     Admins:
@@ -327,7 +327,7 @@ Organizations:
   - Host: peer1-hlf-peer.org15.svc.cluster.local
     Port: 7051
   ID: Org15MSP
-  MSPDir: ./crypto-config/peerOrganizations/org15.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org15.svc.cluster.local/msp
   Name: Org15MSP
   Policies:
     Admins:
@@ -344,7 +344,7 @@ Organizations:
   - Host: peer1-hlf-peer.org16.svc.cluster.local
     Port: 7051
   ID: Org16MSP
-  MSPDir: ./crypto-config/peerOrganizations/org16.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org16.svc.cluster.local/msp
   Name: Org16MSP
   Policies:
     Admins:
@@ -361,7 +361,7 @@ Organizations:
   - Host: peer1-hlf-peer.org17.svc.cluster.local
     Port: 7051
   ID: Org17MSP
-  MSPDir: ./crypto-config/peerOrganizations/org17.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org17.svc.cluster.local/msp
   Name: Org17MSP
   Policies:
     Admins:
@@ -378,7 +378,7 @@ Organizations:
   - Host: peer1-hlf-peer.org18.svc.cluster.local
     Port: 7051
   ID: Org18MSP
-  MSPDir: ./crypto-config/peerOrganizations/org18.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org18.svc.cluster.local/msp
   Name: Org18MSP
   Policies:
     Admins:
@@ -395,7 +395,7 @@ Organizations:
   - Host: peer1-hlf-peer.org19.svc.cluster.local
     Port: 7051
   ID: Org19MSP
-  MSPDir: ./crypto-config/peerOrganizations/org19.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org19.svc.cluster.local/msp
   Name: Org19MSP
   Policies:
     Admins:
@@ -412,7 +412,7 @@ Organizations:
   - Host: peer1-hlf-peer.org20.svc.cluster.local
     Port: 7051
   ID: Org20MSP
-  MSPDir: ./crypto-config/peerOrganizations/org20.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org20.svc.cluster.local/msp
   Name: Org20MSP
   Policies:
     Admins:
@@ -429,7 +429,7 @@ Organizations:
   - Host: peer1-hlf-peer.org21.svc.cluster.local
     Port: 7051
   ID: Org21MSP
-  MSPDir: ./crypto-config/peerOrganizations/org21.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org21.svc.cluster.local/msp
   Name: Org21MSP
   Policies:
     Admins:
@@ -446,7 +446,7 @@ Organizations:
   - Host: peer1-hlf-peer.org22.svc.cluster.local
     Port: 7051
   ID: Org22MSP
-  MSPDir: ./crypto-config/peerOrganizations/org22.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org22.svc.cluster.local/msp
   Name: Org22MSP
   Policies:
     Admins:
@@ -463,7 +463,7 @@ Organizations:
   - Host: peer1-hlf-peer.org23.svc.cluster.local
     Port: 7051
   ID: Org23MSP
-  MSPDir: ./crypto-config/peerOrganizations/org23.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org23.svc.cluster.local/msp
   Name: Org23MSP
   Policies:
     Admins:
@@ -480,7 +480,7 @@ Organizations:
   - Host: peer1-hlf-peer.org24.svc.cluster.local
     Port: 7051
   ID: Org24MSP
-  MSPDir: ./crypto-config/peerOrganizations/org24.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org24.svc.cluster.local/msp
   Name: Org24MSP
   Policies:
     Admins:
@@ -497,7 +497,7 @@ Organizations:
   - Host: peer1-hlf-peer.org25.svc.cluster.local
     Port: 7051
   ID: Org25MSP
-  MSPDir: ./crypto-config/peerOrganizations/org25.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org25.svc.cluster.local/msp
   Name: Org25MSP
   Policies:
     Admins:
@@ -514,7 +514,7 @@ Organizations:
   - Host: peer1-hlf-peer.org26.svc.cluster.local
     Port: 7051
   ID: Org26MSP
-  MSPDir: ./crypto-config/peerOrganizations/org26.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org26.svc.cluster.local/msp
   Name: Org26MSP
   Policies:
     Admins:
@@ -531,7 +531,7 @@ Organizations:
   - Host: peer1-hlf-peer.org27.svc.cluster.local
     Port: 7051
   ID: Org27MSP
-  MSPDir: ./crypto-config/peerOrganizations/org27.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org27.svc.cluster.local/msp
   Name: Org27MSP
   Policies:
     Admins:
@@ -548,7 +548,7 @@ Organizations:
   - Host: peer1-hlf-peer.org28.svc.cluster.local
     Port: 7051
   ID: Org28MSP
-  MSPDir: ./crypto-config/peerOrganizations/org28.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org28.svc.cluster.local/msp
   Name: Org28MSP
   Policies:
     Admins:
@@ -565,7 +565,7 @@ Organizations:
   - Host: peer1-hlf-peer.org29.svc.cluster.local
     Port: 7051
   ID: Org29MSP
-  MSPDir: ./crypto-config/peerOrganizations/org29.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org29.svc.cluster.local/msp
   Name: Org29MSP
   Policies:
     Admins:
@@ -582,7 +582,7 @@ Organizations:
   - Host: peer1-hlf-peer.org30.svc.cluster.local
     Port: 7051
   ID: Org30MSP
-  MSPDir: ./crypto-config/peerOrganizations/org30.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org30.svc.cluster.local/msp
   Name: Org30MSP
   Policies:
     Admins:
@@ -599,7 +599,7 @@ Organizations:
   - Host: peer1-hlf-peer.org31.svc.cluster.local
     Port: 7051
   ID: Org31MSP
-  MSPDir: ./crypto-config/peerOrganizations/org31.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org31.svc.cluster.local/msp
   Name: Org31MSP
   Policies:
     Admins:
@@ -616,7 +616,7 @@ Organizations:
   - Host: peer1-hlf-peer.org32.svc.cluster.local
     Port: 7051
   ID: Org32MSP
-  MSPDir: ./crypto-config/peerOrganizations/org32.svc.cluster.local/msp
+  MSPDir: ../crypto-config/peerOrganizations/org32.svc.cluster.local/msp
   Name: Org32MSP
   Policies:
     Admins:
