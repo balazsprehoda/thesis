@@ -32,7 +32,7 @@ class Txconfig(object):
             'EtcdRaft': {
                 'Consenters': [],
             },
-            'Organizations': {},
+            'Organizations': self.Organizations[0],
             'Policies': {
                 'Readers': {
                     'Type': 'ImplicitMeta',

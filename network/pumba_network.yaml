@@ -27,17 +27,16 @@ spec:
         args:
           - --log-level
           - "debug"
+          - --random
           - netem
           - --duration
-          - "5m"
+          - "2m"
           - --tc-image
           - gaiadocker/iproute2
           - delay
           - --time
-          - "2000"
-          - --distribution
-          - "normal"
-          - "re2:.*ord1-hlf-ord.*"
+          - "50"
+          - "re2:.*hlf.*"
         resources:
           requests:
             cpu: 10m

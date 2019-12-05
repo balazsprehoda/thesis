@@ -35,9 +35,9 @@ done
 for ORG_NUM in $(seq 1 ${NUM_OF_ORGS})
 do
     export CORE_PEER_LOCALMSPID=Org${ORG_NUM}MSP
-    export CORE_PEER_MSPCONFIGPATH=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/msp
+    export CORE_PEER_MSPCONFIGPATH=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer1-hlf-peer.org${ORG_NUM}.svc.cluster.local/msp
     export CORE_PEER_ADDRESS=peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local:7051
-    export CORE_PEER_TLS_ROOTCERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer${ORG_NUM}-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/ca.crt
+    export CORE_PEER_TLS_ROOTCERT_FILE=/fabric/config/crypto/peerOrganizations/org${ORG_NUM}.svc.cluster.local/peers/peer1-hlf-peer.org${ORG_NUM}.svc.cluster.local/tls/ca.crt
 
     peer channel update -o ${ORDERER_URL} -c ${CHANNEL_NAME} -f /fabric/config/channel-artifacts/Org${ORG_NUM}MSPanchors.tx --tls --cafile $ORDERER_CAFILE
 done

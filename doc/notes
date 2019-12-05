@@ -1,0 +1,1 @@
+1. Chaincode endorsement policy: AND('A','A','B','C','D',...) -> signature set did not satisfy policy, validation error

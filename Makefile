@@ -69,8 +69,8 @@ generate:
 	sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" caliper/caliper.yaml
 
 	# Generate CLI deployment config file
-	cp templates/cli-TEMPLATE.yaml network/cli.yaml
-	sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/cli.yaml
+	cp templates/cli-TEMPLATE.yaml network/cli/cli.yaml
+	sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/cli/cli.yaml
 
 	# Generate peer deployment config files
 	for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
@@ -132,15 +132,17 @@ clean:
 	rm -rf network/connection-profile.yaml
 	rm -rf caliper/caliper.yaml
 	rm -rf network/pumba/*.yaml
+	rm -rf network/channel-artifacts
+	rm -rf network/crypto-config
 
 
 .PHONY: join
 join:
-	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && scripts/create-join-channel.sh"
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir scripts && cp /fabric/config/scripts/* scripts/ && chmod +x scripts/* && NUM_OF_ORGS=${NUMBER_OF_ORGS} NUM_OF_PEERS=${NUMBER_OF_PEERS_PER_ORG} scripts/create-join-channel.sh"
 
 .PHONY: chaincode
 chaincode:
-	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /scripts && ./install-instantiate-chaincode.sh"
+	kubectl exec -n fabric-tools fabric-tools -- bash -c "mkdir -p /opt/gopath/src/github.com/chaincode/go && cp /fabric/chaincode/* /opt/gopath/src/github.com/chaincode/go && cd /scripts && NUM_OF_ORGS=${NUMBER_OF_ORGS} NUM_OF_PEERS=${NUMBER_OF_PEERS_PER_ORG} ./install-instantiate-chaincode.sh"
 
 .PHONY: init
 init:
@@ -184,3 +186,8 @@ crypto-del:
 .PHONY: watch
 watch:
 	watch -n 2 'kubectl get pods --all-namespaces'
+
+.PHONY: setup-32-ftsrglab
+setup-32-ftsrglab:
+	make generate NUMBER_OF_PEERS_PER_ORG=1 NUMBER_OF_ORGS=32 NUMBER_OF_ORDERERS=3 VM_ABSPATH=/home/meres/thesis ABSPATH=/home/meres/thesis
+	make crypto-gen NETWORK=32-org NUMBER_OF_ORGS=32

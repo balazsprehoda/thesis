@@ -26,10 +26,10 @@ do
 done
 
 # Create CC policy string
-POLICY="'Org1MSP.member',"
-for ORG_NUM in $(seq 1 ${NUM_OF_ORGS}-1)
+let COMMAS=${NUM_OF_ORGS}-1
+for ORG_NUM in $(seq 1 ${COMMAS})
 do
-    POLICY+="'Org${ORG_NUM}MSP.member,'"
+    POLICY+="'Org${ORG_NUM}MSP.member',"
 done
 POLICY+="'Org${NUM_OF_ORGS}MSP.member'"
 

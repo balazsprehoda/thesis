@@ -17,7 +17,7 @@ Capabilities:
   Application: *id001
   Channel: &id002
     V1_3: true
-  Orderer: &id037
+  Orderer: &id038
     V1_1: true
 Channel:
   Capabilities: *id002
@@ -32,16 +32,16 @@ Channel:
       Rule: ANY Writers
       Type: ImplicitMeta
 Orderer:
-  Addresses: &id035
+  Addresses: &id036
   - ord1-hlf-ord.orderers.svc.cluster.local:7050
   - ord2-hlf-ord.orderers.svc.cluster.local:7050
   - ord3-hlf-ord.orderers.svc.cluster.local:7050
-  BatchSize: &id036
-    AbsoluteMaxBytes: 98MB
-    MaxMessageCount: 100
-    PreferredMaxBytes: 512KB
-  BatchTimeout: 2s
-  EtcdRaft: &id038
+  BatchSize: &id037
+    AbsoluteMaxBytes: 500MB
+    MaxMessageCount: 40
+    PreferredMaxBytes: 500MB
+  BatchTimeout: 100s
+  EtcdRaft: &id039
     Consenters:
     - ClientTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/tls/server.crt
       Host: ord1-hlf-ord.orderers.svc.cluster.local
@@ -56,7 +56,20 @@ Orderer:
       Port: 7050
       ServerTLSCert: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/tls/server.crt
   OrdererType: etcdraft
-  Organizations: &id039 {}
+  Organizations: &id003
+    ID: OrdererMSP
+    MSPDir: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
+    Name: OrdererOrg
+    Policies:
+      Admins:
+        Rule: MAJORITY Admins
+        Type: ImplicitMeta
+      Readers:
+        Rule: ANY Readers
+        Type: ImplicitMeta
+      Writers:
+        Rule: ANY Writers
+        Type: ImplicitMeta
   Policies: &id040
     Admins:
       Rule: MAJORITY Admins
@@ -71,20 +84,8 @@ Orderer:
       Rule: ANY Writers
       Type: ImplicitMeta
 Organizations:
-- ID: OrdererMSP
-  MSPDir: ../crypto-config/ordererOrganizations/orderers.svc.cluster.local/msp
-  Name: OrdererOrg
-  Policies:
-    Admins:
-      Rule: MAJORITY Admins
-      Type: ImplicitMeta
-    Readers:
-      Rule: ANY Readers
-      Type: ImplicitMeta
-    Writers:
-      Rule: ANY Writers
-      Type: ImplicitMeta
-- &id003
+- *id003
+- &id004
   AnchorPeers:
   - Host: peer1-hlf-peer.org1.svc.cluster.local
     Port: 7051
@@ -101,7 +102,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id004
+- &id005
   AnchorPeers:
   - Host: peer1-hlf-peer.org2.svc.cluster.local
     Port: 7051
@@ -118,7 +119,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id005
+- &id006
   AnchorPeers:
   - Host: peer1-hlf-peer.org3.svc.cluster.local
     Port: 7051
@@ -135,7 +136,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id006
+- &id007
   AnchorPeers:
   - Host: peer1-hlf-peer.org4.svc.cluster.local
     Port: 7051
@@ -152,7 +153,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id007
+- &id008
   AnchorPeers:
   - Host: peer1-hlf-peer.org5.svc.cluster.local
     Port: 7051
@@ -169,7 +170,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id008
+- &id009
   AnchorPeers:
   - Host: peer1-hlf-peer.org6.svc.cluster.local
     Port: 7051
@@ -186,7 +187,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id009
+- &id010
   AnchorPeers:
   - Host: peer1-hlf-peer.org7.svc.cluster.local
     Port: 7051
@@ -203,7 +204,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id010
+- &id011
   AnchorPeers:
   - Host: peer1-hlf-peer.org8.svc.cluster.local
     Port: 7051
@@ -220,7 +221,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id011
+- &id012
   AnchorPeers:
   - Host: peer1-hlf-peer.org9.svc.cluster.local
     Port: 7051
@@ -237,7 +238,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id012
+- &id013
   AnchorPeers:
   - Host: peer1-hlf-peer.org10.svc.cluster.local
     Port: 7051
@@ -254,7 +255,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id013
+- &id014
   AnchorPeers:
   - Host: peer1-hlf-peer.org11.svc.cluster.local
     Port: 7051
@@ -271,7 +272,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id014
+- &id015
   AnchorPeers:
   - Host: peer1-hlf-peer.org12.svc.cluster.local
     Port: 7051
@@ -288,7 +289,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id015
+- &id016
   AnchorPeers:
   - Host: peer1-hlf-peer.org13.svc.cluster.local
     Port: 7051
@@ -305,7 +306,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id016
+- &id017
   AnchorPeers:
   - Host: peer1-hlf-peer.org14.svc.cluster.local
     Port: 7051
@@ -322,7 +323,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id017
+- &id018
   AnchorPeers:
   - Host: peer1-hlf-peer.org15.svc.cluster.local
     Port: 7051
@@ -339,7 +340,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id018
+- &id019
   AnchorPeers:
   - Host: peer1-hlf-peer.org16.svc.cluster.local
     Port: 7051
@@ -356,7 +357,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id019
+- &id020
   AnchorPeers:
   - Host: peer1-hlf-peer.org17.svc.cluster.local
     Port: 7051
@@ -373,7 +374,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id020
+- &id021
   AnchorPeers:
   - Host: peer1-hlf-peer.org18.svc.cluster.local
     Port: 7051
@@ -390,7 +391,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id021
+- &id022
   AnchorPeers:
   - Host: peer1-hlf-peer.org19.svc.cluster.local
     Port: 7051
@@ -407,7 +408,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id022
+- &id023
   AnchorPeers:
   - Host: peer1-hlf-peer.org20.svc.cluster.local
     Port: 7051
@@ -424,7 +425,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id023
+- &id024
   AnchorPeers:
   - Host: peer1-hlf-peer.org21.svc.cluster.local
     Port: 7051
@@ -441,7 +442,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id024
+- &id025
   AnchorPeers:
   - Host: peer1-hlf-peer.org22.svc.cluster.local
     Port: 7051
@@ -458,7 +459,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id025
+- &id026
   AnchorPeers:
   - Host: peer1-hlf-peer.org23.svc.cluster.local
     Port: 7051
@@ -475,7 +476,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id026
+- &id027
   AnchorPeers:
   - Host: peer1-hlf-peer.org24.svc.cluster.local
     Port: 7051
@@ -492,7 +493,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id027
+- &id028
   AnchorPeers:
   - Host: peer1-hlf-peer.org25.svc.cluster.local
     Port: 7051
@@ -509,7 +510,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id028
+- &id029
   AnchorPeers:
   - Host: peer1-hlf-peer.org26.svc.cluster.local
     Port: 7051
@@ -526,7 +527,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id029
+- &id030
   AnchorPeers:
   - Host: peer1-hlf-peer.org27.svc.cluster.local
     Port: 7051
@@ -543,7 +544,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id030
+- &id031
   AnchorPeers:
   - Host: peer1-hlf-peer.org28.svc.cluster.local
     Port: 7051
@@ -560,7 +561,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id031
+- &id032
   AnchorPeers:
   - Host: peer1-hlf-peer.org29.svc.cluster.local
     Port: 7051
@@ -577,7 +578,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id032
+- &id033
   AnchorPeers:
   - Host: peer1-hlf-peer.org30.svc.cluster.local
     Port: 7051
@@ -594,7 +595,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id033
+- &id034
   AnchorPeers:
   - Host: peer1-hlf-peer.org31.svc.cluster.local
     Port: 7051
@@ -611,7 +612,7 @@ Organizations:
     Writers:
       Rule: ANY Writers
       Type: ImplicitMeta
-- &id034
+- &id035
   AnchorPeers:
   - Host: peer1-hlf-peer.org32.svc.cluster.local
     Port: 7051
@@ -634,7 +635,6 @@ Profiles:
     Consortiums:
       MyConsortium:
         Organizations:
-        - *id003
         - *id004
         - *id005
         - *id006
@@ -666,21 +666,21 @@ Profiles:
         - *id032
         - *id033
         - *id034
+        - *id035
     Orderer:
-      Addresses: *id035
-      BatchSize: *id036
+      Addresses: *id036
+      BatchSize: *id037
       BatchTimeout: 2s
-      Capabilities: *id037
-      EtcdRaft: *id038
+      Capabilities: *id038
+      EtcdRaft: *id039
       OrdererType: etcdraft
-      Organizations: *id039
+      Organizations: *id003
       Policies: *id040
     Policies: *id041
   TestChannel:
     Application:
       Capabilities: *id001
       Organizations:
-      - *id003
       - *id004
       - *id005
       - *id006
@@ -712,6 +712,7 @@ Profiles:
       - *id032
       - *id033
       - *id034
+      - *id035
       Policies: *id042
     Capabilities: *id002
     Consortium: MyConsortium
