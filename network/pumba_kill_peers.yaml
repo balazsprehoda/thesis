@@ -25,13 +25,10 @@ spec:
         imagePullPolicy: IfNotPresent
         name: pumba
         args:
-          - --random
-          - --interval
-          - "60s"
           - kill
           - --signal
           - "SIGKILL"
-          - "re2:.*._peer_peer1.*"
+          - "re2:.*ord1-hlf-ord.*"
         resources:
           requests:
             cpu: 10m
