@@ -3,7 +3,7 @@ class Config(object):
         self.__dict__.update(entries)
         self.name = "test-network"
         self.version = "1.0"
-        self.caliper = {'blockchain': "fabric", 'command': {'start': 'sleep 60s'}}
+        self.caliper = {'blockchain': "fabric"}
         self.info = {'Version': '1.4.3', 'Size': '32 orgs with 1 peer each', 'Orderer': 'Raft with 3 orderers', 'Distribution': 'Kubernetes', 'StateDB': 'CouchDB'}
         self.clients = {}
         self.channels = {'mychannel': {'created': True, 'chaincodes': [{'id': 'go', 'version': "1.0", 'language': 'golang', 'path': 'chaincode/go'}], 'orderers': [], 'peers': {}}}

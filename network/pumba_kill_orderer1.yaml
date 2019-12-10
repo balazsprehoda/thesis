@@ -13,7 +13,7 @@ metadata:
   name: pumba-1
   namespace: pumba
 spec:
-  nodeName: virt32
+  nodeName: virt02
   restartPolicy: Never
   containers:
   - image: gaiaadm/pumba:master
@@ -22,6 +22,8 @@ spec:
     args:
       - --log-level
       - "debug"
+      - --interval
+      - "60s"
       - kill
       - --signal
       - "SIGKILL"

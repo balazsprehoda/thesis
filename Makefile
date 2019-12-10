@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+NUMBER_OF_NODES?=40
 NUMBER_OF_ORGS?=3
 NUMBER_OF_ORDERERS?=3
 NUMBER_OF_PEERS_PER_ORG?=1
@@ -51,32 +53,37 @@ crypto-gen:
 .PHONY: generate
 generate:
 	# Generate network connection profile for external applications (Blockchain Analyzer)
-	cp templates/connection-profile-TEMPLATE.yaml network/connection-profile.yaml
-	sed -i -e "s~ABSPATH~${ABSPATH}~g" network/connection-profile.yaml
+	@cp templates/connection-profile-TEMPLATE.yaml network/connection-profile.yaml
+	@sed -i -e "s~ABSPATH~${ABSPATH}~g" network/connection-profile.yaml
 
 	# Generate orderer deployment config files
-	for ORD_NUM in $(shell seq 1 ${NUMBER_OF_ORDERERS}); \
+	@for ORD_NUM in $(shell seq 1 ${NUMBER_OF_ORDERERS}); \
 	do \
+		let NODE_NUM=$${ORD_NUM}%${NUMBER_OF_NODES}+1; \
+		NODE_NAME=`printf "virt%02d" $$NODE_NUM`; \
 		cp templates/orderer-TEMPLATE.yaml network/orderers/orderer$${ORD_NUM}.yaml; \
 		sed -i -e  "s/ORD_NUMBER/$${ORD_NUM}/g" network/orderers/orderer$${ORD_NUM}.yaml; \
 		sed -i -e  "s~ABSPATH~${VM_ABSPATH}~g" network/orderers/orderer$${ORD_NUM}.yaml; \
+		sed -i -e  "s/NODE_NAME/$${NODE_NAME}/g" network/orderers/orderer$${ORD_NUM}.yaml; \
 		cp templates/orderer-svc-TEMPLATE.yaml network/orderers/orderer$${ORD_NUM}_svc.yaml; \
 		sed -i -e  "s/ORD_NUMBER/$${ORD_NUM}/g" network/orderers/orderer$${ORD_NUM}_svc.yaml; \
 	done
 
 	# Generate Caliper deployment config file
-	cp templates/caliper-TEMPLATE.yaml caliper/caliper.yaml
-	sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" caliper/caliper.yaml
+	@cp templates/caliper-TEMPLATE.yaml caliper/caliper.yaml
+	@sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" caliper/caliper.yaml
 
 	# Generate CLI deployment config file
-	cp templates/cli-TEMPLATE.yaml network/cli/cli.yaml
-	sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/cli/cli.yaml
+	@cp templates/cli-TEMPLATE.yaml network/cli/cli.yaml
+	@sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/cli/cli.yaml
 
 	# Generate peer deployment config files
-	for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
+	@for ORG_NUM in $(shell seq 1 ${NUMBER_OF_ORGS}); \
 	do \
 		for PEER_NUM in $(shell seq 1 ${NUMBER_OF_PEERS_PER_ORG}); \
 		do \
+			let NODE_NUM="(($${ORG_NUM}-1)*${NUMBER_OF_PEERS_PER_ORG}+($${PEER_NUM}-1)+1)%${NUMBER_OF_NODES}+1"; \
+			NODE_NAME=`printf "virt%02d" $$NODE_NUM`; \
 			cp templates/peer-TEMPLATE.yaml network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
 			sed -i -e "s/PEER_NAME/peer$${PEER_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
 			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
@@ -84,6 +91,7 @@ generate:
 			sed -i -e "s~ABSPATH~${VM_ABSPATH}~g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
 			sed -i -e "s/PEER_REQ_PORT/30$${ORG_NUM}51/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
 			sed -i -e "s/PEER_EVENT_PORT/30$${ORG_NUM}53/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
+			sed -i -e "s/NODE_NAME/$${NODE_NAME}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}.yaml; \
 			cp templates/peer-svc-TEMPLATE.yaml network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
 			sed -i -e "s/PEER_NAME/peer$${PEER_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
 			sed -i -e "s/ORG_NAME/org$${ORG_NUM}/g" network/peers/peer$${PEER_NUM}org$${ORG_NUM}_svc.yaml; \
@@ -122,7 +130,12 @@ monitor:
 	kubectl create serviceaccount --namespace kube-system tiller
 	kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 	kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+	sleep 15
 	helm install --name=main --namespace=monitoring stable/prometheus-operator -f helm/prometheus.yaml
+
+.PHONY: pumba
+pumba:
+	kubectl create -f network/pumba/*
 
 .PHONY: clean
 clean:
@@ -191,3 +204,13 @@ watch:
 setup-32-ftsrglab:
 	make generate NUMBER_OF_PEERS_PER_ORG=1 NUMBER_OF_ORGS=32 NUMBER_OF_ORDERERS=3 VM_ABSPATH=/home/meres/thesis ABSPATH=/home/meres/thesis
 	make crypto-gen NETWORK=32-org NUMBER_OF_ORGS=32
+
+.PHONY: setup-16-ftsrglab
+setup-16-ftsrglab:
+	make generate NUMBER_OF_PEERS_PER_ORG=2 NUMBER_OF_ORGS=16 NUMBER_OF_ORDERERS=3 VM_ABSPATH=/home/meres/thesis ABSPATH=/home/meres/thesis
+	make crypto-gen NETWORK=16-org NUMBER_OF_ORGS=16
+
+.PHONY: setup-8-ftsrglab
+setup-8-ftsrglab:
+	make generate NUMBER_OF_PEERS_PER_ORG=4 NUMBER_OF_ORGS=8 NUMBER_OF_ORDERERS=3 VM_ABSPATH=/home/meres/thesis ABSPATH=/home/meres/thesis
+	make crypto-gen NETWORK=8-org NUMBER_OF_ORGS=8

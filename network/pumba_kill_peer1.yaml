@@ -10,10 +10,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pumba
-  namespace: TARGET_NS
+  name: pumba-1
+  namespace: pumba
 spec:
-  nodeName: TARGET_NODE
+  nodeName: virt03
   restartPolicy: Never
   containers:
   - image: gaiaadm/pumba:master
@@ -22,15 +22,12 @@ spec:
     args:
       - --log-level
       - "debug"
-      - netem
-      - --duration
-      - "3m"
-      - --tc-image
-      - gaiadocker/iproute2
-      - delay
-      - --time
-      - "10"
-      - "re2:.*TARGET_PATTERN.*"
+      - --interval
+      - "60s"
+      - kill
+      - --signal
+      - "SIGKILL"
+      - "re2:.*peer_peer2.*org1.*"
     resources:
       requests:
         cpu: 10m

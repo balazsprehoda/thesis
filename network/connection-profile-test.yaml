@@ -1,0 +1,413 @@
+
+client:
+  
+  tlsEnable: true
+
+  organization: Org1
+
+  logging:
+    level: info
+
+  connection:
+   timeout:
+     peer:
+       endorser: '6000'
+     orderer: '6000'
+
+  # Root of the MSP directories with keys and certs.
+  cryptoconfig:
+    path: home/prehoda/thesis/network/crypto-config
+
+  # BCCSP config for the client. Used by GO SDK.
+  BCCSP:
+    security:
+     enabled: true
+     default:
+      provider: "SW"
+     hashAlgorithm: "SHA2"
+     softVerify: true
+     level: 256
+
+channels:
+  mychannel:
+    orderers:
+    - ord1-hlf-ord.orderers.svc.cluster.local
+    - ord2-hlf-ord.orderers.svc.cluster.local
+    - ord3-hlf-ord.orderers.svc.cluster.local
+    peers:
+      peer1-hlf-peer.org1.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org2.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer1-hlf-peer.org8.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org1.svc.cluster.local:
+        eventSource: false
+      peer2-hlf-peer.org2.svc.cluster.local:
+        eventSource: false
+      peer2-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org8.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org1.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org2.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org8.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org1.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org2.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org8.svc.cluster.local:
+        eventSource: true
+
+name: test-network
+orderers:
+  ord1-hlf-ord.orderers.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: ord1-hlf-ord.orderers.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord1-hlf-ord.orderers.svc.cluster.local/msp/tlscacerts/tlsca.orderers.svc.cluster.local-cert.pem
+    #url: grpcs://ord1-hlf-ord.orderers.svc.cluster.local:7050
+  ord2-hlf-ord.orderers.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: ord2-hlf-ord.orderers.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord2-hlf-ord.orderers.svc.cluster.local/msp/tlscacerts/tlsca.orderers.svc.cluster.local-cert.pem
+    #url: grpcs://ord2-hlf-ord.orderers.svc.cluster.local:7050
+  ord3-hlf-ord.orderers.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: ord3-hlf-ord.orderers.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/ordererOrganizations/orderers.svc.cluster.local/orderers/ord3-hlf-ord.orderers.svc.cluster.local/msp/tlscacerts/tlsca.orderers.svc.cluster.local-cert.pem
+    #url: grpcs://ord3-hlf-ord.orderers.svc.cluster.local:7050
+organizations:
+  Org1:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org1MSP
+    peers:
+    - peer1-hlf-peer.org1.svc.cluster.local
+    - peer2-hlf-peer.org1.svc.cluster.local
+    - peer3-hlf-peer.org1.svc.cluster.local
+    - peer4-hlf-peer.org1.svc.cluster.local
+    cryptoPath:  peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/signcerts/Admin@org1.svc.cluster.local-cert.pem
+  Org2:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org2MSP
+    peers:
+    - peer1-hlf-peer.org2.svc.cluster.local
+    - peer2-hlf-peer.org2.svc.cluster.local
+    - peer3-hlf-peer.org2.svc.cluster.local
+    - peer4-hlf-peer.org2.svc.cluster.local
+    cryptoPath:  peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/signcerts/Admin@org2.svc.cluster.local-cert.pem
+  Org3:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org3MSP
+    peers:
+    - peer1-hlf-peer.org3.svc.cluster.local
+    - peer2-hlf-peer.org3.svc.cluster.local
+    - peer3-hlf-peer.org3.svc.cluster.local
+    - peer4-hlf-peer.org3.svc.cluster.local
+    cryptoPath:  peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/signcerts/Admin@org3.svc.cluster.local-cert.pem
+  Org4:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org4.svc.cluster.local/users/Admin@org4.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org4MSP
+    peers:
+    - peer1-hlf-peer.org4.svc.cluster.local
+    - peer2-hlf-peer.org4.svc.cluster.local
+    - peer3-hlf-peer.org4.svc.cluster.local
+    - peer4-hlf-peer.org4.svc.cluster.local
+    cryptoPath:  peerOrganizations/org4.svc.cluster.local/users/Admin@org4.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org4.svc.cluster.local/users/Admin@org4.svc.cluster.local/msp/signcerts/Admin@org4.svc.cluster.local-cert.pem
+  Org5:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org5.svc.cluster.local/users/Admin@org5.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org5MSP
+    peers:
+    - peer1-hlf-peer.org5.svc.cluster.local
+    - peer2-hlf-peer.org5.svc.cluster.local
+    - peer3-hlf-peer.org5.svc.cluster.local
+    - peer4-hlf-peer.org5.svc.cluster.local
+    cryptoPath:  peerOrganizations/org5.svc.cluster.local/users/Admin@org5.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org5.svc.cluster.local/users/Admin@org5.svc.cluster.local/msp/signcerts/Admin@org5.svc.cluster.local-cert.pem
+  Org6:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org6.svc.cluster.local/users/Admin@org6.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org6MSP
+    peers:
+    - peer1-hlf-peer.org6.svc.cluster.local
+    - peer2-hlf-peer.org6.svc.cluster.local
+    - peer3-hlf-peer.org6.svc.cluster.local
+    - peer4-hlf-peer.org6.svc.cluster.local
+    cryptoPath:  peerOrganizations/org6.svc.cluster.local/users/Admin@org6.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org6.svc.cluster.local/users/Admin@org6.svc.cluster.local/msp/signcerts/Admin@org6.svc.cluster.local-cert.pem
+  Org7:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org7.svc.cluster.local/users/Admin@org7.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org7MSP
+    peers:
+    - peer1-hlf-peer.org7.svc.cluster.local
+    - peer2-hlf-peer.org7.svc.cluster.local
+    - peer3-hlf-peer.org7.svc.cluster.local
+    - peer4-hlf-peer.org7.svc.cluster.local
+    cryptoPath:  peerOrganizations/org7.svc.cluster.local/users/Admin@org7.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org7.svc.cluster.local/users/Admin@org7.svc.cluster.local/msp/signcerts/Admin@org7.svc.cluster.local-cert.pem
+  Org8:
+    adminPrivateKey:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org8.svc.cluster.local/users/Admin@org8.svc.cluster.local/msp/keystore/adminKey
+    mspid: Org8MSP
+    peers:
+    - peer1-hlf-peer.org8.svc.cluster.local
+    - peer2-hlf-peer.org8.svc.cluster.local
+    - peer3-hlf-peer.org8.svc.cluster.local
+    - peer4-hlf-peer.org8.svc.cluster.local
+    cryptoPath:  peerOrganizations/org8.svc.cluster.local/users/Admin@org8.svc.cluster.local/msp
+    signedCert:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org8.svc.cluster.local/users/Admin@org8.svc.cluster.local/msp/signcerts/Admin@org8.svc.cluster.local-cert.pem
+peers:
+  peer1-hlf-peer.org1.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    url: grpcs://10.40.142.1:30151
+  peer1-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer1-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org2.svc.cluster.local:7051
+  peer1-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer1-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org3.svc.cluster.local:7051
+  peer1-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer1-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org4.svc.cluster.local:7051
+  peer1-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer1-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org5.svc.cluster.local:7051
+  peer1-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer1-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org6.svc.cluster.local:7051
+  peer1-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer1-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org7.svc.cluster.local:7051
+  peer1-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer1-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer1-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    #url: grpcs://peer1-hlf-peer.org8.svc.cluster.local:7051
+  peer2-hlf-peer.org1.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer2-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org1.svc.cluster.local:7051
+  peer2-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer2-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org2.svc.cluster.local:7051
+  peer2-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer2-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org3.svc.cluster.local:7051
+  peer2-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer2-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org4.svc.cluster.local:7051
+  peer2-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer2-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org5.svc.cluster.local:7051
+  peer2-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer2-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org6.svc.cluster.local:7051
+  peer2-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer2-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org7.svc.cluster.local:7051
+  peer2-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer2-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    #url: grpcs://peer2-hlf-peer.org8.svc.cluster.local:7051
+  peer3-hlf-peer.org1.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer3-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org1.svc.cluster.local:7051
+  peer3-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer3-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org2.svc.cluster.local:7051
+  peer3-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer3-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org3.svc.cluster.local:7051
+  peer3-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer3-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org4.svc.cluster.local:7051
+  peer3-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer3-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org5.svc.cluster.local:7051
+  peer3-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer3-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org6.svc.cluster.local:7051
+  peer3-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer3-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org7.svc.cluster.local:7051
+  peer3-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer3-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    #url: grpcs://peer3-hlf-peer.org8.svc.cluster.local:7051
+  peer4-hlf-peer.org1.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer4-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org1.svc.cluster.local:7051
+  peer4-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer4-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org2.svc.cluster.local:7051
+  peer4-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer4-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org3.svc.cluster.local:7051
+  peer4-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer4-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org4.svc.cluster.local:7051
+  peer4-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer4-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org5.svc.cluster.local:7051
+  peer4-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer4-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org6.svc.cluster.local:7051
+  peer4-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer4-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org7.svc.cluster.local:7051
+  peer4-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: /home/prehoda/thesis/network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer4-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    #url: grpcs://peer4-hlf-peer.org8.svc.cluster.local:7051
+version: '1.0'

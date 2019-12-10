@@ -10,6 +10,7 @@ spec:
       labels:
         name: ordORD_NUMBER-hlf-ord
     spec:
+      nodeName: NODE_NAME
       containers:
         
         - name: ordORD_NUMBER-hlf-ord
@@ -56,6 +57,9 @@ spec:
             # Channel artifacts
             - mountPath: /etc/hyperledger/config/
               name: artifacts
+            # Persistent storage
+            - mountPath: /var/hyperledger/production
+              name: persistence
           ports:
           - name: operations
             containerPort: 8443
@@ -74,4 +78,9 @@ spec:
         - name: artifacts
           hostPath:
             path: ABSPATH/network/channel-artifacts
+            type: Directory
+        # Persistent storage
+        - name: persistence
+          hostPath:
+            path: /var/hyperledger/persistence
             type: Directory

@@ -1,7 +1,5 @@
 caliper:
   blockchain: fabric
-  command:
-    start: sleep 60s
 channels:
   mychannel:
     chaincodes:
@@ -17,55 +15,9 @@ channels:
     peers:
       peer1-hlf-peer.org1.svc.cluster.local:
         eventSource: true
-      peer1-hlf-peer.org10.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org11.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org12.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org13.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org14.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org15.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org16.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org17.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org18.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org19.svc.cluster.local:
-        eventSource: true
       peer1-hlf-peer.org2.svc.cluster.local:
         eventSource: true
-      peer1-hlf-peer.org20.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org21.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org22.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org23.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org24.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org25.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org26.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org27.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org28.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org29.svc.cluster.local:
-        eventSource: true
       peer1-hlf-peer.org3.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org30.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org31.svc.cluster.local:
-        eventSource: true
-      peer1-hlf-peer.org32.svc.cluster.local:
         eventSource: true
       peer1-hlf-peer.org4.svc.cluster.local:
         eventSource: true
@@ -77,7 +29,53 @@ channels:
         eventSource: true
       peer1-hlf-peer.org8.svc.cluster.local:
         eventSource: true
-      peer1-hlf-peer.org9.svc.cluster.local:
+      peer2-hlf-peer.org1.svc.cluster.local:
+        eventSource: false
+      peer2-hlf-peer.org2.svc.cluster.local:
+        eventSource: false
+      peer2-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer2-hlf-peer.org8.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org1.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org2.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer3-hlf-peer.org8.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org1.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org2.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org3.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org4.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org5.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org6.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org7.svc.cluster.local:
+        eventSource: true
+      peer4-hlf-peer.org8.svc.cluster.local:
         eventSource: true
 clients:
   client0.org1.example.com:
@@ -91,116 +89,6 @@ clients:
           path: /tmp/hfc-cvs/org1
         path: /tmp/hfc-kvs/org1
       organization: Org1
-  client0.org10.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org10.svc.cluster.local/users/User1@org10.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org10.svc.cluster.local/users/User1@org10.svc.cluster.local/msp/signcerts/User1@org10.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org10
-        path: /tmp/hfc-kvs/org10
-      organization: Org10
-  client0.org11.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org11.svc.cluster.local/users/User1@org11.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org11.svc.cluster.local/users/User1@org11.svc.cluster.local/msp/signcerts/User1@org11.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org11
-        path: /tmp/hfc-kvs/org11
-      organization: Org11
-  client0.org12.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org12.svc.cluster.local/users/User1@org12.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org12.svc.cluster.local/users/User1@org12.svc.cluster.local/msp/signcerts/User1@org12.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org12
-        path: /tmp/hfc-kvs/org12
-      organization: Org12
-  client0.org13.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org13.svc.cluster.local/users/User1@org13.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org13.svc.cluster.local/users/User1@org13.svc.cluster.local/msp/signcerts/User1@org13.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org13
-        path: /tmp/hfc-kvs/org13
-      organization: Org13
-  client0.org14.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org14.svc.cluster.local/users/User1@org14.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org14.svc.cluster.local/users/User1@org14.svc.cluster.local/msp/signcerts/User1@org14.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org14
-        path: /tmp/hfc-kvs/org14
-      organization: Org14
-  client0.org15.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org15.svc.cluster.local/users/User1@org15.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org15.svc.cluster.local/users/User1@org15.svc.cluster.local/msp/signcerts/User1@org15.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org15
-        path: /tmp/hfc-kvs/org15
-      organization: Org15
-  client0.org16.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org16.svc.cluster.local/users/User1@org16.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org16.svc.cluster.local/users/User1@org16.svc.cluster.local/msp/signcerts/User1@org16.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org16
-        path: /tmp/hfc-kvs/org16
-      organization: Org16
-  client0.org17.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org17.svc.cluster.local/users/User1@org17.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org17.svc.cluster.local/users/User1@org17.svc.cluster.local/msp/signcerts/User1@org17.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org17
-        path: /tmp/hfc-kvs/org17
-      organization: Org17
-  client0.org18.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org18.svc.cluster.local/users/User1@org18.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org18.svc.cluster.local/users/User1@org18.svc.cluster.local/msp/signcerts/User1@org18.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org18
-        path: /tmp/hfc-kvs/org18
-      organization: Org18
-  client0.org19.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org19.svc.cluster.local/users/User1@org19.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org19.svc.cluster.local/users/User1@org19.svc.cluster.local/msp/signcerts/User1@org19.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org19
-        path: /tmp/hfc-kvs/org19
-      organization: Org19
   client0.org2.example.com:
     client:
       clientPrivateKey:
@@ -212,116 +100,6 @@ clients:
           path: /tmp/hfc-cvs/org2
         path: /tmp/hfc-kvs/org2
       organization: Org2
-  client0.org20.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org20.svc.cluster.local/users/User1@org20.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org20.svc.cluster.local/users/User1@org20.svc.cluster.local/msp/signcerts/User1@org20.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org20
-        path: /tmp/hfc-kvs/org20
-      organization: Org20
-  client0.org21.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org21.svc.cluster.local/users/User1@org21.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org21.svc.cluster.local/users/User1@org21.svc.cluster.local/msp/signcerts/User1@org21.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org21
-        path: /tmp/hfc-kvs/org21
-      organization: Org21
-  client0.org22.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org22.svc.cluster.local/users/User1@org22.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org22.svc.cluster.local/users/User1@org22.svc.cluster.local/msp/signcerts/User1@org22.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org22
-        path: /tmp/hfc-kvs/org22
-      organization: Org22
-  client0.org23.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org23.svc.cluster.local/users/User1@org23.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org23.svc.cluster.local/users/User1@org23.svc.cluster.local/msp/signcerts/User1@org23.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org23
-        path: /tmp/hfc-kvs/org23
-      organization: Org23
-  client0.org24.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org24.svc.cluster.local/users/User1@org24.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org24.svc.cluster.local/users/User1@org24.svc.cluster.local/msp/signcerts/User1@org24.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org24
-        path: /tmp/hfc-kvs/org24
-      organization: Org24
-  client0.org25.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org25.svc.cluster.local/users/User1@org25.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org25.svc.cluster.local/users/User1@org25.svc.cluster.local/msp/signcerts/User1@org25.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org25
-        path: /tmp/hfc-kvs/org25
-      organization: Org25
-  client0.org26.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org26.svc.cluster.local/users/User1@org26.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org26.svc.cluster.local/users/User1@org26.svc.cluster.local/msp/signcerts/User1@org26.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org26
-        path: /tmp/hfc-kvs/org26
-      organization: Org26
-  client0.org27.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org27.svc.cluster.local/users/User1@org27.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org27.svc.cluster.local/users/User1@org27.svc.cluster.local/msp/signcerts/User1@org27.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org27
-        path: /tmp/hfc-kvs/org27
-      organization: Org27
-  client0.org28.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org28.svc.cluster.local/users/User1@org28.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org28.svc.cluster.local/users/User1@org28.svc.cluster.local/msp/signcerts/User1@org28.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org28
-        path: /tmp/hfc-kvs/org28
-      organization: Org28
-  client0.org29.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org29.svc.cluster.local/users/User1@org29.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org29.svc.cluster.local/users/User1@org29.svc.cluster.local/msp/signcerts/User1@org29.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org29
-        path: /tmp/hfc-kvs/org29
-      organization: Org29
   client0.org3.example.com:
     client:
       clientPrivateKey:
@@ -333,39 +111,6 @@ clients:
           path: /tmp/hfc-cvs/org3
         path: /tmp/hfc-kvs/org3
       organization: Org3
-  client0.org30.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org30.svc.cluster.local/users/User1@org30.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org30.svc.cluster.local/users/User1@org30.svc.cluster.local/msp/signcerts/User1@org30.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org30
-        path: /tmp/hfc-kvs/org30
-      organization: Org30
-  client0.org31.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org31.svc.cluster.local/users/User1@org31.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org31.svc.cluster.local/users/User1@org31.svc.cluster.local/msp/signcerts/User1@org31.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org31
-        path: /tmp/hfc-kvs/org31
-      organization: Org31
-  client0.org32.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org32.svc.cluster.local/users/User1@org32.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org32.svc.cluster.local/users/User1@org32.svc.cluster.local/msp/signcerts/User1@org32.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org32
-        path: /tmp/hfc-kvs/org32
-      organization: Org32
   client0.org4.example.com:
     client:
       clientPrivateKey:
@@ -421,17 +166,6 @@ clients:
           path: /tmp/hfc-cvs/org8
         path: /tmp/hfc-kvs/org8
       organization: Org8
-  client0.org9.example.com:
-    client:
-      clientPrivateKey:
-        path: network/crypto-config/peerOrganizations/org9.svc.cluster.local/users/User1@org9.svc.cluster.local/msp/keystore/key.pem
-      clientSignedCert:
-        path: network/crypto-config/peerOrganizations/org9.svc.cluster.local/users/User1@org9.svc.cluster.local/msp/signcerts/User1@org9.svc.cluster.local-cert.pem
-      credentialStore:
-        cryptoStore:
-          path: /tmp/hfc-cvs/org9
-        path: /tmp/hfc-kvs/org9
-      organization: Org9
 info:
   Distribution: Kubernetes
   Orderer: Raft with 3 orderers
@@ -465,214 +199,42 @@ organizations:
     mspid: Org1MSP
     peers:
     - peer1-hlf-peer.org1.svc.cluster.local
+    - peer2-hlf-peer.org1.svc.cluster.local
+    - peer3-hlf-peer.org1.svc.cluster.local
+    - peer4-hlf-peer.org1.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin@org1.svc.cluster.local/msp/signcerts/Admin@org1.svc.cluster.local-cert.pem
-  Org10:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org10.svc.cluster.local/users/Admin@org10.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org10MSP
-    peers:
-    - peer1-hlf-peer.org10.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org10.svc.cluster.local/users/Admin@org10.svc.cluster.local/msp/signcerts/Admin@org10.svc.cluster.local-cert.pem
-  Org11:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org11.svc.cluster.local/users/Admin@org11.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org11MSP
-    peers:
-    - peer1-hlf-peer.org11.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org11.svc.cluster.local/users/Admin@org11.svc.cluster.local/msp/signcerts/Admin@org11.svc.cluster.local-cert.pem
-  Org12:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org12.svc.cluster.local/users/Admin@org12.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org12MSP
-    peers:
-    - peer1-hlf-peer.org12.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org12.svc.cluster.local/users/Admin@org12.svc.cluster.local/msp/signcerts/Admin@org12.svc.cluster.local-cert.pem
-  Org13:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org13.svc.cluster.local/users/Admin@org13.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org13MSP
-    peers:
-    - peer1-hlf-peer.org13.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org13.svc.cluster.local/users/Admin@org13.svc.cluster.local/msp/signcerts/Admin@org13.svc.cluster.local-cert.pem
-  Org14:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org14.svc.cluster.local/users/Admin@org14.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org14MSP
-    peers:
-    - peer1-hlf-peer.org14.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org14.svc.cluster.local/users/Admin@org14.svc.cluster.local/msp/signcerts/Admin@org14.svc.cluster.local-cert.pem
-  Org15:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org15.svc.cluster.local/users/Admin@org15.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org15MSP
-    peers:
-    - peer1-hlf-peer.org15.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org15.svc.cluster.local/users/Admin@org15.svc.cluster.local/msp/signcerts/Admin@org15.svc.cluster.local-cert.pem
-  Org16:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org16.svc.cluster.local/users/Admin@org16.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org16MSP
-    peers:
-    - peer1-hlf-peer.org16.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org16.svc.cluster.local/users/Admin@org16.svc.cluster.local/msp/signcerts/Admin@org16.svc.cluster.local-cert.pem
-  Org17:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org17.svc.cluster.local/users/Admin@org17.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org17MSP
-    peers:
-    - peer1-hlf-peer.org17.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org17.svc.cluster.local/users/Admin@org17.svc.cluster.local/msp/signcerts/Admin@org17.svc.cluster.local-cert.pem
-  Org18:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org18.svc.cluster.local/users/Admin@org18.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org18MSP
-    peers:
-    - peer1-hlf-peer.org18.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org18.svc.cluster.local/users/Admin@org18.svc.cluster.local/msp/signcerts/Admin@org18.svc.cluster.local-cert.pem
-  Org19:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org19.svc.cluster.local/users/Admin@org19.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org19MSP
-    peers:
-    - peer1-hlf-peer.org19.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org19.svc.cluster.local/users/Admin@org19.svc.cluster.local/msp/signcerts/Admin@org19.svc.cluster.local-cert.pem
   Org2:
     adminPrivateKey:
       path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/keystore/adminKey
     mspid: Org2MSP
     peers:
     - peer1-hlf-peer.org2.svc.cluster.local
+    - peer2-hlf-peer.org2.svc.cluster.local
+    - peer3-hlf-peer.org2.svc.cluster.local
+    - peer4-hlf-peer.org2.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/users/Admin@org2.svc.cluster.local/msp/signcerts/Admin@org2.svc.cluster.local-cert.pem
-  Org20:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org20.svc.cluster.local/users/Admin@org20.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org20MSP
-    peers:
-    - peer1-hlf-peer.org20.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org20.svc.cluster.local/users/Admin@org20.svc.cluster.local/msp/signcerts/Admin@org20.svc.cluster.local-cert.pem
-  Org21:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org21.svc.cluster.local/users/Admin@org21.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org21MSP
-    peers:
-    - peer1-hlf-peer.org21.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org21.svc.cluster.local/users/Admin@org21.svc.cluster.local/msp/signcerts/Admin@org21.svc.cluster.local-cert.pem
-  Org22:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org22.svc.cluster.local/users/Admin@org22.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org22MSP
-    peers:
-    - peer1-hlf-peer.org22.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org22.svc.cluster.local/users/Admin@org22.svc.cluster.local/msp/signcerts/Admin@org22.svc.cluster.local-cert.pem
-  Org23:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org23.svc.cluster.local/users/Admin@org23.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org23MSP
-    peers:
-    - peer1-hlf-peer.org23.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org23.svc.cluster.local/users/Admin@org23.svc.cluster.local/msp/signcerts/Admin@org23.svc.cluster.local-cert.pem
-  Org24:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org24.svc.cluster.local/users/Admin@org24.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org24MSP
-    peers:
-    - peer1-hlf-peer.org24.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org24.svc.cluster.local/users/Admin@org24.svc.cluster.local/msp/signcerts/Admin@org24.svc.cluster.local-cert.pem
-  Org25:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org25.svc.cluster.local/users/Admin@org25.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org25MSP
-    peers:
-    - peer1-hlf-peer.org25.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org25.svc.cluster.local/users/Admin@org25.svc.cluster.local/msp/signcerts/Admin@org25.svc.cluster.local-cert.pem
-  Org26:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org26.svc.cluster.local/users/Admin@org26.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org26MSP
-    peers:
-    - peer1-hlf-peer.org26.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org26.svc.cluster.local/users/Admin@org26.svc.cluster.local/msp/signcerts/Admin@org26.svc.cluster.local-cert.pem
-  Org27:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org27.svc.cluster.local/users/Admin@org27.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org27MSP
-    peers:
-    - peer1-hlf-peer.org27.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org27.svc.cluster.local/users/Admin@org27.svc.cluster.local/msp/signcerts/Admin@org27.svc.cluster.local-cert.pem
-  Org28:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org28.svc.cluster.local/users/Admin@org28.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org28MSP
-    peers:
-    - peer1-hlf-peer.org28.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org28.svc.cluster.local/users/Admin@org28.svc.cluster.local/msp/signcerts/Admin@org28.svc.cluster.local-cert.pem
-  Org29:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org29.svc.cluster.local/users/Admin@org29.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org29MSP
-    peers:
-    - peer1-hlf-peer.org29.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org29.svc.cluster.local/users/Admin@org29.svc.cluster.local/msp/signcerts/Admin@org29.svc.cluster.local-cert.pem
   Org3:
     adminPrivateKey:
       path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/keystore/adminKey
     mspid: Org3MSP
     peers:
     - peer1-hlf-peer.org3.svc.cluster.local
+    - peer2-hlf-peer.org3.svc.cluster.local
+    - peer3-hlf-peer.org3.svc.cluster.local
+    - peer4-hlf-peer.org3.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/users/Admin@org3.svc.cluster.local/msp/signcerts/Admin@org3.svc.cluster.local-cert.pem
-  Org30:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org30.svc.cluster.local/users/Admin@org30.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org30MSP
-    peers:
-    - peer1-hlf-peer.org30.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org30.svc.cluster.local/users/Admin@org30.svc.cluster.local/msp/signcerts/Admin@org30.svc.cluster.local-cert.pem
-  Org31:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org31.svc.cluster.local/users/Admin@org31.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org31MSP
-    peers:
-    - peer1-hlf-peer.org31.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org31.svc.cluster.local/users/Admin@org31.svc.cluster.local/msp/signcerts/Admin@org31.svc.cluster.local-cert.pem
-  Org32:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org32.svc.cluster.local/users/Admin@org32.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org32MSP
-    peers:
-    - peer1-hlf-peer.org32.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org32.svc.cluster.local/users/Admin@org32.svc.cluster.local/msp/signcerts/Admin@org32.svc.cluster.local-cert.pem
   Org4:
     adminPrivateKey:
       path: network/crypto-config/peerOrganizations/org4.svc.cluster.local/users/Admin@org4.svc.cluster.local/msp/keystore/adminKey
     mspid: Org4MSP
     peers:
     - peer1-hlf-peer.org4.svc.cluster.local
+    - peer2-hlf-peer.org4.svc.cluster.local
+    - peer3-hlf-peer.org4.svc.cluster.local
+    - peer4-hlf-peer.org4.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org4.svc.cluster.local/users/Admin@org4.svc.cluster.local/msp/signcerts/Admin@org4.svc.cluster.local-cert.pem
   Org5:
@@ -681,6 +243,9 @@ organizations:
     mspid: Org5MSP
     peers:
     - peer1-hlf-peer.org5.svc.cluster.local
+    - peer2-hlf-peer.org5.svc.cluster.local
+    - peer3-hlf-peer.org5.svc.cluster.local
+    - peer4-hlf-peer.org5.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org5.svc.cluster.local/users/Admin@org5.svc.cluster.local/msp/signcerts/Admin@org5.svc.cluster.local-cert.pem
   Org6:
@@ -689,6 +254,9 @@ organizations:
     mspid: Org6MSP
     peers:
     - peer1-hlf-peer.org6.svc.cluster.local
+    - peer2-hlf-peer.org6.svc.cluster.local
+    - peer3-hlf-peer.org6.svc.cluster.local
+    - peer4-hlf-peer.org6.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org6.svc.cluster.local/users/Admin@org6.svc.cluster.local/msp/signcerts/Admin@org6.svc.cluster.local-cert.pem
   Org7:
@@ -697,6 +265,9 @@ organizations:
     mspid: Org7MSP
     peers:
     - peer1-hlf-peer.org7.svc.cluster.local
+    - peer2-hlf-peer.org7.svc.cluster.local
+    - peer3-hlf-peer.org7.svc.cluster.local
+    - peer4-hlf-peer.org7.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org7.svc.cluster.local/users/Admin@org7.svc.cluster.local/msp/signcerts/Admin@org7.svc.cluster.local-cert.pem
   Org8:
@@ -705,16 +276,11 @@ organizations:
     mspid: Org8MSP
     peers:
     - peer1-hlf-peer.org8.svc.cluster.local
+    - peer2-hlf-peer.org8.svc.cluster.local
+    - peer3-hlf-peer.org8.svc.cluster.local
+    - peer4-hlf-peer.org8.svc.cluster.local
     signedCert:
       path: network/crypto-config/peerOrganizations/org8.svc.cluster.local/users/Admin@org8.svc.cluster.local/msp/signcerts/Admin@org8.svc.cluster.local-cert.pem
-  Org9:
-    adminPrivateKey:
-      path: network/crypto-config/peerOrganizations/org9.svc.cluster.local/users/Admin@org9.svc.cluster.local/msp/keystore/adminKey
-    mspid: Org9MSP
-    peers:
-    - peer1-hlf-peer.org9.svc.cluster.local
-    signedCert:
-      path: network/crypto-config/peerOrganizations/org9.svc.cluster.local/users/Admin@org9.svc.cluster.local/msp/signcerts/Admin@org9.svc.cluster.local-cert.pem
 peers:
   peer1-hlf-peer.org1.svc.cluster.local:
     grpcOptions:
@@ -722,156 +288,18 @@ peers:
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer1-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
     url: grpcs://peer1-hlf-peer.org1.svc.cluster.local:7051
-  peer1-hlf-peer.org10.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org10.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org10.svc.cluster.local/peers/peer1-hlf-peer.org10.svc.cluster.local/msp/tlscacerts/tlsca.org10.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org10.svc.cluster.local:7051
-  peer1-hlf-peer.org11.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org11.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org11.svc.cluster.local/peers/peer1-hlf-peer.org11.svc.cluster.local/msp/tlscacerts/tlsca.org11.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org11.svc.cluster.local:7051
-  peer1-hlf-peer.org12.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org12.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org12.svc.cluster.local/peers/peer1-hlf-peer.org12.svc.cluster.local/msp/tlscacerts/tlsca.org12.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org12.svc.cluster.local:7051
-  peer1-hlf-peer.org13.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org13.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org13.svc.cluster.local/peers/peer1-hlf-peer.org13.svc.cluster.local/msp/tlscacerts/tlsca.org13.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org13.svc.cluster.local:7051
-  peer1-hlf-peer.org14.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org14.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org14.svc.cluster.local/peers/peer1-hlf-peer.org14.svc.cluster.local/msp/tlscacerts/tlsca.org14.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org14.svc.cluster.local:7051
-  peer1-hlf-peer.org15.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org15.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org15.svc.cluster.local/peers/peer1-hlf-peer.org15.svc.cluster.local/msp/tlscacerts/tlsca.org15.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org15.svc.cluster.local:7051
-  peer1-hlf-peer.org16.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org16.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org16.svc.cluster.local/peers/peer1-hlf-peer.org16.svc.cluster.local/msp/tlscacerts/tlsca.org16.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org16.svc.cluster.local:7051
-  peer1-hlf-peer.org17.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org17.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org17.svc.cluster.local/peers/peer1-hlf-peer.org17.svc.cluster.local/msp/tlscacerts/tlsca.org17.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org17.svc.cluster.local:7051
-  peer1-hlf-peer.org18.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org18.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org18.svc.cluster.local/peers/peer1-hlf-peer.org18.svc.cluster.local/msp/tlscacerts/tlsca.org18.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org18.svc.cluster.local:7051
-  peer1-hlf-peer.org19.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org19.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org19.svc.cluster.local/peers/peer1-hlf-peer.org19.svc.cluster.local/msp/tlscacerts/tlsca.org19.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org19.svc.cluster.local:7051
   peer1-hlf-peer.org2.svc.cluster.local:
     grpcOptions:
       ssl-target-name-override: peer1-hlf-peer.org2.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer1-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
     url: grpcs://peer1-hlf-peer.org2.svc.cluster.local:7051
-  peer1-hlf-peer.org20.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org20.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org20.svc.cluster.local/peers/peer1-hlf-peer.org20.svc.cluster.local/msp/tlscacerts/tlsca.org20.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org20.svc.cluster.local:7051
-  peer1-hlf-peer.org21.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org21.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org21.svc.cluster.local/peers/peer1-hlf-peer.org21.svc.cluster.local/msp/tlscacerts/tlsca.org21.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org21.svc.cluster.local:7051
-  peer1-hlf-peer.org22.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org22.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org22.svc.cluster.local/peers/peer1-hlf-peer.org22.svc.cluster.local/msp/tlscacerts/tlsca.org22.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org22.svc.cluster.local:7051
-  peer1-hlf-peer.org23.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org23.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org23.svc.cluster.local/peers/peer1-hlf-peer.org23.svc.cluster.local/msp/tlscacerts/tlsca.org23.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org23.svc.cluster.local:7051
-  peer1-hlf-peer.org24.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org24.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org24.svc.cluster.local/peers/peer1-hlf-peer.org24.svc.cluster.local/msp/tlscacerts/tlsca.org24.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org24.svc.cluster.local:7051
-  peer1-hlf-peer.org25.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org25.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org25.svc.cluster.local/peers/peer1-hlf-peer.org25.svc.cluster.local/msp/tlscacerts/tlsca.org25.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org25.svc.cluster.local:7051
-  peer1-hlf-peer.org26.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org26.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org26.svc.cluster.local/peers/peer1-hlf-peer.org26.svc.cluster.local/msp/tlscacerts/tlsca.org26.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org26.svc.cluster.local:7051
-  peer1-hlf-peer.org27.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org27.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org27.svc.cluster.local/peers/peer1-hlf-peer.org27.svc.cluster.local/msp/tlscacerts/tlsca.org27.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org27.svc.cluster.local:7051
-  peer1-hlf-peer.org28.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org28.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org28.svc.cluster.local/peers/peer1-hlf-peer.org28.svc.cluster.local/msp/tlscacerts/tlsca.org28.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org28.svc.cluster.local:7051
-  peer1-hlf-peer.org29.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org29.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org29.svc.cluster.local/peers/peer1-hlf-peer.org29.svc.cluster.local/msp/tlscacerts/tlsca.org29.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org29.svc.cluster.local:7051
   peer1-hlf-peer.org3.svc.cluster.local:
     grpcOptions:
       ssl-target-name-override: peer1-hlf-peer.org3.svc.cluster.local
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer1-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
     url: grpcs://peer1-hlf-peer.org3.svc.cluster.local:7051
-  peer1-hlf-peer.org30.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org30.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org30.svc.cluster.local/peers/peer1-hlf-peer.org30.svc.cluster.local/msp/tlscacerts/tlsca.org30.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org30.svc.cluster.local:7051
-  peer1-hlf-peer.org31.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org31.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org31.svc.cluster.local/peers/peer1-hlf-peer.org31.svc.cluster.local/msp/tlscacerts/tlsca.org31.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org31.svc.cluster.local:7051
-  peer1-hlf-peer.org32.svc.cluster.local:
-    grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org32.svc.cluster.local
-    tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org32.svc.cluster.local/peers/peer1-hlf-peer.org32.svc.cluster.local/msp/tlscacerts/tlsca.org32.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org32.svc.cluster.local:7051
   peer1-hlf-peer.org4.svc.cluster.local:
     grpcOptions:
       ssl-target-name-override: peer1-hlf-peer.org4.svc.cluster.local
@@ -902,10 +330,148 @@ peers:
     tlsCACerts:
       path: network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer1-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
     url: grpcs://peer1-hlf-peer.org8.svc.cluster.local:7051
-  peer1-hlf-peer.org9.svc.cluster.local:
+  peer2-hlf-peer.org1.svc.cluster.local:
     grpcOptions:
-      ssl-target-name-override: peer1-hlf-peer.org9.svc.cluster.local
+      ssl-target-name-override: peer2-hlf-peer.org1.svc.cluster.local
     tlsCACerts:
-      path: network/crypto-config/peerOrganizations/org9.svc.cluster.local/peers/peer1-hlf-peer.org9.svc.cluster.local/msp/tlscacerts/tlsca.org9.svc.cluster.local-cert.pem
-    url: grpcs://peer1-hlf-peer.org9.svc.cluster.local:7051
+      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer2-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org1.svc.cluster.local:7051
+  peer2-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer2-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org2.svc.cluster.local:7051
+  peer2-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer2-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org3.svc.cluster.local:7051
+  peer2-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer2-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org4.svc.cluster.local:7051
+  peer2-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer2-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org5.svc.cluster.local:7051
+  peer2-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer2-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org6.svc.cluster.local:7051
+  peer2-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer2-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org7.svc.cluster.local:7051
+  peer2-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer2-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer2-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    url: grpcs://peer2-hlf-peer.org8.svc.cluster.local:7051
+  peer3-hlf-peer.org1.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer3-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org1.svc.cluster.local:7051
+  peer3-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer3-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org2.svc.cluster.local:7051
+  peer3-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer3-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org3.svc.cluster.local:7051
+  peer3-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer3-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org4.svc.cluster.local:7051
+  peer3-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer3-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org5.svc.cluster.local:7051
+  peer3-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer3-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org6.svc.cluster.local:7051
+  peer3-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer3-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org7.svc.cluster.local:7051
+  peer3-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer3-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer3-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    url: grpcs://peer3-hlf-peer.org8.svc.cluster.local:7051
+  peer4-hlf-peer.org1.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org1.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer4-hlf-peer.org1.svc.cluster.local/msp/tlscacerts/tlsca.org1.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org1.svc.cluster.local:7051
+  peer4-hlf-peer.org2.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org2.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org2.svc.cluster.local/peers/peer4-hlf-peer.org2.svc.cluster.local/msp/tlscacerts/tlsca.org2.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org2.svc.cluster.local:7051
+  peer4-hlf-peer.org3.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org3.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org3.svc.cluster.local/peers/peer4-hlf-peer.org3.svc.cluster.local/msp/tlscacerts/tlsca.org3.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org3.svc.cluster.local:7051
+  peer4-hlf-peer.org4.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org4.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org4.svc.cluster.local/peers/peer4-hlf-peer.org4.svc.cluster.local/msp/tlscacerts/tlsca.org4.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org4.svc.cluster.local:7051
+  peer4-hlf-peer.org5.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org5.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org5.svc.cluster.local/peers/peer4-hlf-peer.org5.svc.cluster.local/msp/tlscacerts/tlsca.org5.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org5.svc.cluster.local:7051
+  peer4-hlf-peer.org6.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org6.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org6.svc.cluster.local/peers/peer4-hlf-peer.org6.svc.cluster.local/msp/tlscacerts/tlsca.org6.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org6.svc.cluster.local:7051
+  peer4-hlf-peer.org7.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org7.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org7.svc.cluster.local/peers/peer4-hlf-peer.org7.svc.cluster.local/msp/tlscacerts/tlsca.org7.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org7.svc.cluster.local:7051
+  peer4-hlf-peer.org8.svc.cluster.local:
+    grpcOptions:
+      ssl-target-name-override: peer4-hlf-peer.org8.svc.cluster.local
+    tlsCACerts:
+      path: network/crypto-config/peerOrganizations/org8.svc.cluster.local/peers/peer4-hlf-peer.org8.svc.cluster.local/msp/tlscacerts/tlsca.org8.svc.cluster.local-cert.pem
+    url: grpcs://peer4-hlf-peer.org8.svc.cluster.local:7051
 version: '1.0'

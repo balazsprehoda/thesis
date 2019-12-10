@@ -10,6 +10,7 @@ spec:
       labels:
         name: PEER_NAME
     spec:
+      nodeName: NODE_NAME
       containers:
         - name: peer
           image: hyperledger/fabric-peer:1.4.3
@@ -83,6 +84,9 @@ spec:
             # Docker socket
             - mountPath: /host/var/run/docker.sock
               name: dockersocket
+            # Persistent storage
+            - mountPath: /var/hyperledger/production
+              name: persistence
           ports:
             - name: request
               containerPort: 7051
@@ -128,3 +132,8 @@ spec:
         - name: dockersocket
           hostPath:
             path: /var/run/docker.sock
+        # Persistent storage
+        - name: persistence
+          hostPath:
+            path: /var/hyperledger/persistence
+            type: Directory

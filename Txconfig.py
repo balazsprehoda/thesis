@@ -25,9 +25,9 @@ class Txconfig(object):
             'Addresses': [],
             'BatchTimeout': '2s',
             'BatchSize': {
-                'MaxMessageCount': 100,
-                'AbsoluteMaxBytes': '98MB',
-                'PreferredMaxBytes': '512KB'
+                'MaxMessageCount': 40,
+                'AbsoluteMaxBytes': '500MB',
+                'PreferredMaxBytes': '500MB'
             },
             'EtcdRaft': {
                 'Consenters': [],

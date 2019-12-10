@@ -1,0 +1,27 @@
+32-org:
+	baseline: OK
+
+	0.5_orderer_fault: OK
+
+	1_orderer_fault: OK
+
+	0.5_peer_fault: OK
+	1_peer_fault:
+
+16-org:
+	baseline
+
+	0.5_orderer_fault
+	1_orderer_fault
+
+	0.5_peer_fault
+	1_peer_fault
+
+8-org:
+	baseline: OK
+
+	0.5_orderer_fault: OK
+	1_orderer_fault: OK
+
+	0.5_peer_fault: OK
+	1_peer_fault: OK

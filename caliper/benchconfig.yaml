@@ -5,13 +5,64 @@ test:
     type: local
     number: 3
   rounds:
-  - label: generate
+  - label: warm-up
+    txDuration: [60] # The test length in seconds
+    rateControl:
+    - type: linear-rate
+      opts:
+        startingTps: 80
+        finishingTps: 80
+    # the user callback module relative to the workspace
+    arguments:
+      clients: 3
+      # Pattern is going to be evaluated as .*targetPattern.*
+      # targetPattern: ord1-hlf
+      # Action is going to be passed to make generate. Can be one of kill, pause, netem
+      # pumbaAction: netem
+      # Deploy Pumba after milliseconds:
+      # deployAfter: 1500
+    callback: caliper/generate-randomid.js
+  - label: main1
     txDuration: [120] # The test length in seconds
     rateControl:
     - type: linear-rate
       opts:
-        startingTps: 160
-        finishingTps: 200
+        startingTps: 90
+        finishingTps: 90
+    # the user callback module relative to the workspace
+    arguments:
+      clients: 3
+      # Pattern is going to be evaluated as .*targetPattern.*
+      # targetPattern: ord1-hlf
+      # Action is going to be passed to make generate. Can be one of kill, pause, netem
+      # pumbaAction: netem
+      # Deploy Pumba after milliseconds:
+      # deployAfter: 1500
+    callback: caliper/generate-randomid.js
+  - label: main2
+    txDuration: [120] # The test length in seconds
+    rateControl:
+    - type: linear-rate
+      opts:
+        startingTps: 90
+        finishingTps: 90
+    # the user callback module relative to the workspace
+    arguments:
+      clients: 3
+      # Pattern is going to be evaluated as .*targetPattern.*
+      # targetPattern: ord1-hlf
+      # Action is going to be passed to make generate. Can be one of kill, pause, netem
+      # pumbaAction: netem
+      # Deploy Pumba after milliseconds:
+      # deployAfter: 1500
+    callback: caliper/generate-randomid.js
+  - label: main3
+    txDuration: [120] # The test length in seconds
+    rateControl:
+    - type: linear-rate
+      opts:
+        startingTps: 90
+        finishingTps: 90
     # the user callback module relative to the workspace
     arguments:
       clients: 3

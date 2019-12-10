@@ -20,7 +20,8 @@ spec:
     imagePullPolicy: IfNotPresent
     name: pumba
     args:
-      - --random
+      - --log-level
+      - "debug"
       - kill
       - --signal
       - "SIGKILL"
